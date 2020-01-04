@@ -45,6 +45,7 @@ h4 {
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 200;
+	font-weight: 200;
 	margin-bottom: 16px; 
 }
 
@@ -57,7 +58,7 @@ a:hover {
 }
 
 a:visited {
-    color: slateblue;
+    color: lightskyblue;
 }
 
 a:visited:hover {
@@ -110,18 +111,49 @@ nav a:visited {
 
 .third-float-container {
 	left: 0; 
-	width: 33.3%; 
+	width: 32.3%;
+	margin: 0% 1% 1% 0%;
 	height: 0; 
 	position: relative; 
-	padding-bottom: 33.3%; 
+	padding-bottom: 32.3%; 
+	float: left;
+}
+
+.full-float-container {
+	left: 0; 
+	width: 99%;
+	margin: 0% 1% 1% 0%;
+	height: 0; 
+	position: relative; 
+	padding-bottom: 32.3%;
 	float: left;
 }
 
 .third-float-tile {
-	border: 0;
+	background-color: #222;
+	border: 1px;
+	border-style: solid;
+	border-color: #444;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	position: absolute
+}
+
+.third-float-tile:hover {
+	background-color: #353535;
+	border-color: lightskyblue;
+}
+
+.third-float-padding {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute
+}
+
+.tile-subtitle {
+	text-align: center;
 }
