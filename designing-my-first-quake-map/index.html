@@ -1,0 +1,195 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Sound Effect Variation in Unity</title>
+	<meta name="description" content="Extending Unity audio functionality to randomize in-game sound effects">
+	<meta name="author" content="Andrew Mushel">
+
+	<link rel="stylesheet" href="../css/styles.css">
+	<style id="tt-easy-google-font-styles" type="text/css">
+
+	</style>
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+        <h1>Andrew Mushel</h1>
+        <h4>Game Dev | Music | Sound Design</h4>
+    </div>
+	<div>
+		<iframe frameborder="0" src="../nav.html" width="100%" height="32" sandbox="allow-top-navigation"></iframe>
+	</div>
+	<div class="content">
+		<h2>Designing My First Quake Map</h2>
+		<p>I am not much of a level designer, let alone a Quake mapper, but with the hype around the release of <a
+				href="http://kristianduske.com/trenchbroom/">TrenchBroom2</a> and the incredible maps still being made
+			for
+			the 22-year-old classic, I thought it would be a fun and educational experience to make one of my own.</p>
+		<p>My main goals were to learn more about the inner workings of Quake, learn about level design with some
+			hand-on
+			experimentation and practice, and to create a fun Quake map.</p>
+		<p>The resulting map is a bit inconsistent in terms of layout and aesthetics as it involved a lot of learning
+			and
+			experimentation along the way. Really, it&#8217;s something of a test map and I made things up as I went
+			along,
+			but I’m happy with it nonetheless.</p>
+		<p><a href="http://andrewmushel.com/files/quake/digsite_v1.zip">You can download it here.</a></p>
+		<h3>Context</h3>
+		<p>In my mind, the most significant benefit of designing maps for a game with a clearly defined gameplay loop is
+			that it allows you to focus on the relationship between the core mechanics and the map layout.</p>
+		<p>3D shooters are particularly well-suited to this kind of exercise, as their core gameplay is often
+			straight-forward (move, point, shoot), with a heavy emphasis on 3D positioning and sightlines. This puts a
+			lot
+			of control in the hands of the level designer to craft unique play spaces.</p>
+		<figure id="attachment_1029" aria-describedby="caption-attachment-1029" style="width: 90%"
+			><a href="images/GL_Plat.jpg">
+				<img src="images/GL_Plat.jpg" alt="" width="100%" height="auto" /></a>
+			<figcaption id="caption-attachment-1029" class="wp-caption-text">That Grenade Launcher is just out of reach.
+			</figcaption>
+		</figure>
+		<p>Old school/arena shooters take this further by putting significant, game-changing resources and mechanics on
+			the
+			map itself. Health, armor, weapons, ammo, power-ups and so on. They can all be distributed throughout the
+			map to
+			dictate what resources players have when.</p>
+		<p>Few other genres offer such potentially significant variation in player experience from level to level.</p>
+		<h3>A Sense of Scale</h3>
+		<p>One of the first things that required a fair amount of experimentation to get handle on was level scaling.
+			Spaces
+			that seemed natural to me at first tended to feel very cramped in-game.</p>
+		<p>Quake feels short and wide for a variety of reasons. The player character’s movement speed is high compared
+			to
+			most modern games, but their jump height is low. Various enemy types also have some difficulty navigating
+			narrower spaces.</p>
+		<figure id="attachment_1004" aria-describedby="caption-attachment-1004" style="width: 90%"
+			><a href="images/RampRoom.jpg">
+				<img src="images/RampRoom.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1004" class="wp-caption-text">Wide ramps and tall ceilings.</figcaption>
+		</figure>
+		<p>Really, the only entities that demand much verticality are wizards (the white floating guys) and demons (the
+			ugly
+			monsters who like to leap in your face).</p>
+		<p>This puts very few real limitations on room height, especially with the ability to employ trigger_monsterjump
+			(which, true to its name, makes monsters jump) to navigate ledges at various elevations.</p>
+		<h3>Level Flow</h3>
+		<p>One thing that is often associated with old school FPS level design is complex, labyrinthine layouts that
+			require
+			the player to scour the area for switches and keys to advance. This is difficult to execute well and can
+			result
+			in a lot of directionless wandering when intended paths aren&#8217;t clear.</p>
+		<figure id="attachment_1005" aria-describedby="caption-attachment-1005" style="width: 90%"
+			><a href="images/StartMoat.jpg">
+				<img src="images/StartMoat.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1005" class="wp-caption-text">Silver keycard visible at the start of the map.
+			</figcaption>
+		</figure>
+		<p>So, I decided to make a really linear map that clearly communicates player goals and progress by revisiting
+			the
+			same areas at different levels.</p>
+		<p>Objectives are foreshadowed early to give the player a good idea of where they will be in a few minutes and
+			once
+			they&#8217;ve reached their destination, they often see early areas from a different perspective.</p>
+		<figure id="attachment_1008" aria-describedby="caption-attachment-1008" style="width: 90%"
+			><a href="images/GoldKey1.jpg">
+				<img src="images/GoldKey1.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1008" class="wp-caption-text">First glimpse of the gold keycard.
+			</figcaption>
+		</figure>
+		<p>Putting routes the player will follow later on higher ground initially out of reach also has the added
+			benefit of
+			cutting down on unavoidable back-tracking, since they can simply drop down on the way back. It&#8217;s a
+			one-way
+			shortcut.</p>
+		<figure id="attachment_1026" aria-describedby="caption-attachment-1026" style="width: 90%"
+			><a href="images/GoldKey2.jpg">
+				<img src="images/GoldKey.jpg" alt="" width="100%" height="auto" /></a>
+			<figcaption id="caption-attachment-1026" class="wp-caption-text">Second view of the gold keycard and shortcut on the way back.</figcaption>
+		</figure>
+		<h3>Lighting</h3>
+		<p>The lighting system in the original Quake has a lot of character and potential for the dramatic, but taking
+			advantage of that seems to be a delicate balance. It’s easy to make a level too dark to see what&#8217;s
+			going
+			on or too bright and washed out. I probably erred on the side of &#8220;too dark,&#8221; if I&#8217;m
+			honest.
+		</p>
+		<p>Basic lights are spheres with a pretty steep fall-off, and a few properties that allow you to adjust their
+			intensity and radius. You can also define a minimum light level (which doesn&#8217;t look great) and a
+			default
+			sunlight level (light produced by any sky brushes) in the world spawn entity.</p>
+		<figure id="attachment_1009" aria-describedby="caption-attachment-1009" style="width: 90%"
+			><a href="images/GreatHallBelow.jpg">
+				<img src="images/GreatHallBelow.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1009" class="wp-caption-text">Wall fixtures cast interesting shadows on
+				the
+				ceiling.</figcaption>
+		</figure>
+		<p>What I found most appealing aesthetically was a combination of high intensity lights casting shadows on
+			interesting brush geometry and dim fill lights with a large radius to subtly brighten excessively dark
+			areas.
+			Often simply creating a physical light fixture and placing a light next to it was enough to cast interesting
+			shadows.</p>
+		<figure id="attachment_1011" aria-describedby="caption-attachment-1011" style="width: 90%"
+			><a href="images/GreatHallAbove.jpg">
+				<img class="wp-image-1011 size-large" src="images/GreatHallAbove.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1011" class="wp-caption-text">Looking down from above.</figcaption>
+		</figure>
+		<h3>Creative Constraints</h3>
+		<p>Probably the biggest appeal in designing maps for Quake is the unique limitations the game itself provides. I
+			opted not to use any custom mod content in part for this reason.</p>
+		<p>Custom interactions in vanilla Quake are limited but flexible, relying on a simple trigger system. The core
+			of
+			this functionality is the “target” and “targetname” properties, which can be defined for any entity.
+			Targetname
+			is the name associated with a given entities entity (or entities) in question and the target is the
+			targetname
+			of a different entity which will be triggered.</p>
+		<figure id="attachment_1013" aria-describedby="caption-attachment-1013" style="width: 90%"
+			><a href="images/PistonsPuzzle.jpg">
+				<img src="images/PistonsPuzzle.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1013" class="wp-caption-text">I wonder if any of these pistons move.
+			</figcaption>
+		</figure>
+		<p>What an entity does when it is triggered varies. Enemies when triggered will attack the player. Lights toggle
+			on and off. A trigger_teleport&#8230; Well, it teleports things.</p>
+		<p>Most interesting to me is the “func_door” entity, which in practice is a brush or collection of brushes that
+			moves 360 degrees horizontally or up and down when triggered. By default, func_doors trigger when approached
+			by a character (player or enemy), but if given a targetname, they must be triggered manually. This makes it
+			very easy to create complex doors with many moving parts as well as plenty other creative applications.</p>
+		<figure id="attachment_1012" aria-describedby="caption-attachment-1012" style="width: 90%"
+			><a href="images/Digger.jpg">
+				<img src="images/Digger.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1012" class="wp-caption-text">What does this machinery do?</figcaption>
+		</figure>
+		<h3>Audio</h3>
+		<p>Quake doesn&#8217;t seem to offer much in the way of custom audio behavior, with the primary entities for
+			that
+			purpose being a handful of preset ambient emitters, which can be placed throughout the level and have a
+			static
+			drop-off.</p>
+		<p>The most persistent ambient sounds, like the wind in outdoor areas and the persistent water agitation sounds
+			play
+			automatically based on your proximity to any open area with sky or water brushes.</p>
+		<figure id="attachment_1038" aria-describedby="caption-attachment-1038" style="width: 90%"
+			><a href="images/RuinEntrance.jpg">
+				<img src="images/RuinEntrance.jpg" alt="" width="100%" height="auto"/></a>
+			<figcaption id="caption-attachment-1038" class="wp-caption-text">Customs doors made of multiple brushes and
+				some lava/slime.</figcaption>
+		</figure>
+		<h3>Info_Intermission</h3>
+		<p>Overall, I had a lot of fun and learned about Quake and level design in the process. It&#8217;s fascinating
+			to
+			look at the nuances of the original id episodes and the work of experienced map makers in the community.</p>
+		<p>There is are so many details that go into these maps, some of which I didn&#8217;t explore as much as I would
+			like. In particular, the subtle and not-so-subtle ways that Quake maps change based on difficulty level is
+			very
+			cool, but also labor-intensive.</p>
+		<p>Modernized tools like TrenchBroom make this process more accessible than it has ever been.</p>
+	</div>
+
+</body>
+
+</html>
