@@ -82,6 +82,13 @@ blockquote {
 	padding: 5px;
 }
 
+.social-links {
+	float: left;
+	margin-left: 0%;
+	margin-top: 1px;
+	padding: 5px;
+}
+
 nav a {
 	text-decoration: none;
 	background-color: #222;
