@@ -116,9 +116,39 @@ nav a:visited {
 	min-width: 400px;
 }
 
+.forty-four-width-float-container {
+	left: 0; 
+	width: 43%;
+	margin: 0% 1% 1% 0%;
+	height: 0; 
+	position: relative; 
+	padding-bottom: 32.3%; 
+	float: left;
+}
+
+.fifty-four-width-float-container {
+	left: 0; 
+	width: 53%;
+	margin: 0% 1% 1% 0%;
+	height: 0; 
+	position: relative; 
+	padding-bottom: 32.3%; 
+	float: left;
+}
+
 .third-float-container {
 	left: 0; 
 	width: 32.3%;
+	margin: 0% 1% 1% 0%;
+	height: 0; 
+	position: relative; 
+	padding-bottom: 32.3%; 
+	float: left;
+}
+
+.two-third-float-container {
+	left: 0;
+	width: 64.6%;
 	margin: 0% 1% 1% 0%;
 	height: 0; 
 	position: relative; 
