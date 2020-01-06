@@ -96,6 +96,8 @@ nav a {
 	border-style: solid;
 	border-width: 1px;
 	padding: 5px;
+	margin: 3px;
+	float: left;
 }
 
 nav a:hover {
@@ -128,7 +130,7 @@ nav a:visited {
 
 .fifty-four-width-float-container {
 	left: 0; 
-	width: 53%;
+	width: 55%;
 	margin: 0% 1% 1% 0%;
 	height: 0; 
 	position: relative; 
