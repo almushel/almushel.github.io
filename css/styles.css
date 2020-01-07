@@ -82,6 +82,11 @@ blockquote {
 	padding: 5px;
 }
 
+.nav-frame {
+	width: 100%;
+	height: 48px;
+}
+
 .social-links {
 	float: left;
 	margin-left: 0%;
