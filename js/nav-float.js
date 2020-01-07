@@ -1,20 +1,21 @@
-let nav, origin;
+let static, float, origin;
 
 window.onload = function () {
-    nav = document.getElementById('float-nav')
-    origin = nav.getBoundingClientRect().top;
+    static = document.getElementById("static-nav");
+    float = document.getElementById('float-nav');
+    origin = float.getBoundingClientRect().top;
 
     window.addEventListener("scroll", floatNav);
 }
 
 function floatNav() {
-    let rect = nav.getBoundingClientRect();
+    let rect = static.getBoundingClientRect();
     if (rect.top < 0) {
         origin = document.documentElement.scrollTop + rect.top;
-        nav.style.top = '0px';
-        nav.style.position = 'fixed';
-        nav.style.width = '25%';
+        float.style.display = 'initial';
+        static.style.visibility = "hidden"
     } else if (document.documentElement.scrollTop < origin) {
-        nav.removeAttribute('style');
+        float.style.display = 'none';
+        static.removeAttribute('style');
     }
 }
