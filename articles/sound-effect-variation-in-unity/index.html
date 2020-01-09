@@ -36,10 +36,8 @@
 			sounds are played.</p>
 		<p>Before we do any specific implementation, we need a game object with an Audio Source component attached to
 			it. Create a new one or use an existing object in your game that needs to make some noise.</p>
-		<p><a href="images/AddAudioSource2.gif"><img
-					class="alignnone size-full wp-image-977"
-					src="images/AddAudioSource2.gif" alt=""
-					width="405" height="400" /></a></p>
+		<p><a href="images/AddAudioSource2.gif">
+			<img src="images/AddAudioSource2.gif" alt="" height="auto" style="max-width: 100%"/></a></p>
 		<h3>Round Robin</h3>
 		<p>To play our variations, we need to store them in a container Unity can work with: an array of AudioClips.</p>
 		<pre>public AudioClip[] clipArray;</pre>
@@ -49,11 +47,8 @@
 		<pre>private int clipIndex;</pre>
 		<p>In the inspector, set Effect Source to your AudioSource component, set the Clip Array size based on the
 			number of variations you’re using, and add your AudioClips to the array.</p>
-		<p><a href="images/SoundEffectVariation-Script.png"><img
-					class="alignnone size-full wp-image-974"
-					src="images/SoundEffectVariation-Script.png"
-					alt="" width="405" height="162"
-					/></a></p>
+		<p><a href="images/SoundEffectVariation-Script.png">
+			<img src="images/SoundEffectVariation-Script.png" alt="" height="auto" style="max-width: 100%"/></a></p>
 		<p>Now, for the playback itself. We’ll create a new method, PlayRoundRobin(). Every time this method is called,
 			it will play the current index of the array then increment the clipIndex value. If the index is beyond the
 			boundaries of the array, it is reset to 0 and the round robin continues.</p>
@@ -127,10 +122,8 @@ void PlayRandom2()
 		<p>Set these values in the Inspector according to preference. This may vary depending on the specific sound
 			effect, but in general very small ranges will sound more natural. Larger ranges sound jarring and unnatural
 			(though that could be a useful effect in some cases). Set these values to 1 for no effect at all.</p>
-		<p><a href="images/PitchVolumeMinMax.gif"><img
-					class="alignnone size-full wp-image-975"
-					src="images/PitchVolumeMinMax.gif" alt=""
-					width="405" height="120" /></a></p>
+		<p><a href="images/PitchVolumeMinMax.gif">
+			<img src="images/PitchVolumeMinMax.gif" alt="" height="auto" style="max-width: 100%"/></a></p>
 		<p>Add these two new lines to the beginning of the PlayRandom() and PlayRoundRobin() methods:</p>
 		<pre>
 effectSource.pitch = Random.Range(pitchMin, pitchMax);
