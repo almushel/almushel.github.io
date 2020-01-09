@@ -70,7 +70,7 @@ blockquote {
 }
 
 pre {
-	white-space: pre-wrap;
+	overflow: auto;
 }
 
 .top-banner {
