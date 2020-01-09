@@ -46,12 +46,10 @@
 			<p>Create a new object in your scene, or use one that already exists. Whatever is appropriate.</p>
 			<p>Add an AudioSource component to it and set the AudioClip to your music file, either from the menu to the
 				right of the field or by dragging and dropping it from the project browser.</p>
-			<p><a
-					href="images/AddAudioSource.gif"><img
-						class="size-full wp-image-924 alignnone"
-						src="images/AddAudioSource.gif"
-						alt="" width="405" height="400" /></a></p>
-			<p>Make sure that &#8220;Play On Awake&#8221; and &#8220;Loop&#8221; are enabled. Your music will play when
+			<p><a href="images/AddAudioSource.gif"></a>
+					<img src="images/AddAudioSource.gif"
+						alt="Add Audio Source" height="auto" style="max-width: 100%"/></a></p>
+			<p>Make sure that "Play On Awake" and "Loop" are enabled. Your music will play when
 				you start the scene and loop at the end of the audio file.</p>
 			<h3>2. Manual Tail/Release Overlap</h3>
 			<p>This method requires some work outside of Unity with an audio editor or Digital Audio Workstation (DAW).
@@ -61,26 +59,21 @@
 				the tail cut at the exact end time of the last bar/measure, and another with that tail transposed to the
 				beginning of the track, so that it overlaps with the start.</p>
 			<p><a
-					href="images/Tail-Overlap.png"><img
-						class="size-full wp-image-920"
-						src="images/Tail-Overlap.png"
-						alt="" width="740" height="200"
-						srcset="images/Tail-Overlap.png"
-						sizes="(max-width: 706px) 89vw, (max-width: 767px) 82vw, 740px" /></a></p>
+					href="images/Tail-Overlap.png">
+					<img src="images/Tail-Overlap.png"
+						alt="Tail Overlap" height="auto" style="max-width: 100%"/></a></p>
 			<p>Ensure that the start and end of these tracks are at a zero crossing, to avoid any discontinuities
 				(audible pops) during playback. This can be accomplished with extremely short fades at the start and end
 				points. This second track will transition seamlessly from the introductory track and loop seamlessly as
 				well.</p>
 			<p>Add an AudioSource to an object as in the previous section and set the second edit of the track (with the
-				tail overlapped with the start) as the default AudioClip. &#8220;Play on Start&#8221; should
+				tail overlapped with the start) as the default AudioClip. "Play on Start" should
 				<strong>NOT</strong> be enabled.</p>
 			<p>This is where a bit of scripting is required. Create a C# script and add it to the same game object as
 				your AudioSource.</p>
-			<p><a
-					href="images/AddScriptMusicLoop.gif"><img
-						class="size-full wp-image-900 alignnone"
-						src="images/AddScriptMusicLoop.gif"
-						alt="AddScriptMusicLoop" width="405" height="400" /></a></p>
+			<p><a href="images/AddScriptMusicLoop.gif">
+				<img src="images/AddScriptMusicLoop.gif"
+					alt="Add Script Music Loop" height="auto" style="max-width: 100%"/></a></p>
 			<p>Open it in your IDE of choice. This will only require a few lines of code. First, declare two public
 				variables: an AudioSource and an AudioClip</p>
 			<pre>
@@ -88,17 +81,13 @@
 	public AudioClip musicStart;
 	</pre>
 			<p>Save this and switch back to the Unity editor. There will be two new fields for the C# Script component
-				in the Inspector: &#8220;Music Source&#8221; and &#8220;Music Start.&#8221;</p>
-			<p>Click and drag the AudioSource you added to your game object earlier into the &#8220;Music Source&#8221;
-				field on your script. Do the same with &#8220;Music Start,&#8221; using the intro edit of the clip
+				in the Inspector: "Music Source" and "Music Start."</p>
+			<p>Click and drag the AudioSource you added to your game object earlier into the "Music Source"
+				field on your script. Do the same with "Music Start," using the intro edit of the clip
 				(without a tail at the start or end).</p>
-			<p><a
-					href="images/Tail-Overlap-Set-up.png"><img
-						class="size-full wp-image-918 alignnone"
-						src="images/Tail-Overlap-Set-up.png"
-						alt="" width="405" height="470"
-						srcset="images/Tail-Overlap-Set-up.png"
-						sizes="(max-width: 405px) 100vw, 405px" /></a></p>
+			<p><a href="images/Tail-Overlap-Set-up.png">
+				<img src="images/Tail-Overlap-Set-up.png"
+					alt="Tail Overlap Set-up" height="auto" style="max-width: 100%" /></a></p>
 			<p>This is where the code that makes noise comes in.</p>
 			<pre>
 	void Start () 
@@ -133,12 +122,9 @@
 				Time Signature is the number of beats per bar/measure. and Bars Length is the number of bars/measures in
 				the track. You need to know these values for this calculation to work.</p>
 			<p><a
-					href="images/Music-Track-Properties.png"><img
-						class="alignnone size-full wp-image-962"
-						src="images/Music-Track-Properties.png"
-						alt="" width="406" height="220"
-						srcset="images/Music-Track-Properties.png"
-						sizes="(max-width: 406px) 100vw, 406px" /></a></p>
+					href="images/Music-Track-Properties.png">
+					<img src="images/Music-Track-Properties.png"
+						alt="" height="auto" style="max-width: 100%"/></a></p>
 			<p>Next, we need some private variables for some values we will be calculating in the script itself.</p>
 			<pre>
 	private float loopPointMinutes, loopPointSeconds;
@@ -187,7 +173,7 @@
 			</ol>
 			<p>And that's it. The music track should begin playing at the start of the scene and continue to
 				repeat at the loop point until the object is destroyed.</p>
-		</div><!-- .entry-content -->	
+		</div>
 </body>
 
 </html>

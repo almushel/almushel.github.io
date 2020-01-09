@@ -69,6 +69,10 @@ blockquote {
     background-color: #444;
 }
 
+pre {
+	white-space: pre-wrap;
+}
+
 .top-banner {
 	margin: 0px;
 	padding: 0.5rem;
