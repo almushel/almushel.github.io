@@ -258,19 +258,6 @@ nav a:visited {
 }
 
 /*Key animations*/
-
-@keyframes gbKeyAnim {
-	0% {
-		left: 0%;
-		clip-path: inset(0% 88% 0% 0%);
-	}
-
-	100% {
-		left: -175%;
-		clip-path: inset(0% 0% 0% 88%);
-	}
-}
-
 @keyframes verticalBob {
 	from {
 		top: 15%
@@ -290,7 +277,7 @@ nav a:visited {
 	height: 25%;
 	width: auto;
 	position: absolute;
-	animation: gbKeyAnim 2s steps(7, end) infinite, verticalBob 1s ease-in-out infinite alternate;
+	animation: verticalBob 1s ease-in-out infinite alternate;
 }
 
 .keyTainer {
