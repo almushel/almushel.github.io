@@ -2,14 +2,20 @@
 @import url('https://fonts.googleapis.com/css?family=Oxygen+Mono');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
-html {
-    background-color: #222;
-    color: white;
+:root {
+	--heading-font: Ubuntu;
+	--paragraph-font: Oxygen;
+	--font-color: white;
+	--bg-color-1: #222;
+	--bg-color-2: #333;
+	--bg-color-3: #444;
+	--accent-color: lightskyblue;
 }
 
-
 body {
-	font-family: 'Oxygen'; 
+	background-color: var(--bg-color-1);
+    color: var(--font-color);
+	font-family: var(--paragraph-font, Arial); 
 	font-style: normal; 
 	font-weight: 400;
 	margin: 0px;
@@ -19,7 +25,7 @@ body {
 
 h1 { 
 	font-size: 4em;
-	font-family: 'Ubuntu'; 
+	font-family: var(--heading-font, Arial); 
 	font-style: normal; 
 	font-weight: 800; 
 	letter-spacing: 1px; 
@@ -27,13 +33,13 @@ h1 {
 }
 
 h2 { 
-	font-family: 'Ubuntu';
+	font-family: var(--heading-font, Arial);
 	font-style: normal;
 	font-weight: 600;
 }
 
 h3 { 
-	font-family: 'Ubuntu';
+	font-family: var(--heading-font, Arial);
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 500;
@@ -41,7 +47,7 @@ h3 {
 }
 
 h4 { 
-	font-family: 'Ubuntu';
+	font-family: var(--heading-font, Arial);
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 200;
@@ -50,23 +56,23 @@ h4 {
 }
 
 a {
-    color: lightskyblue;
+    color: var(--accent-color);
 }
 
 a:hover {
-    color: white
+    color: var(--font-color)
 }
 
 a:visited {
-    color: lightskyblue;
+    color: var(--accent-color);
 }
 
 a:visited:hover {
-	color: white;
+	color: var(--font-color);
 }
 
 blockquote {
-    background-color: #444;
+    background-color: var(--bg-color-3);
 }
 
 pre {
@@ -76,7 +82,7 @@ pre {
 .top-banner {
 	margin: 0px;
 	padding: 0.5rem;
-	background-color: #444;
+	background-color: var(--bg-color-3);
     text-align: center;
 }
 
@@ -100,8 +106,8 @@ pre {
 
 nav a {
 	text-decoration: none;
-	background-color: #222;
-	border: #444;
+	background-color: var(--bg-color-1);
+	border: var(--bg-color-3);
 	border-style: solid;
 	border-width: 1px;
 	padding: 5px;
@@ -110,15 +116,15 @@ nav a {
 }
 
 nav a:hover {
-	background-color: #444;
+	background-color: var(--bg-color-3);
 }
 
 nav a:visited {
-	color: lightskyblue;
+	color: var(--accent-color);
 }
 
 .content {
-    background-color: #333;
+    background-color: var(--bg-color-2);
 	padding: 2%;
 	margin: 2% 0% 2% 3%;
     float: left;
@@ -177,7 +183,7 @@ nav a:visited {
 
 @media only screen and (min-width: 1024px) {
 	.content {
-		background-color: #333;
+		background-color: var(--bg-color-2);
 		padding: 2%;
 		margin: 1%;
 		float: left; 
@@ -217,10 +223,10 @@ nav a:visited {
 }
 
 .third-float-tile {
-	background-color: #222;
+	background-color: var(--bg-color-1);
 	border: 1px;
 	border-style: solid;
-	border-color: #444;
+	border-color: var(--bg-color-3);
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -230,7 +236,7 @@ nav a:visited {
 
 .third-float-tile:hover {
 	background-color: #353535;
-	border-color: lightskyblue;
+	border-color: var(--accent-color);
 }
 
 .third-float-padding {
@@ -258,19 +264,6 @@ nav a:visited {
 }
 
 /*Key animations*/
-
-@keyframes gbKeyAnim {
-	0% {
-		left: 0%;
-		clip-path: inset(0% 88% 0% 0%);
-	}
-
-	100% {
-		left: -175%;
-		clip-path: inset(0% 0% 0% 88%);
-	}
-}
-
 @keyframes verticalBob {
 	from {
 		top: 15%
@@ -290,7 +283,7 @@ nav a:visited {
 	height: 25%;
 	width: auto;
 	position: absolute;
-	animation: gbKeyAnim 2s steps(7, end) infinite, verticalBob 1s ease-in-out infinite alternate;
+	animation: verticalBob 1s ease-in-out infinite alternate;
 }
 
 .keyTainer {
