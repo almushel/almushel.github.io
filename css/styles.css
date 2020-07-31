@@ -10,6 +10,7 @@
 	--bg-color-2: #333;
 	--bg-color-3: #444;
 	--accent-color: lightskyblue;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -19,8 +20,7 @@ body {
 	font-style: normal; 
 	font-weight: 400;
 	margin: 0px;
-	height: 100%;
-	width: 100%;
+	display: inline;
 }
 
 h1 { 
@@ -87,17 +87,25 @@ pre {
 }
 
 .side-nav {
+	position: sticky;
+	top: 0;
 	float: left;
+	max-width: 25%;
 	margin-left: 0%;
 	padding: 5px;
 }
 
 .nav-frame {
+	position: sticky;
+	top: 0;
 	width: 100%;
 	height: 48px;
 }
 
 .social-links {
+	position: sticky;
+	bottom: 0;
+	max-width: 25%;
 	float: left;
 	margin-left: 0%;
 	margin-top: 1px;
@@ -231,12 +239,16 @@ nav a:visited {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	position: absolute
+	position: absolute;
+	transition: transform 0.5s;
 }
 
 .third-float-tile:hover {
 	background-color: #353535;
 	border-color: var(--accent-color);
+	z-index: 2;
+	transform: scale(1.025);
+	transition: transform 0.5s;
 }
 
 .third-float-padding {
@@ -255,12 +267,6 @@ nav a:visited {
 
 .tile-subtitle {
 	text-align: center;
-}
-
-#float-nav {
-	position: fixed;
-	top: 0px;
-    width: 25%;
 }
 
 /*Key animations*/
