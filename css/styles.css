@@ -90,9 +90,35 @@ pre {
 	position: sticky;
 	top: 0;
 	float: left;
-	max-width: 25%;
 	margin-left: 0%;
 	padding: 5px;
+	z-index: 3;
+}
+
+.side-nav a {
+	visibility: hidden;
+	background-color: var(--bg-color-1);
+	border: 1px solid var(--bg-color-3);
+	filter: drop-shadow(0 0 2px black);
+}
+
+.side-nav:hover a {
+	visibility: visible;
+}
+
+.side-nav:hover .icon {
+	color: var(--font-color);
+	background-color: var(--bg-color-3);
+}
+
+.side-nav .icon {
+	float: left;
+	color: var(--accent-color);
+	border: 1px solid var(--bg-color-3);
+	background-color: var(--bg-color-1);
+	filter: drop-shadow(0 0 2px black);
+	padding: 5px;
+	margin: 3px;
 }
 
 .nav-frame {
@@ -105,19 +131,38 @@ pre {
 .social-links {
 	position: sticky;
 	bottom: 0;
-	max-width: 25%;
+	max-width: 50%;
 	float: left;
 	margin-left: 0%;
 	margin-top: 1px;
 	padding: 5px;
+	z-index: 3;
+}
+
+.social-links a {
+	margin: 0.5%;
+	padding: 0;
+	max-width: 15%;
+	background-color: var(--bg-color-2);
+	border-radius: 10%;
+	filter: drop-shadow(0 0 3px black);
+}
+
+.social-links a:hover {
+	background-color: var(--bg-color-3);
+}
+
+.social-links .icon {
+	vertical-align: middle;
+	filter: invert(50%);
+}
+
+.social-links .icon:hover {
+	filter: invert(100%);
 }
 
 nav a {
 	text-decoration: none;
-	background-color: var(--bg-color-1);
-	border: var(--bg-color-3);
-	border-style: solid;
-	border-width: 1px;
 	padding: 5px;
 	margin: 3px;
 	float: left;
@@ -198,6 +243,14 @@ nav a:visited {
 		margin-left: 25%;
 		width: 50%;
 	}
+
+	.side-nav {
+		max-width: 25%;
+	}
+
+	.social-links {
+		max-width: 20%;
+	}
 	
 	.third-float-container {
 		left: 0; 
@@ -232,9 +285,7 @@ nav a:visited {
 
 .third-float-tile {
 	background-color: var(--bg-color-1);
-	border: 1px;
-	border-style: solid;
-	border-color: var(--bg-color-3);
+	border: 1px solid var(--bg-color-3);
 	top: 0;
 	left: 0;
 	width: 100%;
