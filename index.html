@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 
 	<title>Andrew Mushel</title>
-	<meta name="description"  content="Andrew is making games so players can tell stories.">
+	<meta name="description"  content="Andrew is making games.">
 	<meta name="author" content="Andrew Mushel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,7 +14,7 @@
 	<meta name="twitter:site" content="@almushel" />
 	<meta name="twitter:creator" content="@almushel" />
 	<meta property='og:title' content="Andrew Mushel" />
-	<meta property="og:description" content="Andrew is making games so players can tell stories.">
+	<meta property="og:description" content="Andrew is making games.">
 	<meta property="og:url" content="https://andrewmushel.com" />
 	<meta property="og:image" content="https://andrewmushel.com/images/am_sd_site_banner.jpg" />
 	<meta property="og:type" content="website" />
@@ -26,7 +26,7 @@
 <body>
 	<div id="top" class="top-banner">
 		<h1>Andrew Mushel</h1>
-		<h4>Making games so players can tell stories.</h4>
+		<h4>Game programming and design</h4>
 	</div>
 
 	<nav class="side-nav">
@@ -39,9 +39,12 @@
 		<a href="./articles"> Articles</a>
 	</nav>
 
-	<div class="content" id="about">
+	<div class='section-banner' id="about">
+		<h2>ABOUT ME</h2>
+	</div>
+
+	<div class="content">
 		<div>
-			<h2>About Me</h2>
 			<p>I'm a game designer/programmer, technical writer, composer, and audio designer who is deeply fascinated by the performant and emergent experiences 
 				created by dynamic, deep, demanding gameplay systems.</p>
 			<p>I've worked for 8 years in a variety of different capacities in online learning, technical writing, and instructional design. 
@@ -56,24 +59,30 @@
 		</div>
 	</div>
 
-	<div class="content" id="games">
-		<h2>Games</h2>
+	<div class='section-banner' id="games">
+		<h2>GAMES</h2>
+	</div>
+
+	<div class="content">
 		<h4 style="width:100%; float: left">My Games</h4>
 		<div id="solo">
-			<div class="forty-four-width-float-container">
-				<div class="third-float-tile">
-					<video autoplay loop muted width="99.9%" height="99.9%">
-						<source src="./videos/Space Drifter.mp4" type="video/mp4">
-					</video>
+			<div class="third-float-container">
+				<div class="third-float-tile smooth-expand">
+					<a href="https://almushel.itch.io/space-drifter">
+						<video autoplay loop muted width="99.9%" height="99.9%" class="show-on-hover" style="position:absolute; background: black;">
+							<source src="./videos/Space Drifter.mp4" type="video/mp4">
+						</video>
+						<img src="./images/space-drifter.png" alt="Loot Not Found" class="hide-on-hover" style="width: 100%; height: auto; position:absolute; z-index: 2;">
+					</a>
 				</div>
 			</div>
-			<div class="fifty-four-width-float-container">
-				<iframe frameborder="0"
-					src="https://itch.io/embed/470533?bg_color=222222&amp;fg_color=6DC2FF&amp;link_color=6d74ff&amp;border_color=404040"
-					class="third-float-tile">
-					<a href="https://almushel.itch.io/space-drifter">Space Drifter by almushel</a>
-				</iframe>
-			</div>
+			<div id="lootnotfound" class="third-float-container smooth-expand">
+				<a href="https://js13kgames.com/entries/loot-not-found">
+					<div class="third-float-tile">
+						<img src="./images/lootnotfound.png" alt="Loot Not Found" style="width: 100%; height: auto;">
+					</div>
+				</a>
+			</div>			
 		</div>
 
 		<h4 style="width:100%; float: left">Collaborations</h4>
@@ -113,13 +122,6 @@
 					</div>
 				</a>
 			</div>
-			<div id="flipside" class="third-float-container smooth-expand">
-				<a href="https://gamkedo.itch.io/flipside">
-					<div class="third-float-tile">
-						<img src="./images/flipside.png" alt="Flipside logo" style="width: 100%; height: auto">
-					</div>
-				</a>
-			</div>
 			<div id="slimesquest" class="third-float-container smooth-expand">
 				<a href="https://hrgames.itch.io/a-slimes-quest-for-freedom">
 					<img src="./images/ASQFF.jpg" alt="A Slime's Quest for Freedom logo" class="third-float-tile"></a>
@@ -132,10 +134,19 @@
 				<a href="https://almushel.github.io/CryptoClash/"><Play it in your Browser></a></p>
 			</div>
 		</div>
+		<h4 style="width:100%; float: left">Other Projects</h4>
+		<div style="width:100%; float: left">
+			<a href="https://gamkedo.itch.io/mobius-inversion">Mobius Inversion</a>
+			<a href="https://gamkedo.itch.io/flipside">Flipside</a>
+		</div>
+		
 	</div>
 
-	<div class="content" id="music">
-		<h2>Music</h2>
+	<div class='section-banner' id="music">
+		<h2>MUSIC</h2>
+	</div>
+
+	<div class="content">
 		<div>
 			<div class="third-float-container smooth-expand">
 				<iframe class="third-float-tile"
@@ -159,12 +170,15 @@
 					width="100%" height="550" frameborder="no" scrolling="no"></iframe></p>
 		</div>
 	</div>
-	<div class="content" id="audio">
-		<h2>Audio Design</h2>
+
+	<div class='section-banner' id="audio">
+		<h2>AUDIO DESIGN</h2>
+	</div>
+
+	<div class="content">
 		<div class="two-third-float-container">
 			<iframe src="https://player.vimeo.com/video/246142268" width="100%" height="auto" frameborder="0" allowfullscreen="allowfullscreen" class='third-float-tile'"></iframe>
 		</div>
-
 
 		<div class="third-float-container smooth-expand">
 			<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=927823189">
