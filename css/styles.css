@@ -311,7 +311,6 @@ nav a:visited {
 }
 
 .third-float-tile:hover {
-	background-color: #353535;
 	border-color: var(--accent-color);
 	z-index: 2;
 }
@@ -380,7 +379,7 @@ nav a:visited {
 	transition: opacity 0.5s;
 }
 
-a:hover > .show-on-hover {
+.third-float-tile:hover > .show-on-hover {
 	opacity: 1.0;
 }
 
@@ -389,7 +388,7 @@ a:hover > .show-on-hover {
 	transition: opacity 0.5s;
 }
 
-a:hover > .hide-on-hover {
+.third-float-tile:hover > .hide-on-hover {
 	opacity: 0.0;
 }
 
@@ -398,4 +397,9 @@ a:hover > .hide-on-hover {
 	width: 100%;
 	float: left;
 	padding-left: 10%;
+}
+
+.vertical-center {
+	top: 50%;
+	transform: translate(0, -50%);
 }
