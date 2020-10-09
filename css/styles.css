@@ -24,15 +24,16 @@ body {
 }
 
 h1 { 
-	font-size: 4em;
+	font-size: 5em;
 	font-family: var(--heading-font, Arial); 
 	font-style: normal; 
 	font-weight: 800; 
 	letter-spacing: 1px; 
-	line-height: 1; 
+	line-height: 1;
 }
 
 h2 { 
+	font-size: 2em;
 	font-family: var(--heading-font, Arial);
 	font-style: normal;
 	font-weight: 600;
@@ -130,7 +131,6 @@ pre {
 }
 
 .social-links {
-	position: sticky;
 	bottom: 0;
 	max-width: 50%;
 	float: left;
@@ -349,7 +349,7 @@ nav a:visited {
 
 .section-banner {
 	background: var(--bg-color-3);
-	width: 100%;
+	width: 95.5%;
 	float: left;
 	padding-left: 4.5%;
 }
@@ -406,5 +406,6 @@ nav a:visited {
 
 	.section-banner {
 		padding-left: 27%;
+		width: 73%;
 	}
 }
