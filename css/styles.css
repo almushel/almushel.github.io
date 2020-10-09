@@ -36,6 +36,7 @@ h2 {
 	font-family: var(--heading-font, Arial);
 	font-style: normal;
 	font-weight: 600;
+	letter-spacing: 4px;
 }
 
 h3 { 
@@ -254,52 +255,6 @@ nav a:visited {
 	width: 100%;
 }
 
-@media only screen and (min-width: 1024px) {
-	.content {
-		float: left; 
-		margin-left: 25%;
-		width: 50%;
-	}
-
-	.social-links {
-		max-width: 20%;
-	}
-	
-	.third-float-container {
-		left: 0; 
-		width: 32.3%;
-		margin: 0% 1% 1% 0%;
-		height: 0; 
-		position: relative; 
-		padding-bottom: 32.3%; 
-		float: left;
-	}
-	
-	.two-third-float-container {
-		left: 0;
-		width: 64.6%;
-		margin: 0% 1% 1% 0%;
-		height: 0; 
-		position: relative; 
-		padding-bottom: 32.3%; 
-		float: left;
-	}
-	
-	.full-float-container {
-		left: 0; 
-		width: 99%;
-		margin: 0% 1% 1% 0%;
-		height: 0; 
-		position: relative; 
-		padding-bottom: 32.3%;
-		float: left;
-	}
-
-	.audio-container {
-		max-width: 60%;
-	}
-}
-
 .third-float-tile {
 	background-color: var(--bg-color-1);
 	border: 1px solid var(--bg-color-3);
@@ -396,10 +351,60 @@ nav a:visited {
 	background: var(--bg-color-3);
 	width: 100%;
 	float: left;
-	padding-left: 10%;
+	padding-left: 4.5%;
 }
 
 .vertical-center {
 	top: 50%;
 	transform: translate(0, -50%);
+}
+
+@media only screen and (min-width: 1024px) {
+	.content {
+		float: left; 
+		margin-left: 25%;
+		width: 50%;
+	}
+
+	.social-links {
+		max-width: 20%;
+	}
+	
+	.third-float-container {
+		left: 0; 
+		width: 32.3%;
+		margin: 0% 1% 1% 0%;
+		height: 0; 
+		position: relative; 
+		padding-bottom: 32.3%; 
+		float: left;
+	}
+	
+	.two-third-float-container {
+		left: 0;
+		width: 64.6%;
+		margin: 0% 1% 1% 0%;
+		height: 0; 
+		position: relative; 
+		padding-bottom: 32.3%; 
+		float: left;
+	}
+	
+	.full-float-container {
+		left: 0; 
+		width: 99%;
+		margin: 0% 1% 1% 0%;
+		height: 0; 
+		position: relative; 
+		padding-bottom: 32.3%;
+		float: left;
+	}
+
+	.audio-container {
+		max-width: 60%;
+	}
+
+	.section-banner {
+		padding-left: 27%;
+	}
 }
