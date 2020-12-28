@@ -11,12 +11,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="../images/AM.png">
 	<link rel="stylesheet" href="../css/styles.css">
+
+	<script>
+		window.addEventListener("scroll", () => {
+			document.body.style.setProperty("--scroll", window.pageYOffset / (document.body.offsetHeight - window.innerHeight));
+		}, false);
+	</script>
 </head>
 
 <body>
 	<div id="top" class="top-banner">
 		<h1>Andrew Mushel</h1>
-		<h3>Making games so players can tell stories.</h3>
+		<h3>Game programming and design</h3>
 	</div>
 
 	<nav class="side-nav">
@@ -34,14 +40,26 @@
 		
 		<iframe src="https://itch.io/embed/625848?bg_color=222222&amp;fg_color=6DC2FF&amp;link_color=6d74ff&amp;border_color=404040" height="auto" width="100%" frameborder="0"><a
 				href="https://brianjboucher.itch.io/glacierbound">Glacierbound by brianjboucher</a></iframe>
-		<h3>Summary</h3>
-		<p>JavaScript Gameplay Programming, Graphics Programming, 2D Art, Animation</p>
-		<h3>What I did</h3>
+
+		<h3>Art and Animation</h3>
+		&nbsp;
 		<div style="float: left; width: 100%;">
-			<img src="../images/door_red.png" alt="Red door texture" class="fourth-float-image pixelated">
-			<img src="../images/door_green.png" alt="Green door texture" class="fourth-float-image pixelated">
-			<img src="../images/door_blue.png" alt="Blue door texture" class="fourth-float-image pixelated">
-			<img src="../images/door.png" alt="Unsecured door texture" class="fourth-float-image pixelated">
+			<div style="overflow:hidden;" class="fourth-float-tile">
+				<img src="../images/door_red.png" alt="Red door texture" class="pixelated animDoor">
+			</div>
+			
+			<div style="overflow:hidden;" class="fourth-float-tile">
+				<img src="../images/door_green.png" alt="Green door texture" class="pixelated animDoor">
+			</div>
+
+			<div style="overflow:hidden;" class="fourth-float-tile">
+				<img src="../images/door_blue.png" alt="Blue door texture" class="pixelated animDoor">
+			</div>
+
+			<div style="overflow:hidden;" class="fourth-float-tile">
+				<img src="../images/door.png" alt="Unsecured door texture" class="pixelated animDoor">
+			</div>
+
 		</div>
 
 		<div class='keyTainer'>
@@ -57,15 +75,33 @@
 			<div class='key-shadow'></div>
 		</div>
 		<img src="../images/wall_blue_3.png" alt="Wall texture" class="fourth-float-image pixelated">
-		&nbsp;
-		<h4>Graphics Programming</h4>
+		<p>&nbsp;</p>
+
+		<h3>Graphics Programming</h3>
 		<p>
 			Wall texturing, sprite object rendering (animation and rotation), object shadows, enemy death animations, draw distance/fog rendering, scrolling skybox, HUD refinements, 
 			snow weather effect optimizations, custom menu cursor, floor and ceiling distance gradient, movement sway animation, level start/end HUD transition
 		</p>
-		<h4>Gameplay/Engine Programming</h4>
+		
+		<h3>Graphics Programming</h3>
 		<p>
-			Mouse input, interactive doors, color-coded locked doors and keys, projectile/item/character/map collision, enemy AI, pathfinding, garbage collection, 
+			Wall texturing, sprite object rendering (animation and rotation), object shadows, enemy death animations, draw distance/fog rendering, scrolling skybox, HUD refinements, 
+			snow weather effect optimizations, custom menu cursor, floor and ceiling distance gradient, movement sway animation, level start/end HUD transition
+		</p>
+
+		<h3>Enemy AI, vision, and pathfinding</h3>
+			<img src="../images/glacierbound_enemy_states.png" alt="Glacierbound enemy states">
+			<p>
+				Enemies have a 90 degree field of vision within which they can detect the player or another character that has just caused damage.
+				A simple raycast detects whether the target character is behind a wall.
+			</p>
+			<p>
+				Pathfinding uses a simple breadth-first search, due to the limited size and complexity of the maps. 
+				It is only used while enemies are searching for their target. While in that state, enemies can open doors.
+			</p>
+		<h3>Other Gameplay/Engine Programming</h3>
+		<p>
+			Mouse input, interactive doors, color-coded locked doors and keys, projectile/item/character/map collision, garbage collection, 
 			level data structure, level stat tracking, level transitions, story introduction and conclusion screens, image loading improvements, assorted bug fixing
 		</p>
 	</div>

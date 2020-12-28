@@ -10,6 +10,7 @@
 	--bg-color-2: #333;
 	--bg-color-3: #444;
 	--accent-color: lightskyblue;
+	--scroll: 0;
 	scroll-behavior: smooth;
 }
 
@@ -45,7 +46,8 @@ h3 {
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 500;
-	margin-bottom: 12px; 
+	margin-top: 30px;
+	margin-bottom: 10px; 
 }
 
 h4 { 
@@ -54,7 +56,8 @@ h4 {
 	font-style: normal;
 	font-weight: 200;
 	font-weight: 200;
-	margin-bottom: 16px; 
+	margin-top: 24px;
+	margin-bottom: 12px; 
 }
 
 a {
@@ -79,6 +82,10 @@ blockquote {
 
 pre {
 	overflow: auto;
+}
+
+img {
+	max-width: 100%;
 }
 
 .top-banner {
@@ -284,11 +291,16 @@ nav a:visited {
 	height: auto;
 }
 
+.fourth-float-tile {
+	float: left;
+	width: 25%;
+}
+
 .tile-subtitle {
 	text-align: center;
 }
 
-/*Key animations*/
+/*Animations*/
 @keyframes verticalBob {
 	from {
 		top: 15%
@@ -299,8 +311,29 @@ nav a:visited {
 	}
 }
 
+@keyframes doorSlide {
+	from {
+		left: 0%;
+	}
+
+	to {
+		left: -100%;
+	}
+}
+
 .pixelated {
 	image-rendering: pixelated;
+}
+
+.animDoor {
+	width: 100%;
+	height: auto;
+	position: relative;
+	left: calc(var(--scroll) * 100%);
+
+	animation: doorSlide 2s ease-in-out infinite;
+	animation-play-state: paused;
+	animation-delay: calc(var(--scroll) * -2s);
 }
 
 .animKey {
@@ -309,6 +342,8 @@ nav a:visited {
 	width: auto;
 	position: absolute;
 	animation: verticalBob 1s ease-in-out infinite alternate;
+	animation-play-state: paused;
+	animation-delay: calc(var(--scroll) * 1.5s);
 }
 
 .keyTainer {
