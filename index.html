@@ -26,7 +26,13 @@
 <body>
 	<div id="top" class="top-banner">
 		<h1>Andrew Mushel</h1>
-		<h4>Game programming and design</h4>
+		<h4 id="tagline">&nbsp;</h4>
+		<script>
+			let tag = document.getElementById("tagline");
+			fetch("./files/tagline.txt")
+				.then(response => response.text())
+				.then(data => tag.innerHTML = data)
+		</script>
 	</div>
 
 	<nav class="side-nav">
@@ -45,18 +51,26 @@
 
 	<div class="content">
 		<div>
-			<p>I'm a game designer/programmer, technical writer, composer, and audio designer who is deeply fascinated
-				by the performant and emergent experiences created by dynamic, deep, demanding gameplay systems.</p>
-			<p>In 2012, I started taking computer music composition seriously, after briefly entertaining the idea of
-				forming a band with friends a year or two prior.
-				My first published release was the original soundtrack for the free Android game Laser Ninja. I am
-				primarily a pianist and a vocalist, but have also taken lessons in violin and guitar.</p>
-			<p>I have been making games as an enthusiast in a variety of student and independent projects since 2013, 
-				initially doing primarily music composition and audio design, but eventually transitioning to a focus on programming and game design.
-				I increasingly favor using minimal libraries, frameworks, or engines in my own personal projects in JavaScript and C/C++.
+			<p>Working and learning to create beautiful and functional things, 
+				because making ugly, broken things is easy and too many people do it. 
+			</p>	
+			
+			<p>Recovered JavaScript programmer (never used any of the popular frameworks). 
+				Now primarily using C (C99) for personal projects and not missing any of the Syntactic Sugar.
+				Low carb programming.</p>
+			
+			<p>
+				Musician:
+				<ul>
+					<li>Vocalist (Tenor)</li>
+					<li>Pianist (Lazy)</li>
+					<li>Sightreader (Poor)</li>
+					<li>Composer (Electronic)</li>
+				</ul>
 			</p>
-			<p>In 2019, I released my first original game, <a href="https://almushel.itch.io/space-drifter">Space Drifter</a>.
-				All art and audio assets are original and it was built with vanilla JavaScript, HTML5, and CSS.</p>
+
+			<p>9 years of professional experience in technical writing/communication, training development, 
+				online learning, multimedia.</p>
 		</div>
 	</div>
 

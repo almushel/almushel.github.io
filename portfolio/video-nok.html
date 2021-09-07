@@ -16,7 +16,13 @@
 <body>
 	<div id="top" class="top-banner">
 		<h1>Andrew Mushel</h1>
-		<h4>Game programming and design</h4>
+		<h4 id="tagline">&nbsp;</h4>
+		<script>
+			let tag = document.getElementById("tagline");
+			fetch("../files/tagline.txt")
+				.then(response => response.text())
+				.then(data => tag.innerHTML = data)
+		</script>
 	</div>
 
 	<nav class="side-nav">
