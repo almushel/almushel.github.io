@@ -82,6 +82,8 @@ blockquote {
 
 pre {
 	overflow: auto;
+	border: solid 1px grey;
+	padding: 1%;
 }
 
 img {
