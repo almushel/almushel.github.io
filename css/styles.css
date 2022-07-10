@@ -90,6 +90,10 @@ img {
 	max-width: 100%;
 }
 
+iframe {
+	border: none;
+}
+
 .top-banner {
 	margin: 0px;
 	padding: 0.5rem;

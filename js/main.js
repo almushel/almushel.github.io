@@ -1,13 +1,13 @@
-import {parsePageDefinition} from "./render.js";
-import {banner, sideNav, social, portfolio} from "./pages.js";
+import {renderPage} from "./render.js";
+import {homePage} from "./pages.js";
 
 window.onload = () => {
-	let container = document.getElementById("vanilla-router");
+	let root = document.getElementById("vanilla-router");
 
-	if (container) {
-		container.appendChild(
-			parsePageDefinition(
-				banner.concat(sideNav, portfolio, social)
+	if (root) {
+		root.appendChild(
+			renderPage(
+				homePage
 			)
 		);
 
