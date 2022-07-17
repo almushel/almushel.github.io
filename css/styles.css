@@ -64,6 +64,11 @@ a {
     color: var(--accent-color);
 }
 
+iframe {
+	border: none;
+	margin: 1px;
+}
+
 a:hover {
     color: var(--font-color)
 }
@@ -80,8 +85,15 @@ blockquote {
     background-color: var(--bg-color-3);
 }
 
+code {
+	border: solid 1px lightgrey;
+	padding: 0.25em 0.5em;
+	background-color: var(--bg-color-1);
+}
+
 pre {
 	overflow: auto;
+	background-color: var(--bg-color-1);
 	border: solid 1px grey;
 	padding: 1%;
 }
@@ -140,35 +152,38 @@ img {
 }
 
 .social-links {
-	bottom: 0;
-	max-width: 50%;
-	float: left;
-	margin-left: 0%;
-	margin-top: 1px;
-	padding: 5px;
+	width: 75%;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
 	z-index: 3;
 }
 
 .social-links a {
-	margin: 0.5%;
+	flex: 1 1 auto;
 	padding: 0;
-	max-width: 15%;
+	margin: 3% 2% 3% 2%;
 	background-color: var(--bg-color-2);
+	border-color: var(--accent-color);
 	border-radius: 10%;
-	filter: drop-shadow(0 0 3px black);
+	transition: transform 0.25s ease-in;
 }
 
 .social-links a:hover {
-	background-color: var(--bg-color-3);
+	background-color: var(--bg-color-2);
+	transition: transform 0.25s ease-in;
+	transform: scale(1.1);
 }
 
 .social-links .icon {
-	vertical-align: middle;
-	filter: invert(50%);
+	margin: 2%;
+	width:98%;
+	height: auto;
+	filter: invert(100%);
 }
 
 .social-links .icon:hover {
-	filter: invert(100%);
+	filter: brightness(0) saturate(100%) invert(79%) sepia(90%) saturate(2887%) hue-rotate(174deg) brightness(98%) contrast(101%) grayscale(0%);
 }
 
 nav a {
@@ -189,7 +204,7 @@ nav a:visited {
 .content {
     background-color: var(--bg-color-2);
 	padding: 2%;
-	margin: 0% 2.5%;
+	margin-left: 3%;
     float: left;
 	width: 90%;
 }
@@ -245,12 +260,12 @@ nav a:visited {
 }
 
 .smooth-expand {
-	transition: transform 0.5s;
+	transition: transform 0.25s ease-in;
 }
 
 .smooth-expand:hover {
 	transform: scale(1.025);
-	transition: transform 0.5s;
+	transition: transform 0.25s ease-in;
 }
 
 .audio-container {
@@ -368,7 +383,7 @@ nav a:visited {
 
 .show-on-hover {
 	opacity: 0.0;
-	transition: opacity 0.5s;
+	transition: opacity 0.5s ease-in;
 }
 
 .third-float-tile:hover > .show-on-hover {
@@ -377,7 +392,7 @@ nav a:visited {
 
 .hide-on-hover {
 	opacity: 1.0;
-	transition: opacity 0.5s;
+	transition: opacity 0.5s ease-in;
 }
 
 .third-float-tile:hover > .hide-on-hover {
@@ -404,7 +419,8 @@ nav a:visited {
 	}
 
 	.social-links {
-		max-width: 20%;
+		width: 25%;
+		margin: auto;
 	}
 	
 	.third-float-container {
