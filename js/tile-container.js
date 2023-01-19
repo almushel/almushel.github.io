@@ -26,17 +26,9 @@ export default class TileContainer extends HTMLElement {
 
 			let colClass;
 			switch(this?.getAttribute("cols")) {
-				case "2": {
-					colClass = "two-column";
-				} break;
-
-				case "3": {
-					colClass = "three-column";
-				} break;
-
-				default: {
-					colClass = "one-column";
-				} break;
+				case "2": colClass = "two-column"; break;
+				case "3": colClass = "three-column"; break;
+				default : colClass = "one-column"; break;
 			}
 			container.classList.add(colClass);
 
