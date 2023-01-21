@@ -4,6 +4,7 @@ let styles = document.createElement("style");
 			overflow: hidden;
 			
 			width: 49%;
+			height: auto;
 			margin: 0% 1% 1% 0;
 			
 			background: var(--bg-color-1);
@@ -22,17 +23,41 @@ let styles = document.createElement("style");
 
 		.filter-container > span {
 			display: block;
+			padding-bottom: 0.25em;
+			margin: 0;
 		}
 
-		.filter-container .label {
-			padding: 1.25%;
+		.filter-container .toggle {
+			display: block;
+			padding: .25em;
 			margin-bottom: .25em;
 			border-bottom: 1px solid var(--bg-color-3);
 			cursor: pointer;
 		}
 
-		.filter-container .label:hover {
+		.filter-container .toggle:hover {
 			background: var(--bg-color-2);
+		}
+
+		.arrow {
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			display: inline-block;
+			margin-right: .25em;
+			
+			padding: .25em;
+
+			transition: transform .25s;
+		}
+
+		.up {
+			transform: translateY(50%) rotate(-135deg);
+			-webkit-transform: translateY(50%) rotate(-135deg);
+		}
+		  
+		.down {
+			transform: translateY(50%) rotate(45deg);
+			-webkit-transform: translateY(50%) rotate(45deg);
 		}
 
 		@media only screen and (min-width: 1280px) {
@@ -46,82 +71,64 @@ export default class TagFilter extends HTMLElement {
 	constructor() {
 		super();
 		this.elements = Array.from(this.children);
-		
-		const labelHeight = "1.6em";
 
 		this.tagNames = new Set();
 		this.tags = {};
-		this.tagInputs = document.createElement("div");
-		this.tagInputs.className = "filter-container";
-		this.tagInputs.style.height = labelHeight;
-
-		let containerLabel = document.createElement("span");
-		containerLabel.innerHTML = "Filters";
-		containerLabel.classList.add("label");
-		containerLabel.onclick = (e) => {
-			e.target.parentElement.style.height = (e.target.parentElement.style.height === labelHeight) ? (0.25 + this.tagNames.size * 1.5)+"em" : labelHeight;
-		}
-
-		this.tagInputs.append(containerLabel);
+		this.tagControls = document.createElement("div");
+		this.tagControls.className = "filter-container";
 		
-//		this.categoryNames = new Set();
-//		this.categories = {};
-		
-		const shadowRoot = this.attachShadow({mode: "open"});
+		const shadowRoot = this.attachShadow({mode: "closed"});
 		shadowRoot.append(styles.cloneNode(true));
 
 		for (let child of this.elements) {
 			for (let tag of this.extractElementTags(child)) this.pushTag(tag);
 
-/* TO-DO: Rethink categories
-			if (child.hasAttribute("category")) {
-				this.pushToCategory(child, child.getAttribute("category"));
-			} else {
-				this.pushToCategory(child, "other");
-			}
-*/
 			shadowRoot.append(child);
 		}
 
-		// Alphabetize tag checkboxes
-		let tagInputsArr = Array.from(this.tagInputs.children).sort(
-			(a, b) => { 
-				return (
-					a.title < b.title ? -1 : 
-					a.title > b.title ? 1 : 0
-				);
-			}
-		);
-
-		for (let i of tagInputsArr) this.tagInputs.append(i);
-
-		if (this.tagNames.size) shadowRoot.prepend(this.tagInputs);
-/*	
-		for (let name of this.categoryNames) {
-			let heading = document.createElement("h3");
-				heading.style = "width: 100%; float: left;";
-				heading.innerHTML = name.toUpperCase();
-			shadowRoot.append(heading);
-
-			for (let e of this.categories[name]) {
-				shadowRoot.append(e);
-			}
+		if (this.tagNames.size) {
+			// Alphabetize tag checkboxes
+			let tagInputsArr = Array.from(this.tagControls.children).sort(
+				(a, b) => { 
+					return (
+						a.title < b.title ? -1 : 
+						a.title > b.title ? 1 : 0
+					);
+				}
+			);
+			for (let i of tagInputsArr) this.tagControls.append(i);
+		
+			// Create filter menu toggle switch
+			let containerToggle = document.createElement("div");
+				containerToggle.innerHTML = `Filters <div class="arrow up" style="float: right;"></div>`;
+				containerToggle.classList.add("toggle");
+	
+			this.tagControls.prepend(containerToggle);
+			
+			shadowRoot.prepend(this.tagControls);
 		}
-*/
+
 		this.updateTagFilter()
 	}
 
-	pushToCategory(element, category) {
-		if (!this.categoryNames.has(category)) {
-			this.categoryNames.add(category);
-			this.categories[category] = [];
-		}
+	connectedCallback() {
+		const toggle = this.tagControls.querySelector(".toggle");
+		const toggleHeight = toggle.getBoundingClientRect().height; // Subtract the bottom border
+		const checkBoxHeight = this.tagControls.querySelector("span").getBoundingClientRect().height;
+		const expandedHeight = (toggleHeight+1) + this.tagNames.size * checkBoxHeight;
 
-		this.categories[category].push(element);
+		this.tagControls.style.height = toggleHeight.toFixed(1)+"px";
+		toggle.onclick = () => {
+			let newHeight = (toggle.parentElement.style.height == toggleHeight.toFixed(1)+"px") ? expandedHeight : toggleHeight;
+			toggle.parentElement.style.height = newHeight.toFixed(1)+"px";
+			
+			toggle.querySelector(".arrow").classList.toggle("down")
+			toggle.querySelector(".arrow").classList.toggle("up");
+		}
 	}
 
 	pushTag(tagName) {
-		if (this.tags[tagName] === undefined) {
+		if (!this.tagNames.has(tagName)) {
 			this.tagNames.add(tagName);
 			this.tags[tagName] = false;
 
@@ -143,7 +150,7 @@ export default class TagFilter extends HTMLElement {
 			
 			container.append(checkbox, label);
 
-			this.tagInputs.append(container);
+			this.tagControls.append(container);
 		}
 	}
 
@@ -154,6 +161,7 @@ export default class TagFilter extends HTMLElement {
 	updateTagFilter() {
 		let tagsEnabled = [];
 
+		// TO-DO: store enabled state somewhere
 		for (let name of this.tagNames) {
 			if (this.tags[name] == true) tagsEnabled.push(name);
 		}
@@ -169,11 +177,7 @@ export default class TagFilter extends HTMLElement {
 	}
 
 	extractElementTags(element) {
-		let result = [""];
-
-		if (element.hasAttribute("tags")) {
-			result = element.getAttribute("tags").split(/\s?,\s?/);
-		}
+		let result = element.dataset?.tags?.split(/\s?,\s?/) || [""];
 
 		return result;
 	}
