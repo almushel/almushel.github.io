@@ -102,6 +102,10 @@ img {
 	max-width: 100%;
 }
 
+video {
+	max-width: 100%;
+}
+
 .top-banner {
 	margin: 0px;
 	padding: 0.5rem;
@@ -139,6 +143,7 @@ nav a:visited {
 .nav-label {
 	display: inline-block;
 	padding: 0.5em 1em;
+	border-right: 1px solid var(--bg-color-3)
 }
 
 #top-nav input {
@@ -150,8 +155,9 @@ nav a:visited {
 	transform: translate(-100%);
 
 	border-width: 0;
-	height: 3em;
 	width: 100%;
+	height: 2.76em;
+	margin: 0;
 	vertical-align: middle;
 }
 
@@ -168,10 +174,6 @@ nav a:visited {
 
 #menu-toggle-on:checked ~ .nav-menu {
 	display: inherit;
-}
-
-.nav-menu a {
-	display:block;
 }
 
 .social-links {
@@ -237,10 +239,6 @@ nav a:visited {
 .fourth-float-tile {
 	float: left;
 	width: 25%;
-}
-
-.tile-subtitle {
-	text-align: center;
 }
 
 .section-banner {

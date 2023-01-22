@@ -11,71 +11,68 @@
 export default class TileContainer extends HTMLElement {
 	constructor() {
 		super();
+		this.initialized = false;
+		let shadowRoot = this.attachShadow({mode: "closed"});
+
+		let styles = document.createElement("link");
+		styles.setAttribute("rel", "stylesheet");
+		styles.setAttribute("href", "/css/tile-container.css");
+
+		let container = document.createElement("div");
+		container.classList.add("tile-container", "smooth-expand");
+		container.dataset.columns = this.dataset.columns;
+
+		this._content = document.createElement("div");
+		this._content.classList.add("tile-content");
+		
+		if (this.hasAttribute("href")) {
+			let anchor = container.appendChild(document.createElement("a"));
+			anchor.href = this.getAttribute("href");
+			anchor.appendChild(this._content);
+		} else {
+			container.appendChild(this._content);
+		}
+
+		shadowRoot.append(styles, container);
 	}
 
 	connectedCallback() {
-		if (this.isConnected) {
-			let shadowRoot = this.attachShadow({mode: "open"});
-
-			let styles = document.createElement("link");
-			styles.setAttribute("rel", "stylesheet");
-			styles.setAttribute("href", "/css/tile-container.css");
-
-			let container = document.createElement("div");
-			container.classList.add("tile-container", "smooth-expand");
-			container.dataset.columns = this.dataset.columns;
-
-			let tileContent = document.createElement("div");
-			tileContent.classList.add("tile-content");
-			
-			if (this.hasAttribute("href")) {
-				let anchor = container.appendChild(document.createElement("a"));
-				anchor.href = this.getAttribute("href");
-				anchor.appendChild(tileContent);
-			} else {
-				container.appendChild(tileContent);
-			}
-
-			if(this.hasAttribute("iframe")) {
-				let frame = tileContent.appendChild(document.createElement("iframe"));
+		if (this.isConnected & !this.initialized) {
+			// The content is loaded after connection so that container layout is established before rendering
+			if (this.hasAttribute("iframe")) {
+				let frame = this._content.appendChild(document.createElement("iframe"));
 				frame.src = this.getAttribute("iframe");
 				frame.allowfullscreen = "allowfullscreen";
 				frame.loading = "lazy";
 				frame.width = "99.6%";
 				frame.height = "99.6%";
 			} else {
-				// TO-DO: Pause when hidden, resume on hover
 				if (this.hasAttribute("video")) { // Background video
-					let video = tileContent.appendChild(document.createElement("video"));
+					let video = this._content.appendChild(document.createElement("video"));
 					video.autoplay = true;
 					video.loop = true;
 					video.muted = true;
+					video.width = "99.6%";
+					video.height = "99.6%";
 					video.title = this.getAttribute("title");
 					video.classList.add("show-on-hover");
 					video.src = this.getAttribute("video");
 				} else if (this.hasAttribute("img2")) { // Background image
-					let image = tileContent.appendChild(document.createElement("img"));
+					let image = this._content.appendChild(document.createElement("img"));
 					image.loading = "lazy";
 					image.src = this.getAttribute("img2");
 					image.classList.add("show-on-hover");
 				}
-
+	
 				if (this.hasAttribute("img")) { // Foreground image
-					let image = tileContent.appendChild(document.createElement("img"));
+					let image = this._content.appendChild(document.createElement("img"));
 					image.src = this.getAttribute("img");
 					image.alt = this?.getAttribute("title");
 					if (this.hasAttribute("img2") || this.hasAttribute("video")) image.classList.add("hide-on-hover");
 				}
 			}
 
-
-			if (this.hasAttribute("title")) {
-				let title = tileContent.appendChild(document.createElement("div"));
-				title.innerText = this.getAttribute("title");
-				title.classList.add("show-on-hover", "subtitle");
-			}
-
-			shadowRoot.append(styles, container);
+			this.initialized = true;
 		}
 	}
 }

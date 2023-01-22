@@ -113,7 +113,7 @@ export default class TagFilter extends HTMLElement {
 
 	connectedCallback() {
 		const toggle = this.tagControls.querySelector(".toggle");
-		const toggleHeight = toggle.getBoundingClientRect().height; // Subtract the bottom border
+		const toggleHeight = toggle.getBoundingClientRect().height-1; // Subtract the bottom border
 		const checkBoxHeight = this.tagControls.querySelector("span").getBoundingClientRect().height;
 		// NOTE: expandedHeight is always short the equivalent of one checkbox span padding-bottom value (.25em or 4px)
 		const expandedHeight = (toggleHeight+1) + this.tagNames.size * checkBoxHeight;

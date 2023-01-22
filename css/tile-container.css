@@ -6,7 +6,7 @@ iframe {
 .tile-container {
 	left: 0;
 	height: 0;
-	margin: 0% 1% 1.75em 0;
+	margin: 0% 1% 1% 0;
 	position: relative;
 	float: left;
 }
@@ -27,7 +27,7 @@ iframe {
 }
 
 .tile-content {
-	background-color: var(--bg-color-1);
+	background-color: black;
 	border: 1px solid var(--bg-color-3);
 	top: 0;
 	left: 0;
@@ -47,20 +47,7 @@ iframe {
 .tile-content video {
 	width: 100%;
 	height: 100%;
-	position: absolute; 
-	background: black;
-}
-
-.tile-content .subtitle {
-	background-color: rgba(0,0,0, 0.25);
-	color: var(--font-color);
-	font-family: var(--paragraph-font, Arial);
-	font-style: normal; 
-	font-weight: 400;
-	text-align: center;
-	width: 100%; 
-	position: absolute; 
-	bottom: -1.25em;
+	position: absolute;
 }
 
 .tile-content:hover {
