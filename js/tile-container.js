@@ -21,6 +21,7 @@ export default class TileContainer extends HTMLElement {
 		let container = document.createElement("div");
 		container.classList.add("tile-container", "smooth-expand");
 		container.dataset.columns = this.dataset.columns;
+		container.dataset.rows = this.dataset.rows;
 
 		this._content = document.createElement("div");
 		this._content.classList.add("tile-content");
