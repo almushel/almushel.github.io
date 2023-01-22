@@ -11,20 +11,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="../../images/AM.png">
 	<link rel="stylesheet" href="../../css/styles.css">
+	<script src="/js/index.js" type="module"></script>
 </head>
 
 <body>
 	<div id="top" class="top-banner">
-        <h1>Andrew Mushel</h1>
-        <h4 id="tagline">&nbsp;</h4>
-		<script>
-			let tag = document.getElementById("tagline");
-			fetch("../../files/tagline.txt")
-				.then(response => response.text())
-				.then(data => tag.innerHTML = data)
-		</script>
+    <h1>Andrew Mushel</h1>
+    <h4 id="tagline">&nbsp;</h4>
+		
     </div>
-	<iframe frameborder="0" class="nav-frame" src="../../nav.html" sandbox="allow-top-navigation"></iframe>
+	<nav id="top-nav"><span class="nav-label">Menu</span></nav>
 	<div class="content">
 		<h2>Sound Effect Variation in Unity</h2>
 		<p>One of the most fundamental elements of satisfying interactive audio implementation is variation. When you
