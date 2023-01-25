@@ -140,7 +140,7 @@ nav a:visited {
 	border-bottom: 1px solid var(--accent-color);
 }
 
-.nav-label {
+#top-nav .nav-label {
 	display: inline-block;
 	padding: 0.5em 1em;
 	border-right: 1px solid var(--bg-color-3)
@@ -168,8 +168,11 @@ nav a:visited {
 .nav-menu {
 	position: relative;
 	overflow: hidden;
-	display: none;
 	border-top: 1px solid var(--bg-color-3);
+}
+
+#menu-toggle-off:checked ~ .nav-menu {
+	display: none;
 }
 
 #menu-toggle-on:checked ~ .nav-menu {
