@@ -3,6 +3,9 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 :root {
+	background-color: var(--bg-color-1);
+	scroll-behavior: smooth;
+
 	--heading-font: Ubuntu;
 	--paragraph-font: Oxygen;
 	--font-color: white;
@@ -11,17 +14,14 @@
 	--bg-color-3: #444;
 	--accent-color: lightskyblue;
 	--scroll: 0;
-	scroll-behavior: smooth;
 }
 
 body {
-	background-color: var(--bg-color-1);
     color: var(--font-color);
 	font-family: var(--paragraph-font, Arial);
 	font-style: normal; 
 	font-weight: 400;
-	margin: 0px;
-	display: inline;
+	margin: 0;
 }
 
 h1 { 
@@ -286,66 +286,6 @@ nav a:visited {
 	}
 }
 
-/*Animations*/
-@keyframes verticalBob {
-	from {
-		top: 15%
-	}
-
-	to {
-		top: 55%
-	}
-}
-
-@keyframes doorSlide {
-	from {
-		left: 0%;
-	}
-
-	to {
-		left: -100%;
-	}
-}
-
 .pixelated {
 	image-rendering: pixelated;
-}
-
-.animDoor {
-	width: 100%;
-	height: auto;
-	position: relative;
-	left: calc(var(--scroll) * 100%);
-
-	animation: doorSlide 2s ease-in-out infinite;
-	animation-play-state: paused;
-	animation-delay: calc(var(--scroll) * -2s);
-}
-
-.animKey {
-	margin-left: 37.5%;
-	height: 25%;
-	width: auto;
-	position: absolute;
-	animation: verticalBob 1s ease-in-out infinite alternate;
-	animation-play-state: paused;
-	animation-delay: calc(var(--scroll) * 1.5s);
-}
-
-.keyTainer {
-	float: left;
-	position: relative;
-	height: 0;
-	padding-top: 25%;
-	width: 25%;
-}
-
-.key-shadow {
-	position: absolute;
-	background-color: black;
-	margin-top: -15%;
-	margin-left: 37.5%;
-	width: 25%;
-	height: 8%;
-	border-radius: 100%;
 }
