@@ -47,18 +47,19 @@ styleSheet.replaceSync(`
 	border: solid white;
 	border-width: 0 3px 3px 0;
 	display: inline-block;
+	margin-top: -.125em;
 	margin-right: .25em;
 	
 	padding: .25em;
 
 	transition: transform .25s;
-	transform: translateY(50%) rotate(-135deg);
-	-webkit-transform: translateY(50%) rotate(-135deg);
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
   
 .expanded .arrow {
-	transform: translateY(50%) rotate(45deg);
-	-webkit-transform: translateY(50%) rotate(45deg);
+	transform: translateY(100%) rotate(-135deg);
+	-webkit-transform: translateY(100%) rotate(-135deg);
 }
 
 @media only screen and (min-width: 1280px) {

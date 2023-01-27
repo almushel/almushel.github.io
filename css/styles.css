@@ -113,7 +113,7 @@ video {
     text-align: center;
 }
 
-nav a {
+.nav-menu * {
 	text-decoration: none;
 	padding: 0.5em 1em;
 	float: left;
@@ -140,42 +140,38 @@ nav a:visited {
 	border-bottom: 1px solid var(--accent-color);
 }
 
-#top-nav .nav-label {
+#top-nav input {
+	position: absolute;
+	opacity: 0;
+}
+
+#top-nav label {
+	cursor: pointer;
 	display: inline-block;
 	padding: 0.5em 1em;
 	border-right: 1px solid var(--bg-color-3)
 }
 
-#top-nav input {
-	opacity: 0;
-	cursor: pointer;
+#top-nav label .arrow {
+	margin: -.125em 0 .5em .25em;
 
-	position: absolute;
-	top: 0;
-	transform: translate(-100%);
-
-	border-width: 0;
-	width: 100%;
-	height: 2.76em;
-	margin: 0;
-	vertical-align: middle;
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
 
-#top-nav > input[type="radio"]:checked {
+#top-nav > input[type="checkbox"]:checked+label .arrow {
+	transform: translateY(100%) rotate(-135deg);
+	-webkit-transform: translateY(100%) rotate(-135deg);
+}
+
+#top-nav .nav-menu {
 	display: none;
-}
-
-.nav-menu {
 	position: relative;
 	overflow: hidden;
 	border-top: 1px solid var(--bg-color-3);
 }
 
-#menu-toggle-off:checked ~ .nav-menu {
-	display: none;
-}
-
-#menu-toggle-on:checked ~ .nav-menu {
+#menu-toggle:checked ~ .nav-menu {
 	display: inherit;
 }
 
@@ -288,4 +284,22 @@ nav a:visited {
 
 .pixelated {
 	image-rendering: pixelated;
+}
+
+.arrow {
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	
+	padding: .25em;
+}
+
+.arrow.up {
+	transform: translateY(100%) rotate(-135deg);
+	-webkit-transform: translateY(100%) rotate(-135deg);
+}
+  
+.arrow.down {
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
