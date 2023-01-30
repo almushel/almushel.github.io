@@ -53,21 +53,23 @@ styleSheet.replaceSync(`
 	padding: .25em;
 
 	transition: transform .25s;
-	transform: translateY(50%) rotate(45deg);
-	-webkit-transform: translateY(50%) rotate(45deg);
-}
-  
-.expanded .arrow {
 	transform: translateY(100%) rotate(-135deg);
 	-webkit-transform: translateY(100%) rotate(-135deg);
+}
+
+.toggle > .arrow { float: right; }
+  
+.expanded .arrow {
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
 
 @media only screen and (min-width: 1280px) {
 	.filter-container {
 		width: 32.3%;
 	}
-}
-`);
+}`
+);
 
 export default class TagFilter extends HTMLElement {
 	constructor() {
@@ -76,8 +78,8 @@ export default class TagFilter extends HTMLElement {
 		shadowRoot.adoptedStyleSheets = [styleSheet];
 
 		this.elements = Array.from(this.children);
-		this.tagNames = new Set();
-		this.tags = {};
+		this.tagsEnabled = new Set();
+
 		this.tagControls = document.createElement("div");
 		this.tagControls.className = "filter-container";
 		shadowRoot.append(this.tagControls);
@@ -88,9 +90,9 @@ export default class TagFilter extends HTMLElement {
 			shadowRoot.append(child);
 		}
 
-		if (this.tagNames.size) {
+		if (this.tagControls.children?.length) {
 			// Alphabetize tag checkboxes
-			let tagInputsArr = Array.from(this.tagControls.children).sort(
+			let tagInputsArray = Array.from(this.tagControls.children).sort(
 				(a, b) => { 
 					return (
 						a.title < b.title ? -1 : 
@@ -98,25 +100,28 @@ export default class TagFilter extends HTMLElement {
 					);
 				}
 			);
-			for (let i of tagInputsArr) this.tagControls.append(i);
+			for (let i of tagInputsArray) {
+				i.querySelector("input").onchange = (e) => {
+					this.setTagState(e.target.parentElement.title, e.target.checked);
+					this.updateTagFilter();
+				};
+				this.tagControls.append(i);
+			}
 		
 			// Create filter menu toggle switch
-			let containerToggle = document.createElement("div");
-				containerToggle.innerHTML = `Filters <div class="arrow up" style="float: right;"></div>`;
-				containerToggle.classList.add("toggle");
-	
-			this.tagControls.prepend(containerToggle);
+			this.tagControls.insertAdjacentHTML("afterbegin", 
+				`<div class="toggle">
+					Filters<div class="arrow"></div>
+				</div>`
+			);
 		}
-
-		this.updateTagFilter()
 	}
 
 	connectedCallback() {
 		const toggle = this.tagControls.querySelector(".toggle");
 		const toggleHeight = toggle.getBoundingClientRect().height-1; // Subtract the bottom border
 		const checkBoxHeight = this.tagControls.querySelector("span").getBoundingClientRect().height;
-		// NOTE: expandedHeight is always short the equivalent of one checkbox span padding-bottom value (.25em or 4px)
-		const expandedHeight = (toggleHeight+1) + this.tagNames.size * checkBoxHeight;
+		const expandedHeight = (toggleHeight+1) + (this.tagControls.children.length-1) * Math.round(checkBoxHeight);
 
 		styleSheet.insertRule(`:host { --container-collapsed-height: ${toggleHeight+"px"} }`);
 		styleSheet.insertRule(`:host { --container-expanded-height: ${expandedHeight+"px"} }`);
@@ -125,49 +130,31 @@ export default class TagFilter extends HTMLElement {
 	}
 
 	pushTag(tagName) {
-		if (!this.tagNames.has(tagName)) {
-			this.tagNames.add(tagName);
-			this.tags[tagName] = false;
+		if (!this.tagControls.querySelector(`span[title="${tagName}"]`)) {
+			const tagID = tagName+"-checkbox";
 
-			let container = document.createElement("span");
-				container.title = tagName;
-					
-			let checkbox = document.createElement("input");
-				checkbox.type = "checkbox";
-				checkbox.id = tagName + "-checkbox";
-				checkbox.checked = false;
-				checkbox.onchange = (e) => {
-					this.setTagState(e.target.parentElement.title, e.target.checked);
-					this.updateTagFilter();
-				};
-			
-			let label = document.createElement("label");
-				label.for = checkbox.id;
-				label.innerHTML = tagName;
-			
-			container.append(checkbox, label);
-
-			this.tagControls.append(container);
+			this.tagControls.insertAdjacentHTML("beforeend", 
+				`<span title="${tagName}">
+					<input type="checkbox" id="${tagID}"/><label for="${tagID}">${tagName}</label>
+				</span>`
+			);
 		}
 	}
 
 	setTagState(tagName, state) {
-		this.tags[tagName] = state;
+		if (state) this.tagsEnabled.add(tagName);
+		else this.tagsEnabled.delete(tagName);
 	}
 
 	updateTagFilter() {
-		let tagsEnabled = [];
-
-		// TO-DO: store enabled state somewhere
-		for (let name of this.tagNames) {
-			if (this.tags[name] == true) tagsEnabled.push(name);
-		}
-
 		for (let e of this.elements) {
 			let hidden = false;
 			let elementTags = new Set(this.extractElementTags(e));
-			for (let filter of tagsEnabled) {
-				if (!elementTags.has(filter)) hidden = true;
+			for (let filter of this.tagsEnabled) {
+				if (!elementTags.has(filter)) {
+					hidden = true;
+					break;
+				}
 			}
 			e.hidden = hidden;
 		}

@@ -154,14 +154,13 @@ nav a:visited {
 
 #top-nav label .arrow {
 	margin: -.125em 0 .5em .25em;
-
-	transform: translateY(50%) rotate(45deg);
-	-webkit-transform: translateY(50%) rotate(45deg);
+	transform: translateY(100%) rotate(-135deg);
+	-webkit-transform: translateY(100%) rotate(-135deg);
 }
 
 #top-nav > input[type="checkbox"]:checked+label .arrow {
-	transform: translateY(100%) rotate(-135deg);
-	-webkit-transform: translateY(100%) rotate(-135deg);
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
 
 #top-nav .nav-menu {
