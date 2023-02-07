@@ -11,7 +11,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="../images/AM.png">
 	<link rel="stylesheet" href="../css/styles.css">
-	<script src="/js/index.js" type="module"></script>
+	<script src="/js/main.js" type="module"></script>
+	<script src="/js/audio-playlist.js" type="module"></script>
 </head>
 
 <body>
@@ -31,46 +32,17 @@
 		<h3>Summary</h3>
 		<p>Audio Design/Implementation, Music</p>
 		<h3>What I did</h3>
-		<div class="audio-container">
-			<p>Clear Screen</p>
-			<audio controls> 
-				<source src="../audio/ClearScreen.ogg" type="audio/ogg">
-				<source src="../audio/ClearScreen.mp3" type="audio/mpeg">
-			</audio>
-		</div>
 
-		<div class="audio-container">
-		<p>Extra Life</p>
-		<audio controls> 
-			<source src="../audio/extraLife.ogg" type="audio/ogg">
-			<source src="../audio/extraLife.mp3" type="audio/mpeg">
-		</audio>
-		</div>
+		<audio-playlist>
+			<div slot="sources">
+				<audio title="Warp Speed" src="../audio/WarpSpeed.mp3" type="audio/mpeg"></audio>
+				<audio title="Clear Screen" src="../audio/ClearScreen.mp3" type="audio/mpeg"></audio>
+				<audio title="Extra Life" src="../audio/extraLife.mp3" type="audio/mpeg"></audio>
+				<audio title="Player Laser" src="../audio/PlayerFireLaser.mp3" type="audio/mpeg"></audio>
+				<audio title="Player Powerup" src="../audio/PlayerPowerupActivate.mp3" type="audio/mpeg"></audio>
+			</div>
+		</audio-playlist>
 
-		<div class="audio-container">
-		<p>Laser Fire</p>
-		<audio controls> 
-			<source src="../audio/PlayerFireLaser.ogg" type="audio/ogg">
-			<source src="../audio/PlayerFireLaser.mp3" type="audio/mpeg">
-		</audio>
-		</div>
-
-		<div class="audio-container">
-		<p>Activate Powerup</p>
-		<audio controls> 
-			<source src="../audio/PlayerPowerupActivate.ogg" type="audio/ogg">
-			<source src="../audio/PlayerPowerupActivate.mp3" type="audio/mpeg">
-		</audio>
-		</div>
-
-		<h3>Music</h3>
-		<div class="audio-container">
-		<p>"Warp Speed"</p>
-		<audio controls> 
-			<source src="../audio/WarpSpeed.ogg" type="audio/ogg">
-			<source src="../audio/WarpSpeed.mp3" type="audio/mpeg">
-		</audio>
-		</div>
 	</div>
 
 </body>

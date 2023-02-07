@@ -1,9 +1,3 @@
-import TagFilter from "./tag-filter.js"
-import TileContainer from "./tile-container.js"
-
-customElements.define("tag-filter", TagFilter);
-customElements.define("tile-container", TileContainer);
-
 const origin = window.location.origin+"/";
 const currentPage = window.location.href;
 

@@ -71,7 +71,7 @@ styleSheet.replaceSync(`
 }`
 );
 
-export default class TagFilter extends HTMLElement {
+export class TagFilter extends HTMLElement {
 	constructor() {
 		super();
 		const shadowRoot = this.attachShadow({mode: "closed"});
@@ -166,3 +166,5 @@ export default class TagFilter extends HTMLElement {
 		return result;
 	}
 }
+
+customElements.define("tag-filter", TagFilter);

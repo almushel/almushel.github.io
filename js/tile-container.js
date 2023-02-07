@@ -8,7 +8,7 @@
 // "title" : Subtitle shown on hover. Also populates related attributes of other elements (e.g. "alt")
 */
 
-export default class TileContainer extends HTMLElement {
+export class TileContainer extends HTMLElement {
 	constructor() {
 		super();
 		this.initialized = false;
@@ -39,6 +39,7 @@ export default class TileContainer extends HTMLElement {
 
 	connectedCallback() {
 		if (this.isConnected & !this.initialized) {
+			const title = this.getAttribute("title") || "";
 			// The content is loaded after connection so that container layout is established before rendering
 			if (this.hasAttribute("iframe")) {
 				let frame = this._content.appendChild(document.createElement("iframe"));
@@ -53,9 +54,8 @@ export default class TileContainer extends HTMLElement {
 					video.autoplay = true;
 					video.loop = true;
 					video.muted = true;
-					video.width = "99.6%";
-					video.height = "99.6%";
-					video.title = this.getAttribute("title");
+					video.width = video.height = "99.6%";
+					video.title = title;
 					video.classList.add("show-on-hover");
 					video.src = this.getAttribute("video");
 				} else if (this.hasAttribute("img2")) { // Background image
@@ -68,7 +68,7 @@ export default class TileContainer extends HTMLElement {
 				if (this.hasAttribute("img")) { // Foreground image
 					let image = this._content.appendChild(document.createElement("img"));
 					image.src = this.getAttribute("img");
-					image.alt = this?.getAttribute("title");
+					image.alt = title;
 					if (this.hasAttribute("img2") || this.hasAttribute("video")) image.classList.add("hide-on-hover");
 				}
 			}
@@ -77,3 +77,5 @@ export default class TileContainer extends HTMLElement {
 		}
 	}
 }
+
+customElements.define("tile-container", TileContainer);

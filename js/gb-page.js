@@ -85,11 +85,10 @@ class KeyAnimation extends HTMLElement {
 		`;
 	}
 }
+customElements.define("key-animation", KeyAnimation);
 
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, gbPageStyles];
 
 window.addEventListener("scroll", () => {
 	document.documentElement.style.setProperty("--scroll", window.pageYOffset / (document.documentElement.offsetHeight - window.innerHeight));
 }, false);
-
-customElements.define("key-animation", KeyAnimation);
