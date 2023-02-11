@@ -1,5 +1,9 @@
 const stylesheet = new CSSStyleSheet();
 stylesheet.replaceSync(`
+	input[type=checkbox] {
+		filter: grayscale(100%) invert(100%) brightness(150%);
+	}	
+
 	input[type="range"] {
 		flex: auto;
 		-webkit-appearance: none;
@@ -39,7 +43,9 @@ stylesheet.replaceSync(`
 
 		width: 1.5em;
 		height: 1.5em;
-		margin: .55em -.1em 0 .75em;
+		margin-right: .25em;
+
+		transform: translate(25%, 25%);
 		
 		box-sizing: border-box;
 		border-width: .75em 0 .75em 1.5em;
@@ -70,6 +76,7 @@ stylesheet.replaceSync(`
 	}
 
 	label[for="loop-checkbox"] {
+		cursor: pointer;
 		border-left: 1px solid var(--bg-color-2);
 	}
 
@@ -78,6 +85,7 @@ stylesheet.replaceSync(`
 	}
 
 	label[for="loop-checkbox"]::before {
+		line-height: 1.25em;
 		font-size: 1.5em;
 
 		filter: grayscale(75%);
@@ -97,7 +105,8 @@ stylesheet.replaceSync(`
 	
 	label[for="seek-slider"] {
 		font-family: monospace;
-		padding: .75em;
+		line-height: 1.5em;
+		padding: .5em;
 		border-left: 1px solid var(--bg-color-2);
 		border-right: 1px solid var(--bg-color-2);
 	}
@@ -118,13 +127,13 @@ stylesheet.replaceSync(`
 		cursor: pointer;
 		display: block;
 
-		vertical-align: middle;
+		position: relative;
+		top: 0.25em;
 		text-align: center;
 		margin: auto;
 
 		width: 100%;
 		height: 100%;
-		padding-top: .25em;
 
 		background: inherit;
 
@@ -152,7 +161,6 @@ stylesheet.replaceSync(`
 /* Playlist Controls */
 
 	#playlist {
-		margin-bottom: .25em;
 		border: 1px solid var(--bg-color-3);
 	}
 
@@ -175,6 +183,22 @@ stylesheet.replaceSync(`
 		color: var(--accent-color);
 		border-bottom: 1px solid var(--accent-color);
 	}
+
+	#playlist-footer {
+		padding: .25em;
+		background: var(--bg-color-2);
+	}
+
+	#playlist-footer-title {
+		cursor: default;
+		letter-spacing: .15em;
+	}
+
+	#playlist-footer > :is(input, label) {
+		vertical-align: middle;
+		float: right;
+	}
+
 `)
 
 const template = document.createElement("template");
@@ -189,9 +213,12 @@ template.innerHTML = `
 			<input type="range" id="volume-slider" value="1" min="0" max="1" step="0.01">
 		</div>
 	</div>
-	
 	<audio id="player-audio"></audio>
 	<div id="playlist"></div>
+	<div id="playlist-footer">
+		<span id="playlist-footer-title"></span>
+		<input type="checkbox" id="playlist-autoplay-checkbox"><label for="playlist-autoplay-checkbox" title="Autoplay">Autoplay</label>
+	</div>
 </div>
 `
 
@@ -209,15 +236,16 @@ class AudioPlaylist extends HTMLElement {
 			volume_label: shadowRoot.querySelector("label[for=volume-toggle]"),
 			volume_slider: shadowRoot.querySelector("#volume-slider"),
 			playlist: shadowRoot.querySelector("#playlist"),
+			list_elements: [],
 		}
 
 		const timeupdate_callback = () => {
 			if (this.active_track.duration) this.updateSeekSlider();
 		}
 		
-		this.sources = {};
-		this.index = [];
+		this.sources = [];
 
+		this.active_track_index = null;
 		this.active_track = shadowRoot.querySelector("#player-audio");
 		this.active_track.onloadeddata = () => {
 			this.controls.seek_slider.max = this.active_track.duration;
@@ -254,43 +282,60 @@ class AudioPlaylist extends HTMLElement {
 		shadowRoot.querySelector("#loop-checkbox").onchange = (e) => {
 			this.active_track.loop = e.target.checked;
 		}
+
+		shadowRoot.querySelector("#playlist-autoplay-checkbox").onchange = (e) => {
+			if (e.target.checked) {
+				this.active_track.onended = () => {
+					let next_track_index = this.active_track_index + 1;
+					
+					if (next_track_index < this.controls.list_elements.length) {
+						this.controls.list_elements[next_track_index].click();
+					}
+				}
+			} else {
+				this.active_track.onended = null;
+			}
+		}
+
+		shadowRoot.querySelector("#playlist-footer-title").innerText = this.dataset.title;
 	}
 
 	connectedCallback() {
 		if (this.isConnected && this.sources) {
-			let untitled_count = 0;
 			let first_item = true;
-			for (let audio of Array.from(this.children)) {
-				if (audio.tagName != "SOURCE") continue;
-				let title = audio?.getAttribute("title") || audio?.getAttribute("src");
-				if (!title) title = "Untitled" + ++untitled_count;
+			for (let source of Array.from(this.children)) {
+				if (source.tagName != "SOURCE") continue;
+				let title = source?.getAttribute("title") || source?.getAttribute("src");
+				// TO-DO: Check for duplicate title/src
 
 				let id = title.replace(" ", "-") + "-radio";
 				
-				this.sources[title] = audio;
-				this.index.push(title);
+				let track_index = this.sources.push(source) - 1;
 
 				this.controls.playlist.insertAdjacentHTML("beforeend", `
 					<input type="radio" id="${id}" name="playlist-radio-selection" ${first_item ? "checked" : ""}><label for="${id}">${title}</label>
 				`);
 
-				this.controls.playlist.querySelector(`#${id}`).onchange = (e) => {
-					if (e.target.checked)  {
-						this.setActiveTrack(title);
-						this.active_track.play();
+				this.controls.list_elements[track_index] = this.controls.playlist.querySelector(`#${id}`);
+				this.controls.list_elements[track_index]
+					.onchange = (e) => {
+						if (e.target.checked)  {
+							this.setActiveTrack(track_index);
+							this.active_track.play();
+						}
 					}
-				}
 
-				if (first_item) this.setActiveTrack(audio.title);
+				if (first_item) this.setActiveTrack(track_index);
 				first_item = false;
 			}
 		}
 	}
 
-	setActiveTrack(title) {
-		if (this?.active_track?.title === title) return;
+	setActiveTrack(index) {
+		if (this.active_track_index === index) return;
 
-		let source = this.sources[title];
+		this.active_track_index = index;
+		let source = this.sources[index];
 		if (source) {
 			if (this.active_track) {
 				this.active_track.pause();
