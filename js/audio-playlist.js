@@ -26,9 +26,30 @@ stylesheet.replaceSync(`
 		transform: translateY(-.5em);
 	}
 
+	@keyframes glow-pulse {
+		from {
+			filter: drop-shadow(0 0 0 var(--accent-color))
+		}
+
+		to {
+			filter: drop-shadow(0 0 8px var(--accent-color));
+		}
+	}
+
+	.glowing {
+		animation: 4s ease-in infinite alternate glow-pulse;
+	}
+
 	#playlist-container {
+		user-select: none;
 		background: var(--bg-color-1);
 		border: 1px solid var(--bg-color-3);
+	}
+
+	#playlist-header {
+		padding: .5em;
+		border-bottom: 1px solid var(--bg-color-3);
+		overflow: hidden;
 	}
 
 	#player-controls {
@@ -71,20 +92,20 @@ stylesheet.replaceSync(`
 
 /* Loop Button */
 
-	#loop-checkbox {
+	#repeat-checkbox {
 		display:none;
 	}
 
-	label[for="loop-checkbox"] {
+	label[for="repeat-checkbox"] {
 		cursor: pointer;
 		border-left: 1px solid var(--bg-color-2);
 	}
 
-	label[for="loop-checkbox"]:hover {
+	label[for="repeat-checkbox"]:hover {
 		filter: brightness(110%);
 	}
 
-	label[for="loop-checkbox"]::before {
+	label[for="repeat-checkbox"]::before {
 		line-height: 1.25em;
 		font-size: 1.5em;
 
@@ -93,11 +114,11 @@ stylesheet.replaceSync(`
 		content: "🔁";
 	}
 
-	#loop-checkbox:checked + label[for="loop-checkbox"]::before {
+	#repeat-checkbox:checked + label[for="repeat-checkbox"]::before {
 		content: "🔂";
 	}
 
-	#loop-checkbox:active + label[for="loop-checkbox"] {
+	#repeat-checkbox:active + label[for="repeat-checkbox"] {
 		filter: brightness(75%);
 	}
 
@@ -144,8 +165,8 @@ stylesheet.replaceSync(`
 		display: none;
 
 		position: relative;
-		left: 0;
-		top: calc(-4em - 2px);
+		left: 0.5px;
+		top: calc(-4em + 2px);
 		transform-origin: 0% 50%;
 		transform: rotate(-90deg) translateY(40%);
 		height: inherit;
@@ -189,8 +210,10 @@ stylesheet.replaceSync(`
 		background: var(--bg-color-2);
 	}
 
-	#playlist-footer-title {
+	#playlist-footer-title, #now-playing {
 		cursor: default;
+
+		position: relative;
 		letter-spacing: .15em;
 	}
 
@@ -204,11 +227,14 @@ stylesheet.replaceSync(`
 const template = document.createElement("template");
 template.innerHTML = `
 <div id="playlist-container">
+	<div id="playlist-header">
+		<span id="now-playing">Now Playing:...</span>
+	</div>
 	<div id="player-controls">
-		<button id="play-button"></button>
-		<input type="checkbox" id="loop-checkbox"><label for="loop-checkbox" title="Loop"></label>
-		<label for="seek-slider">0:00 / 0:00</label><input type="range" id="seek-slider" value="0" step="0.001">
-		<div id="volume-controls" title="Volume Controls">
+		<button id="play-button" title="Play/Pause"></button>
+		<input type="checkbox" id="repeat-checkbox"><label for="repeat-checkbox" title="Repeat"></label>
+		<label for="seek-slider" title="Time Clock">0:00 / 0:00</label><input type="range" id="seek-slider" value="0" step="0.001" title="Playback Position">
+		<div id="volume-controls" title="Volume">
 			<input type="checkbox" id="volume-toggle"><label for="volume-toggle"></label>
 			<input type="range" id="volume-slider" value="1" min="0" max="1" step="0.01">
 		</div>
@@ -228,6 +254,9 @@ class AudioPlaylist extends HTMLElement {
 		const shadowRoot = this.attachShadow({mode: "closed"});
 		shadowRoot.adoptedStyleSheets = [stylesheet];
 		shadowRoot.appendChild(template.content.cloneNode(true));
+
+		this.header = shadowRoot.querySelector("#playlist-header");
+		this.footer = shadowRoot.querySelector("#playlist-footer");
 
 		this.controls = {
 			play_button: shadowRoot.querySelector("#play-button"),
@@ -251,8 +280,14 @@ class AudioPlaylist extends HTMLElement {
 			this.controls.seek_slider.max = this.active_track.duration;
 			this.updateTimeClock(0, this.active_track.duration);
 		}
-		this.active_track.onplay = () => {this.controls.play_button.classList.add("paused"); }
-		this.active_track.onpause = () => {this.controls.play_button.classList.remove("paused"); }
+		this.active_track.onplay = () => {
+			this.header.querySelector("#now-playing").classList.add("glowing");
+			this.controls.play_button.classList.add("paused"); 
+		}
+		this.active_track.onpause = () => {
+			this.header.querySelector("#now-playing").classList.remove("glowing");
+			this.controls.play_button.classList.remove("paused"); 
+		}
 		this.active_track.ontimeupdate = timeupdate_callback;
 
 		this.controls.play_button.onclick = () => {
@@ -279,11 +314,12 @@ class AudioPlaylist extends HTMLElement {
 										"&#128264;" ;
 		}
 
-		shadowRoot.querySelector("#loop-checkbox").onchange = (e) => {
+		shadowRoot.querySelector("#repeat-checkbox").onchange = (e) => {
 			this.active_track.loop = e.target.checked;
 		}
 
-		shadowRoot.querySelector("#playlist-autoplay-checkbox").onchange = (e) => {
+		let autoplay_checkbox = shadowRoot.querySelector("#playlist-autoplay-checkbox");
+		autoplay_checkbox.onchange = (e) => {
 			if (e.target.checked) {
 				this.active_track.onended = () => {
 					let next_track_index = this.active_track_index + 1;
@@ -296,6 +332,7 @@ class AudioPlaylist extends HTMLElement {
 				this.active_track.onended = null;
 			}
 		}
+		if (this.hasAttribute("autoplay")) autoplay_checkbox.click();
 
 		shadowRoot.querySelector("#playlist-footer-title").innerText = this.dataset.title;
 	}
@@ -341,6 +378,8 @@ class AudioPlaylist extends HTMLElement {
 				this.active_track.pause();
 				this.active_track.currentTime = 0;
 			}
+			
+			this.header.querySelector("#now-playing").innerText = "Now Playing: " + (source.title || source.src);
 
 			this.controls.seek_slider.value = 0;
 			this.active_track.src = source.src;
