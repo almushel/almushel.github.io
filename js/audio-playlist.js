@@ -227,9 +227,6 @@ stylesheet.replaceSync(`
 const template = document.createElement("template");
 template.innerHTML = `
 <div id="playlist-container">
-	<div id="playlist-header">
-		<span id="now-playing">Now Playing:...</span>
-	</div>
 	<div id="player-controls">
 		<button id="play-button" title="Play/Pause"></button>
 		<input type="checkbox" id="repeat-checkbox"><label for="repeat-checkbox" title="Repeat"></label>
@@ -255,7 +252,6 @@ class AudioPlaylist extends HTMLElement {
 		shadowRoot.adoptedStyleSheets = [stylesheet];
 		shadowRoot.appendChild(template.content.cloneNode(true));
 
-		this.header = shadowRoot.querySelector("#playlist-header");
 		this.footer = shadowRoot.querySelector("#playlist-footer");
 
 		this.controls = {
@@ -281,11 +277,9 @@ class AudioPlaylist extends HTMLElement {
 			this.updateTimeClock(0, this.active_track.duration);
 		}
 		this.active_track.onplay = () => {
-			this.header.querySelector("#now-playing").classList.add("glowing");
 			this.controls.play_button.classList.add("paused"); 
 		}
 		this.active_track.onpause = () => {
-			this.header.querySelector("#now-playing").classList.remove("glowing");
 			this.controls.play_button.classList.remove("paused"); 
 		}
 		this.active_track.ontimeupdate = timeupdate_callback;
@@ -378,8 +372,6 @@ class AudioPlaylist extends HTMLElement {
 				this.active_track.pause();
 				this.active_track.currentTime = 0;
 			}
-			
-			this.header.querySelector("#now-playing").innerText = "Now Playing: " + (source.title || source.src);
 
 			this.controls.seek_slider.value = 0;
 			this.active_track.src = source.src;
