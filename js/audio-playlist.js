@@ -230,7 +230,7 @@ template.innerHTML = `
 	<div id="player-controls">
 		<button id="play-button" title="Play/Pause"></button>
 		<input type="checkbox" id="repeat-checkbox"><label for="repeat-checkbox" title="Repeat"></label>
-		<label for="seek-slider" title="Time Clock">0:00 / 0:00</label><input type="range" id="seek-slider" value="0" step="0.001" title="Playback Position">
+		<label for="seek-slider" title="Time Clock">0:00 / 0:00</label><input type="range" id="seek-slider" min="0" value="0" step="0.001" title="Playback Position">
 		<div id="volume-controls" title="Volume">
 			<input type="checkbox" id="volume-toggle"><label for="volume-toggle"></label>
 			<input type="range" id="volume-slider" value="1" min="0" max="1" step="0.01">
@@ -240,7 +240,7 @@ template.innerHTML = `
 	<div id="playlist"></div>
 	<div id="playlist-footer">
 		<span id="playlist-footer-title"></span>
-		<input type="checkbox" id="playlist-autoplay-checkbox"><label for="playlist-autoplay-checkbox" title="Autoplay">Autoplay</label>
+		<input type="checkbox" id="autoplay_checkbox"><label for="autoplay_checkbox" title="Autoplay">Autoplay</label>
 	</div>
 </div>
 `
@@ -252,22 +252,25 @@ class AudioPlaylist extends HTMLElement {
 		shadowRoot.adoptedStyleSheets = [stylesheet];
 		shadowRoot.appendChild(template.content.cloneNode(true));
 
-		this.footer = shadowRoot.querySelector("#playlist-footer");
-
 		this.controls = {
 			play_button: shadowRoot.querySelector("#play-button"),
+			repeat: shadowRoot.querySelector("#repeat-checkbox"),
 			time_clock: shadowRoot.querySelector(`label[for="seek-slider"]`),
 			seek_slider: shadowRoot.querySelector("#seek-slider"),
+			volume_toggle: shadowRoot.querySelector("#volume-toggle"),
 			volume_label: shadowRoot.querySelector("label[for=volume-toggle]"),
 			volume_slider: shadowRoot.querySelector("#volume-slider"),
 			playlist: shadowRoot.querySelector("#playlist"),
 			list_elements: [],
+			autoplay_toggle: shadowRoot.querySelector(`#autoplay_checkbox`),
 		}
 
-		const timeupdate_callback = () => {
-			if (this.active_track.duration) this.updateSeekSlider();
+		this.mouse_focus = null; // The target of the mouse recent mousedown event
+		for (let control in this.controls) {
+			this.controls[control].onmousedown = (e) => { this.mouse_focus = e.target; }
+			this.controls[control].ontouchstart = (e) => { this.mouse_focus = e.target; }
 		}
-		
+
 		this.sources = [];
 
 		this.active_track_index = null;
@@ -276,27 +279,35 @@ class AudioPlaylist extends HTMLElement {
 			this.controls.seek_slider.max = this.active_track.duration;
 			this.updateTimeClock(0, this.active_track.duration);
 		}
-		this.active_track.onplay = () => {
-			this.controls.play_button.classList.add("paused"); 
-		}
-		this.active_track.onpause = () => {
-			this.controls.play_button.classList.remove("paused"); 
-		}
-		this.active_track.ontimeupdate = timeupdate_callback;
+		this.active_track.onplay = () => { this.controls.play_button.classList.add("paused"); }
+		this.active_track.onpause = () => { this.controls.play_button.classList.remove("paused"); }
+		this.active_track.ontimeupdate = () => {
+			if (this.active_track.duration && this.mouse_focus != this.controls.seek_slider) this.updateSeekSlider();
+		};		
 
 		this.controls.play_button.onclick = () => {
 			if (this.active_track.paused) this.active_track.play();
 			else this.active_track.pause();
 		}
 
-		const seek_slider = this.controls.seek_slider;
-		seek_slider.min = 0;
-		seek_slider.onmousedown = () => {this.active_track.ontimeupdate = null; }
-		seek_slider.onchange = (e) => {
-			this.active_track.currentTime = e.target.value;
-			this.active_track.ontimeupdate = timeupdate_callback;
-		}
-		seek_slider.oninput = () => { this.updateTimeClock(seek_slider.value, this.active_track.duration);}
+		this.controls.seek_slider.onchange = (e) => { this.active_track.currentTime = e.target.value; };
+		this.controls.seek_slider.oninput = () => { this.updateTimeClock(this.controls.seek_slider.value, this.active_track.duration);}
+
+		const document_mouse_down_callback = (e) => {			
+			if (this.controls.volume_toggle.checked &&
+				this.mouse_focus != this.controls.volume_label && 
+				this.mouse_focus != this.controls.volume_slider
+				) {
+				this.controls.volume_toggle.checked = false;
+			}
+		};
+		const document_mouse_up_callback = () => { this.mouse_focus = null; };
+
+		document.addEventListener("mousedown", document_mouse_down_callback);
+		document.addEventListener("touchstart", document_mouse_down_callback);
+
+		document.addEventListener("mouseup", document_mouse_up_callback);
+		document.addEventListener("touchend", document_mouse_up_callback);
 
 		this.controls.volume_label.innerHTML = "&#128266;";
 		this.controls.volume_slider.oninput = (e) => { 
@@ -308,12 +319,9 @@ class AudioPlaylist extends HTMLElement {
 										"&#128264;" ;
 		}
 
-		shadowRoot.querySelector("#repeat-checkbox").onchange = (e) => {
-			this.active_track.loop = e.target.checked;
-		}
+		this.controls.repeat.onchange = (e) => this.active_track.loop = e.target.checked;
 
-		let autoplay_checkbox = shadowRoot.querySelector("#playlist-autoplay-checkbox");
-		autoplay_checkbox.onchange = (e) => {
+		this.controls.autoplay_toggle.onchange = (e) => {
 			if (e.target.checked) {
 				this.active_track.onended = () => {
 					let next_track_index = this.active_track_index + 1;
@@ -326,7 +334,7 @@ class AudioPlaylist extends HTMLElement {
 				this.active_track.onended = null;
 			}
 		}
-		if (this.hasAttribute("autoplay")) autoplay_checkbox.click();
+		if (this.hasAttribute("autoplay")) this.controls.autoplay_toggle.click();
 
 		shadowRoot.querySelector("#playlist-footer-title").innerText = this.dataset.title;
 	}
