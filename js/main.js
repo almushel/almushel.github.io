@@ -13,5 +13,11 @@ const topMenuContent = `
 		<${currentPage != origin+"articles/" ? "a href=\"/articles\"" : "div"}>Articles</ ${currentPage != origin+"articles/" ? "a" : "div"}>
 	</div>
 `;
+
 document.getElementById("tagline").innerHTML = "High performance ludic software";
 document.getElementById("top-nav").innerHTML = topMenuContent;
+document.body.insertAdjacentHTML("beforeend", `
+<div class='section-banner'>
+	<p>&#169; Andrew Mushel ${new Date().getFullYear()}</p>
+</div<
+`)

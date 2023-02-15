@@ -175,20 +175,17 @@ nav a:visited {
 }
 
 .social-links {
-	width: 75%;
 	margin: auto;
 	display: flex;
-	flex-direction: row;
-	z-index: 3;
+/*	flex-direction: row;
+	align-content: space-evenly;
+	align-items: center; */
 }
 
 .social-links a {
-	flex: 1 1 auto;
-	padding: 0;
-	margin: 3% 2% 3% 2%;
-	background-color: var(--bg-color-2);
-	border-color: var(--accent-color);
-	border-radius: 10%;
+	flex: 1 0 auto;
+	margin: auto;
+	max-width: 40px;
 	transition: transform 0.25s ease-in;
 }
 
@@ -200,7 +197,7 @@ nav a:visited {
 
 .social-links .icon {
 	margin: 2%;
-	width:98%;
+	width: 98%;
 	height: auto;
 	filter: invert(100%);
 }
@@ -215,28 +212,6 @@ nav a:visited {
 	margin-left: 3%;
     float: left;
 	width: 90%;
-}
-
-.audio-container {
-	border: 1px solid var(--bg-color-3);
-	background-color: var(--bg-color-1);
-	padding: 1%;
-	margin: 1% 0 1% 0;
-}
-
-.audio-container audio {
-	width: 100%;
-}
-
-.fourth-float-image {
-	float: left;
-	width: 25%;
-	height: auto;
-}
-
-.fourth-float-tile {
-	float: left;
-	width: 25%;
 }
 
 .section-banner {
@@ -254,7 +229,7 @@ nav a:visited {
 @media only screen and (min-width: 640px) {
 	.content {
 		float: left;
-		margin-left: 15%;
+		margin-left: calc(35% / 2);
 		width: 65%;
 	}
 }
@@ -264,15 +239,6 @@ nav a:visited {
 		float: left; 
 		margin-left: 25%;
 		width: 50%;
-	}
-
-	.social-links {
-		width: 25%;
-		margin: auto;
-	}
-
-	.audio-container {
-		max-width: 60%;
 	}
 
 	.section-banner {
