@@ -10,7 +10,7 @@ const topMenuContent = `
 		<a href="/#games">Games</a>
 		<a href="/#music">Music</a>
 		<a href="/#audio">Audio</a>
-		<${currentPage != origin+"articles/" ? "a href=\"/articles\"" : "div"}>Articles</ ${currentPage != origin+"articles/" ? "a" : "div"}>
+		<${currentPage != origin+"articles/" ? "a href=\"/articles\"" : "div"}>Articles</${currentPage != origin+"articles/" ? "a" : "div"}>
 	</div>
 `;
 

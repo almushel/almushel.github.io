@@ -17,11 +17,12 @@
 }
 
 body {
-    color: var(--font-color);
+	margin: 0;
+
+	color: var(--font-color);
 	font-family: var(--paragraph-font, Arial);
 	font-style: normal; 
 	font-weight: 400;
-	margin: 0;
 }
 
 h1 { 
@@ -116,7 +117,7 @@ video {
 .nav-menu * {
 	text-decoration: none;
 	padding: 0.5em 1em;
-	float: left;
+	display: inline-block;
 }
 
 nav a:hover {
@@ -130,11 +131,8 @@ nav a:visited {
 #top-nav {
 	position: sticky;
 	top: 0;
-	float: left;
-	margin-left: 0%;
+	left: 0;
 	z-index: 3;
-
-	width: 100%;
 	
 	background: var(--bg-color-2);
 	border-bottom: 1px solid var(--accent-color);
@@ -177,9 +175,9 @@ nav a:visited {
 .social-links {
 	margin: auto;
 	display: flex;
-/*	flex-direction: row;
+	flex-direction: row;
 	align-content: space-evenly;
-	align-items: center; */
+	align-items: center;
 }
 
 .social-links a {
@@ -208,17 +206,16 @@ nav a:visited {
 
 .content {
     background-color: var(--bg-color-2);
-	padding: 2%;
-	margin-left: 3%;
-    float: left;
 	width: 90%;
+	padding: 2%;
+	margin: auto;
+	overflow: auto;
 }
 
 .section-banner {
 	background: var(--bg-color-3);
-	width: 95.5%;
-	float: left;
-	padding-left: 4.5%;
+	margin: auto;
+	padding: .5em 5%;
 }
 
 .vertical-center {
@@ -228,22 +225,21 @@ nav a:visited {
 
 @media only screen and (min-width: 640px) {
 	.content {
-		float: left;
-		margin-left: calc(35% / 2);
 		width: 65%;
+	}
+
+	.section-banner {
+		padding-left: calc(35%/2);
 	}
 }
 
 @media only screen and (min-width: 1280px) {
 	.content {
-		float: left; 
-		margin-left: 25%;
 		width: 50%;
 	}
 
 	.section-banner {
-		padding-left: 27%;
-		width: 73%;
+		padding-left: 25%;
 	}
 }
 
