@@ -209,7 +209,7 @@ nav a:visited {
 	width: 90%;
 	padding: 2%;
 	margin: auto;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .section-banner {

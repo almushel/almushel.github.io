@@ -119,9 +119,8 @@ export class TagFilter extends HTMLElement {
 
 	connectedCallback() {
 		const toggle = this.tagControls.querySelector(".toggle");
-		const toggleHeight = toggle.getBoundingClientRect().height-1; // Subtract the bottom border
-		const checkBoxHeight = this.tagControls.querySelector("span").getBoundingClientRect().height;
-		const expandedHeight = (toggleHeight+1) + (this.tagControls.children.length-1) * Math.round(checkBoxHeight);
+		const toggleHeight = toggle.offsetHeight-1; // Subtract the bottom border=
+		const expandedHeight = this.tagControls.offsetHeight;
 
 		styleSheet.insertRule(`:host { --container-collapsed-height: ${toggleHeight+"px"} }`);
 		styleSheet.insertRule(`:host { --container-expanded-height: ${expandedHeight+"px"} }`);
