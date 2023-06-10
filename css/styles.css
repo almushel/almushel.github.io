@@ -44,7 +44,7 @@ h2 {
 
 h3 { 
 	font-family: var(--heading-font, Arial);
-	font-size: 24px;
+	font-size: 1.5em;
 	font-style: normal;
 	font-weight: 500;
 	margin-top: 30px;
@@ -53,7 +53,7 @@ h3 {
 
 h4 { 
 	font-family: var(--heading-font, Arial);
-	font-size: 20px;
+	font-size: 1.2em;
 	font-style: normal;
 	font-weight: 200;
 	font-weight: 200;
@@ -152,13 +152,13 @@ nav a:visited {
 
 #top-nav label .arrow {
 	margin: -.125em 0 .5em .25em;
-	transform: translateY(100%) rotate(-135deg);
-	-webkit-transform: translateY(100%) rotate(-135deg);
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
 
 #top-nav > input[type="checkbox"]:checked+label .arrow {
-	transform: translateY(50%) rotate(45deg);
-	-webkit-transform: translateY(50%) rotate(45deg);
+	transform: translateY(100%) rotate(-135deg);
+	-webkit-transform: translateY(100%) rotate(-135deg);
 }
 
 #top-nav .nav-menu {

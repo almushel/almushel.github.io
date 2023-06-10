@@ -53,15 +53,15 @@ styleSheet.replaceSync(`
 	padding: .25em;
 
 	transition: transform .25s;
-	transform: translateY(100%) rotate(-135deg);
-	-webkit-transform: translateY(100%) rotate(-135deg);
+	transform: translateY(50%) rotate(45deg);
+	-webkit-transform: translateY(50%) rotate(45deg);
 }
 
 .toggle > .arrow { float: right; }
   
 .expanded .arrow {
-	transform: translateY(50%) rotate(45deg);
-	-webkit-transform: translateY(50%) rotate(45deg);
+	transform: translateY(100%) rotate(-135deg);
+	-webkit-transform: translateY(100%) rotate(-135deg);
 }
 
 @media only screen and (min-width: 1280px) {

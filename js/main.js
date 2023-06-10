@@ -14,7 +14,7 @@ const topMenuContent = `
 	</div>
 `;
 
-document.getElementById("tagline").innerHTML = "High performance ludic software";
+document.getElementById("tagline").innerHTML = "High performance(?!) ludic software";
 document.getElementById("top-nav").innerHTML = topMenuContent;
 document.body.insertAdjacentHTML("beforeend", `
 <div class='section-banner'>
