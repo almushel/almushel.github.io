@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Looping Music in Unity</title>
+	<title>Andrew Mushel | Looping Music in Unity</title>
 	<meta name="description" content="Extending Unity's default audio looping functionality">
 	<meta name="author" content="Andrew Mushel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +16,12 @@
 
 <body>
 	<div id="top" class="top-banner">
-		<h1>Andrew Mushel</h1>
-		<h4 id="tagline">&nbsp;</h4>
+		<span class="top-banner-title">Andrew Mushel</span>
+		<span id="top-banner-tagline">&nbsp;</span>
 	</div>
 	<nav id="top-nav"><input type="checkbox" id="menu-toggle" name="menu"><label for="menu-toggle">Menu <span class="arrow"></span></label></nav>
 	<div class="content">
-		<h2>Looping Music in Unity</h2>
+		<h1>Looping Music in Unity</h1>
 		<div class="entry-content">
 			<p>Unity's default audio capabilities have never been a particular strong point. Some much needed
 				functionality has been added over its lifespan, like audio mixers, sends, and insert effects, but
@@ -37,7 +37,7 @@
 			<p>Before starting, it should be noted the mp3 format is ill-suited for this application for technical
 				reasons beyond the scope of this post and should be avoided. Ogg and Wav are good options that handle
 				seamless looping well in Unity.</p>
-			<h3>1. Default Loop</h3>
+			<h2>1. Default Loop</h2>
 			<p>This is the simplest option, requiring no scripting at all, but it's also the most limited. For
 				music that with no reverb or tail to speak of or music that doesn't need to restart exactly on
 				measure, this can be serviceable. A quick fade at the end of the last bar can work for less ideal music
@@ -50,7 +50,7 @@
 						alt="Add Audio Source" height="auto" style="max-width: 100%"/></a></p>
 			<p>Make sure that "Play On Awake" and "Loop" are enabled. Your music will play when
 				you start the scene and loop at the end of the audio file.</p>
-			<h3>2. Manual Tail/Release Overlap</h3>
+			<h2>2. Manual Tail/Release Overlap</h2>
 			<p>This method requires some work outside of Unity with an audio editor or Digital Audio Workstation (DAW).
 				Here we'll still use Unity's default looping functionality, after playing and introductory
 				variation of the looped track.</p>
@@ -100,7 +100,7 @@
 				first clip to dspTime (the current time of the audio system in seconds, based on the actual number of
 				samples the audio system processes).</p>
 			<p>From that point, the track will loop normally with Unity's default loop functionality.</p>
-			<h3>3. Calculating the Loop Point and Looping Manually</h3>
+			<h2>3. Calculating the Loop Point and Looping Manually</h2>
 			<p>The last approach requires more scripting work, and some extra information about the music itself, but
 				does not require any specific editing of the audio file. We'll be creating a simple custom looping
 				solution using two AudioSources and AudioSource.PlayScheduled() that calculates the end of the last bar

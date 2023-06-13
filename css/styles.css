@@ -26,15 +26,6 @@ body {
 }
 
 h1 { 
-	font-size: 5em;
-	font-family: var(--heading-font, Arial); 
-	font-style: normal; 
-	font-weight: 800; 
-	letter-spacing: 1px; 
-	line-height: 1;
-}
-
-h2 { 
 	font-size: 2em;
 	font-family: var(--heading-font, Arial);
 	font-style: normal;
@@ -42,7 +33,7 @@ h2 {
 	letter-spacing: 4px;
 }
 
-h3 { 
+h2 { 
 	font-family: var(--heading-font, Arial);
 	font-size: 1.5em;
 	font-style: normal;
@@ -51,14 +42,22 @@ h3 {
 	margin-bottom: 10px; 
 }
 
-h4 { 
+h3 { 
 	font-family: var(--heading-font, Arial);
 	font-size: 1.2em;
 	font-style: normal;
 	font-weight: 200;
-	font-weight: 200;
 	margin-top: 24px;
 	margin-bottom: 12px; 
+}
+
+h4 { 
+	font-family: var(--heading-font, Arial);
+	font-size: 1em;
+	font-style: italic;
+	font-weight: 200;
+	margin-top: 20px;
+	margin-bottom: 10px; 
 }
 
 a {
@@ -112,6 +111,30 @@ video {
 	padding: 0.5rem;
 	background-color: var(--bg-color-3);
     text-align: center;
+}
+
+.top-banner-title { 
+	font-size: 5em;
+	font-family: var(--heading-font, Arial); 
+	font-style: bold; 
+	font-weight: 800;
+	letter-spacing: 1px; 
+	line-height: 1;
+
+	display: block;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+}
+
+#top-banner-tagline {
+	font-family: var(--heading-font, Arial);
+	font-size: 1.2em;
+	font-style: italic;
+	font-weight: 200;
+
+	display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
 }
 
 .nav-menu * {

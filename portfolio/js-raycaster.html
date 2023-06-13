@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>JS Raycaster</title>
+	<title>Andrew Mushel | JS Raycaster</title>
 	<meta name="description" content="JS Raycaster Case Study">
 	<meta name="author" content="Andrew Mushel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,17 +16,17 @@
 
 <body>
 	<div id="top" class="top-banner">
-		<h1>Andrew Mushel</h1>
-		<h4 id="tagline">&nbsp;</h4>
+		<span class="top-banner-title">Andrew Mushel</span>
+		<span id="top-banner-tagline">&nbsp;</span>
 	</div>
 
 	<nav id="top-nav"><input type="checkbox" id="menu-toggle" name="menu"><label for="menu-toggle">Menu <span class="arrow"></span></label></nav>
 	
 	<div class="content">
 
-	<h2>JS Raycaster</h2>
+	<h1>JS Raycaster</h1>
 
-	<h3>What is a raycaster?</h3>
+	<h2>What is a raycaster?</h2>
 
 	<p>
 	In simple terms, a raycaster is a 2D renderer that fakes a first person 3D perspective 
@@ -44,7 +44,7 @@
 	[ <a href="https://andrewmushel.com/raycast-demo/demo.html">Play the Demo</a> ]
 	[ <a href="https://github.com/almushel/raycast-demo">View the source code on Github</a> ]
 
-	<h3>Making a ray-caster</h3>
+	<h2>Making a ray-caster</h2>
 	
 	<p>
 	I wanted to learn about raycasters, but I didn't really know how, not to mention my lacking (if improving) math skills. 
@@ -66,7 +66,7 @@
 	My primary goal was to figure out the basic foundations for drawing a variety of wall shapes.
 	</p>
 
-	<h3>Setting the camera direction</h3>
+	<h2>Setting the camera direction</h2>
 	
 	<p>
 	In the tutorial above, the camera position, direction, and camera plane are hardcoded. 
@@ -120,7 +120,7 @@ function rotateVector (vx, vy, angle) {
 	This makes move the camera start position around much simpler.
 	</p>
 
-	<h3>Drawing walls</h3>
+	<h2>Drawing walls</h2>
 	
 	<p>
 	In the tutorial program, every pixel of every vertical stripe is calculated individually from the source texture. 
@@ -133,7 +133,7 @@ function rotateVector (vx, vy, angle) {
 ctx.drawImage(wallTex, texX, 0, 1, wallTex.height, x, drawStart, 1, lineHeight);
 	</pre>
 
-	<h3>Sprites</h3>
+	<h2>Sprites</h2>
 	
 	<p>
 	Sprites were drawn in much the same way that walls were: one stripe at a time. 
@@ -162,7 +162,7 @@ for (var stripe=drawStartX; stripe<=drawEndX; stripe++) {
 }
 	</pre>
 
-	<h3>Sprite Rotation</h3>
+	<h2>Sprite Rotation</h2>
 	
 	<p>
 	For objects that look similar from every angle, the basic sprite implementations is fine, 
@@ -192,7 +192,7 @@ newRotation = Math.floor((deltaAng)/this.rotationDivision);
 	newRotation is the value that can be plugged into the draw pre to clip the correct rotation on the sprite sheet.
 	</p>
 
-	<h3>Scrolling skybox</h3>
+	<h2>Scrolling skybox</h2>
 	
 	<p>
 	While to tutorial does offer an approach to drawing floors and ceilings, the performance impact was significant. 
@@ -222,7 +222,7 @@ var backOffset = Math.floor(foreOffset/2);
 	I did this later for a game called <a href="../portfolio/glacierbound.html">Glacierbound</a>.
 	</p>
 
-	<h3>Offset walls</h3>
+	<h2>Offset walls</h2>
 	
 	<p>
 	A very simple raycaster is designed draw orthogonal walls of equal width on a grid. Every wall is 4 sided and square. 
@@ -257,7 +257,7 @@ if (sideDistY - (deltaDistY/2) < sideDistX) {
 	This will not work for standing thin walls, because they will appear to flip 90 degrees when viewed, or more accurately, when a ray hits them from a new axis. This also means that they cannot be set directly next to each other. Drawing thin walls that can be viewed from all sides is a bit more work. I had to deal with that later with diagonal walls.
 	</p>
 
-	<h3>Doors</h3>
+	<h2>Doors</h2>
 	
 	<p>
 	Doors are more complicated. You need a way to open them and some sort of opening animation, 
@@ -310,7 +310,7 @@ if (side == 1 && worldMap[mapX][mapY - stepY] == 3) rayTex = 4;
 else if (side == 0 && worldMap[mapX - stepX][mapY] == 3) rayTex = 4;
 	</pre>
 
-	<h3>Push walls</h3>
+	<h2>Push walls</h2>
 
 	<p>
 	In Wolfenstein 3D, the most well-known game to use a raycasting renderer like this, secrets were hidden behind push walls. 
@@ -341,7 +341,7 @@ if (sideDistY - (deltaDistY*(1-doorOffsets[mapX][mapY])) < sideDistX) {
 }
 	</pre>
 
-	<h3>Diagonal walls</h3>
+	<h2>Diagonal walls</h2>
 	
 	<p>
 	Diagonal walls were the first feature that could no longer be built directly on the basic orthogonal hit model. 
@@ -388,7 +388,7 @@ perpWallDist =
 	((rayDirX + rayDirY)/2);
 	</pre>
 
-	<h3>Circular columns</h3>
+	<h2>Circular columns</h2>
 	<p>
 	Circular columns were a similar problem, except now I needed to find the intersection of the ray with a circle 
 	with a center point of mapX + 0.5, mapY + 0.5 and a radius of 0.5. 
@@ -442,7 +442,7 @@ wallX = Math.atan2(mapY + 0.5 - intersect.y, mapX + 0.5 - intersect.x) / (Math.P
 wallX += wallX;
 	</pre>
 
-	<h3>Transparent walls</h3>
+	<h2>Transparent walls</h2>
 	
 	<p>
 	In a simple program that draws only walls, this is pretty easy to do. 

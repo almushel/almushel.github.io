@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Sound Effect Variation in Unity</title>
+	<title>Andrew Mushel | Sound Effect Variation in Unity</title>
 	<meta name="description" content="Extending Unity audio functionality to randomize in-game sound effects">
 	<meta name="author" content="Andrew Mushel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,20 +16,20 @@
 
 <body>
 	<div id="top" class="top-banner">
-    <h1>Andrew Mushel</h1>
-    <h4 id="tagline">&nbsp;</h4>
-		
+    	<span class="top-banner-title">Andrew Mushel</span>
+    	<span id="top-banner-tagline">&nbsp;</span>
     </div>
+
 	<nav id="top-nav"><input type="checkbox" id="menu-toggle" name="menu"><label for="menu-toggle">Menu <span class="arrow"></span></label></nav>
 	<div class="content">
-		<h2>Sound Effect Variation in Unity</h2>
+		<h1>Sound Effect Variation in Unity</h1>
 		<p>One of the most fundamental elements of satisfying interactive audio implementation is variation. When you
 			play same sound effect repeatedly, it tends to draw attention to itself through its artificial precision.
 			Natural sounds have all kinds of subtle inconsistencies that we take for granted.</p>
 		<p>To address this problem, games use multiple pre-recorded variants of most of their sound effects and some
 			additional modifications on playback. In this post, I’m going to walk through implementing basic variations
 			within native Unity audio, assuming you already have a set of sound effects to use.</p>
-		<h3>Setting Up</h3>
+		<h2>Setting Up</h2>
 		<p>First, we’ll start with simple round robin, or playing each variation in a predefined, looped order. Next,
 			we’ll randomize the playing order and ensure that the same audio clip doesn’t play back-to-back. Finally,
 			we’ll look at using pitch and volume randomization to add some more subtle differences every time these
@@ -38,7 +38,7 @@
 			it. Create a new one or use an existing object in your game that needs to make some noise.</p>
 		<p><a href="images/AddAudioSource2.gif">
 			<img src="images/AddAudioSource2.gif" alt="" height="auto" style="max-width: 100%"/></a></p>
-		<h3>Round Robin</h3>
+		<h2>Round Robin</h2>
 		<p>To play our variations, we need to store them in a container Unity can work with: an array of AudioClips.</p>
 		<pre>public AudioClip[] clipArray;</pre>
 		<p>We also need to define an Audio Source to the play our sound effects.</p>
@@ -71,7 +71,7 @@ void PlayRoundRobin() {
 </pre>
 		<p>Each time this method is called, it will play the next variation in whatever order you’ve established in the
 			array, starting over when it reaches the end of the array.</p>
-		<h3>Clip Randomization</h3>
+		<h2>Clip Randomization</h2>
 		<p>Next, we’ll write another simple method in the same script to play the clips from the array in a (pseudo)
 			random order.</p>
 		<pre>
@@ -83,7 +83,7 @@ void PlayRandom()
 </pre>
 		<p>This will generate a random number between 0 and the last index of the array, then play the audio clip stored
 			at that index.</p>
-		<h3>Avoiding Repetition</h3>
+		<h2>Avoiding Repetition</h2>
 		<p>While this barebones randomization is serviceable, it still has a clear limitation: there is nothing
 			preventing it from generating the same random index multiple times in a row, exactly the kind of thing
 			we&#8217;re trying to avoid with randomization.</p>
@@ -114,7 +114,7 @@ void PlayRandom2()
 }
 </pre>
 		<p>When this method is called, it will never play the same random variation back-to-back.</p>
-		<h3>Pitch and Volume Randomization</h3>
+		<h2>Pitch and Volume Randomization</h2>
 		<p>Now, the last thing we&#8217;re going to do is randomize the pitch and volume of our Audio Source each time
 			we play our sound effects. We’ll need a few more variables, so we can fine tune this effect easily in Unity.
 		</p>
@@ -131,7 +131,7 @@ effectSource.volume = Random.Range(volumeMin, volumeMax);
 </pre>
 		<p>Each variation will now playback at a random pitch and volume according to the ranges you set and can easily
 			adjust in the Unity editor.</p>
-		<h3>Testing it Out</h3>
+		<h2>Testing it Out</h2>
 		<p>If you want to make sure this is working, without assets or systems to go with it, you can just drop a game
 			object with an Audio Source and the script attached into an empty scene. Add something like this to your
 			Update() method.</p>

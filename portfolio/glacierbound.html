@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Glacierbound</title>
+	<title>Andrew Mushel | Glacierbound</title>
 	<meta name="description" content="Glacierbound with Hometeam Gamedev">
 	<meta name="author" content="Andrew Mushel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +19,14 @@
 	<div class="scrolling-door-bg"></div>
 	
 	<div id="top" class="top-banner">
-		<h1>Andrew Mushel</h1>
-		<h4 id="tagline">&nbsp;</h4>
+		<span class="top-banner-title">Andrew Mushel</span>
+		<span id="top-banner-tagline">&nbsp;</span>
 	</div>
 
 	<nav id="top-nav"><input type="checkbox" id="menu-toggle" name="menu"><label for="menu-toggle">Menu <span class="arrow"></span></label></nav>
 	
 	<div class="content">
-		<h2>Glacierbound</h2>
+		<h1>Glacierbound</h1>
 		
 		<iframe src="https://itch.io/embed/625848?bg_color=222222&amp;fg_color=6DC2FF&amp;link_color=6d74ff&amp;border_color=404040" height="auto" width="100%" frameborder="0">
 			<a href="https://brianjboucher.itch.io/glacierbound">Glacierbound by brianjboucher</a>
@@ -34,7 +34,7 @@
 		<br />
 		<a href="https://github.com/gamkedo-la/glacierbound">View the source code on Github</a>
 
-		<h3>Art and Animation</h3>
+		<h2>Art and Animation</h2>
 		&nbsp;
 		<div style="float: left; width: 100%;">
 			<key-animation src="../images/red-key.gif" alt="Red key animation"></key-animation>
@@ -45,13 +45,13 @@
 
 		<p>&nbsp;</p>
 
-		<h3>Graphics Programming</h3>
+		<h2>Graphics Programming</h2>
 		<p>
 			Wall texturing, sprite object rendering (animation and rotation), object shadows, enemy death animations, draw distance/fog rendering, scrolling skybox, HUD refinements, 
 			snow weather effect optimizations, custom menu cursor, floor and ceiling distance gradient, movement sway animation, level start/end HUD transition
 		</p>
 
-		<h3>Enemy AI, vision, and pathfinding</h3>
+		<h2>Enemy AI, vision, and pathfinding</h2>
 			<img src="../images/glacierbound_enemy_states.png" alt="Glacierbound enemy states">
 			<p>
 				Enemies have a 90 degree field of vision within which they can detect the player or another character that has just caused damage.
@@ -61,7 +61,7 @@
 				Pathfinding uses a simple breadth-first search, due to the limited size and complexity of the maps. 
 				It is only used while enemies are searching for their target. While in that state, enemies can open doors.
 			</p>
-		<h3>Other Gameplay/Engine Programming</h3>
+		<h2>Other Gameplay/Engine Programming</h2>
 		<p>
 			Mouse input, interactive doors, color-coded locked doors and keys, projectile/item/character/map collision, garbage collection, 
 			level data structure, level stat tracking, level transitions, story introduction and conclusion screens, image loading improvements, assorted bug fixing
