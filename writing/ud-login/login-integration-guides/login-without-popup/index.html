@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="Unstoppable Login without Popup | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>Unstoppable Login without Popup | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="unstoppable-login-without-popup">Unstoppable Login without Popup</h1><p>This integration guide shows you how to add Login to Unstoppable to a single-page application without the popup feature, using a TypeScript and React Router example. You will configure the application to receive the authorization tokens and metadata by following the steps below.</p><p><div class="admonition warning">
+Login with Unstoppable can be integrated with any EVM-compatible DApp (as well as <a href="../../featured-updates#login-with-verified-solana-wallet">Solana</a> DApps). However, domains minted on testnets (e.g. Mumbai or Goerli) are not supported.
+</div></p><p><div class="admonition info">
+The example code in this guide has the following dependencies: <code>typescript</code>, <code>react</code>, <code>react-router-dom</code>, <code>@uauth/js</code>
+</div></p><h2 id="step-1-create-your-app">Step 1: Create Your App</h2><p>Create a new React application if you don't already have one. The following commands will create a new react/typescript project in the <code>login-without-popup</code> folder.</p><p><div class="tabs">
+<div class="tab">
+<input type="radio" id="tab-1" name="tab-group-1" checked>
+<label for="tab-1">yarn</label>
+<div class="tab-content"></p><pre class="language-shell">yarn create react-app login-without-popup --template typescript</pre><p></div>
+</div>
+<div class="tab">
+<input type="radio" id="tab-2" name="tab-group-1">
+<label for="tab-2">npx</label>
+<div class="tab-content"></p><pre class="language-shell">npx create-react-app login-without-popup --template typescript</pre><p></div>
+</div>
+</div></p><p>All example code can be added to the <code>/src/App.tsx</code> file created by this step.</p><h2 id="step-2-install-the-libraries">Step 2: Install the Libraries</h2><p>For this example, we will use the UAuth library for login authentication and React Router to handle single page routing.</p><p><div class="tabs">
+<div class="tab">
+<input type="radio" id="tab-3" name="tab-group-2" checked>
+<label for="tab-3">yarn</label>
+<div class="tab-content"></p><pre class="language-shell">yarn add react-router-dom @uauth/js</pre><p></div>
+</div>
+<div class="tab">
+<input type="radio" id="tab-4" name="tab-group-2">
+<label for="tab-4">npm</label>
+<div class="tab-content"></p><pre class="language-shell">npm install --save react-router-dom @uauth/js</pre><p></div>
+</div>
+</div></p><p>Add the following imports to your <code>App.tsx</code>.</p><pre class="language-typescript">import React, {useEffect, useState} from &#39;react&#39;;
+import {BrowserRouter, RouteProps, Routes, Route, Navigate, useLocation} from &#39;react-router-dom&#39;</pre><h2 id="step-3-configure-uauth">Step 3: Configure <code>UAuth</code></h2><p>First, you will configure the UAuth class using the <a href="../login-client-configuration#client-metadata">Client Metadata</a> from your login client configuration.</p><pre class="language-typescript">import UAuth from &#39;@uauth/js&#39;
+
+const uauth = new UAuth({
+    clientID: &#34;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#34;,
+    redirectUri: &#34;http://localhost:3000/callback&#34;,
+    scope: &#34;openid wallet email:optional humanity_check:optional&#34;
+});</pre><p><div class="admonition danger">
+The redirect URIs used to configure this <code>UAuth</code> instance must be an <strong>EXACT</strong> match to the Redirect URIs <a href="../login-client-configuration#redirect-uris">Redirect URI</a> entered in your <a href="../login-client-configuration">Login Client Configuration</a>. See <a href="../login-client-configuration#rules-for-redirect-uris">Rules for Redirect URIs</a> for more details. 
+<br><br>
+For local testing, they must also match the address and port your application is running on. For Create React App, this is <code>localhost:3000</code> by default.
+</div></p><h2 id="step-4-create-a-login-button">Step 4: Create a Login Button</h2><p>Next, you will call <code>uauth.login()</code> to initiate a UAuth login upon clicking the login button. Features of this method include:</p><ol><li>Exposes modal to allow users to input their domain.</li><li>Queries the blockchain to find if an auth server has been configured otherwise uses fallback.</li><li>Redirects the user to the auth server with a OIDC compliant authorization request.</li><li>After every authorization attempt the server will redirect the user to the <code>redirectUri</code> specified at instantiation.</li><li>Throws if any login errors happen before you are redirected to the server.</li></ol><p>Below is an example of what a login page could look like in React.</p><pre class="language-typescript">const Login: React.FC&lt;RouteProps&gt; = props =&gt; {
+  const [errorMessage, setErrorMessage] = useState&lt;string | null&gt;(
+    new URLSearchParams(useLocation().search || &#39;&#39;).get(&#39;error&#39;),
+  )
+
+  const handleLoginButtonClick: React.MouseEventHandler&lt;HTMLButtonElement&gt; =
+    e =&gt; {
+      setErrorMessage(null)
+      uauth.login().catch(error =&gt; {
+        console.error(&#39;login error:&#39;, error)
+        setErrorMessage(&#39;User failed to login.&#39;)
+      })
+    }
+
+  return (
+    &lt;&gt;
+      {errorMessage &amp;&amp; &lt;div&gt;{errorMessage}&lt;/div&gt;}
+      &lt;button onClick={handleLoginButtonClick}&gt;Login with Unstoppable&lt;/button&gt;
+    &lt;/&gt;
+  )
+}</pre><h2 id="step-5-create-the-callback-page">Step 5: Create the Callback Page</h2><p>On the page registered as your <code>redirectUri</code>, you will call <code>uauth.loginCallback()</code> on page load. It will then exchange the authorization code for access and id tokens and handle any failures along the way. Features of this method include:</p><ol><li>Parses authorization code found in current URI.</li><li>Exchanges authorization code for access and id tokens.</li><li>Stores authorization (id and access tokens) inside cache, the default cache is <code>window.localStorage</code>.</li><li>Throws if an error occurs when logging into the server or when parsing and verifying the authorization server's response.</li></ol><p>Below is an example of what a callback page could look like in React.</p><pre class="language-typescript">const Callback: React.FC&lt;RouteProps&gt; = props =&gt; {
+  const [navigateTo, setNavigateTo] = useState&lt;string&gt;()
+
+  useEffect(() =&gt; {
+    // Try to exchange authorization code for access and id tokens.
+    uauth
+      .loginCallback()
+      // Successfully logged and cached user in `window.localStorage`
+      .then(response =&gt; {
+        console.log(&#39;loginCallback -&gt;&#39;, response)
+        setNavigateTo(&#39;/profile&#39;)
+      })
+      // Failed to exchange authorization code for token.
+      .catch(error =&gt; {
+        console.error(&#39;callback error:&#39;, error)
+        setNavigateTo(&#39;/login?error=&#39; + error.message)
+      })
+  }, [])
+
+  if (navigateTo) {
+    return &lt;Navigate to={navigateTo} /&gt;
+  }
+
+  return &lt;&gt;Loading...&lt;/&gt;
+}</pre><h2 id="step-6-create-a-logout-button">Step 6: Create a Logout Button</h2><p>Finally, you will call <code>uauth.logout()</code> to handle logging out upon clicking the logout button. Features of this method include:</p><p>1. Clears cache of authorization.
+2. If the <code>postLogoutRedirectUri</code> is present:
+    1. Uses cached authorization to create a logout URI.
+    2. Redirects to that URI.
+    3. After every logout attempt the server will redirect the user to the <code>postLogoutRedirectUri</code> specified at instantiation.</p><pre class="language-typescript">const Profile: React.FC&lt;RouteProps&gt; = () =&gt; {
+  const [user, setUser] = useState&lt;any&gt;()
+  const [loading, setLoading] = useState(false)
+  const [navigateTo, setNavigateTo] = useState&lt;string&gt;()
+
+  useEffect(() =&gt; {
+    uauth
+      .user()
+      .then(setUser)
+      .catch(error =&gt; {
+        console.error(&#39;profile error:&#39;, error)
+        setNavigateTo(&#39;/login?error=&#39; + error.message)
+      })
+  }, [])
+  
+  const handleLogoutButtonClick: React.MouseEventHandler&lt;HTMLButtonElement&gt; =
+    e =&gt; {
+      console.log(&#39;logging out!&#39;)
+      setLoading(true)
+      uauth
+        .logout()
+        .catch(error =&gt; {
+          console.error(&#39;profile error:&#39;, error)
+          setLoading(false)
+        })
+    }
+
+  if (navigateTo) {
+    return &lt;Navigate to={navigateTo} /&gt;
+  }
+
+  if (!user || loading) {
+    return &lt;&gt;Loading...&lt;/&gt;
+  }
+
+  return (
+    &lt;&gt;
+      &lt;pre&gt;{JSON.stringify(user, null, 2)}&lt;/pre&gt;
+      &lt;button onClick={handleLogoutButtonClick}&gt;Logout&lt;/button&gt;
+    &lt;/&gt;
+  )
+}</pre><h2 id="step-7-routing-to-your-login-pages">Step 7: Routing to your Login Pages</h2><p>Once you have all of your pages, you will need to create routes to them for React Router. This can be returned as follows from your React App component.</p><pre class="language-typescript">return (
+  &lt;BrowserRouter&gt;
+    &lt;Routes&gt;
+      &lt;Route path=&#39;/&#39; element={&lt;Login /&gt;} /&gt;
+      &lt;Route path=&#39;callback&#39; element={&lt;Callback /&gt;} /&gt;
+      &lt;Route path=&#39;profile&#39; element={&lt;Profile /&gt;} /&gt;
+    &lt;/Routes&gt;
+  &lt;/BrowserRouter&gt;
+)</pre><p><div class="admonition success">
+Contratulations
+You now have an Login with Unstoppable single-page application without the popup feature. Type <code>yarn start</code>/<code>npm start</code> to preview your example application with a local server.
+</div></p><p><a href="../../get-started-login#step-3-display-the-users-domain">Next to <strong>Display the User's Domain</strong></a></p>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>

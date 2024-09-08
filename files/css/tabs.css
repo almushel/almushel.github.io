@@ -1,0 +1,51 @@
+.tabs {
+	margin-top: 1.5em;
+	position: relative;
+	min-height: 7em;
+	clear: both;
+
+	display: flex;
+	overflow: auto;
+}
+
+.tab {
+	flex: none;
+}
+
+.tab label {
+	cursor: pointer;
+	padding: 0.7em;
+	border: 1px solid grey; 
+	margin-left: -1px; 
+	position: relative;
+	left: 1px; 
+	top: 0.8em;
+}
+
+.tab [type=radio] {
+	display: none;   
+}
+.tab-content {
+	position: absolute;
+	top: 1.8em;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+[type=radio] ~ label {
+	z-index: 1;
+}
+
+[type=radio]:checked ~ label {
+	background-color: var(--bg-color-3);
+	border-bottom: 3px solid var(--accent-color);
+}
+
+[type=radio] ~ label ~ .tab-content {
+	display:none;
+}
+
+[type=radio]:checked ~ label ~ .tab-content {
+	display: initial;
+}

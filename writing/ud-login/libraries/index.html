@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="UAuth Libraries Overview | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>UAuth Libraries Overview | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="uauth-libraries-overview">UAuth Libraries Overview</h1><h2 id="core-libraries">Core libraries</h2><div style="overflow-x:auto;"><table><thead><tr><th style="text-align: left">Reference</th><th style="text-align: left">Package</th><th style="text-align: left">Description</th></tr></thead><tbody><tr><td style="text-align: left"><a href="uauth-js">UAuth JS</a></td><td style="text-align: left"><code>@uauth/js</code></td><td style="text-align: left">SDK used for single-page applications</td></tr><tr><td style="text-align: left"><a href="uauth-node">UAuth Node</a></td><td style="text-align: left"><code>@uauth/node</code></td><td style="text-align: left">SDK used  server-side applications</td></tr></tbody></table></div><h2 id="middleware-libraries">Middleware libraries</h2><p>The UAuth middleware libraries provide an additional custom interface for <code>@uauth/js</code> to simplify the process of integrating with several existing web3 libraries.</p><div style="overflow-x:auto;"><table><thead><tr><th style="text-align: left">Reference</th><th style="text-align: left">Package</th><th style="text-align: left">Description</th></tr></thead><tbody><tr><td style="text-align: left"><a href="uauth-web3-react">Web3-React</a></td><td style="text-align: left"><code>@uauth/web3-react</code></td><td style="text-align: left">Middleware library for Web3-React</td></tr><tr><td style="text-align: left"><a href="uauth-web3modal">Web3Modal</a></td><td style="text-align: left"><code>@uauth/web3modal</code></td><td style="text-align: left">Middleware library for Web3Modal</td></tr><tr><td style="text-align: left"><a href="web3-onboard-uauth">Web3-Onboard</a></td><td style="text-align: left"><code>@web3-onboard/uauth</code></td><td style="text-align: left">UAuth Module for Web3-Onboard</td></tr><tr><td style="text-align: left"><a href="uauth-moralis">Moralis</a></td><td style="text-align: left"><code>@uauth/moralis</code></td><td style="text-align: left">Middleware library for Moralis</td></tr></tbody></table></div><h2 id="examples">Examples</h2><div style="overflow-x:auto;"><table><thead><tr><th style="text-align: left">Example Project</th><th style="text-align: left">Description</th></tr></thead><tbody><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/spa">spa</a></td><td style="text-align: left">Basic login integration using the <code>@uauth/js</code> library.</td></tr><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/web3-react">web3-react</a></td><td style="text-align: left">Login integration using the <code>@uauth/web3-react</code> library.</td></tr><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/web3modal">web3modal</a></td><td style="text-align: left">Login integration using the <code>@uauth/web3modal</code> library.</td></tr><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/web3-onboard/">web3-onboard</a></td><td style="text-align: left">Login integration using the <code>@uauth/web3-onboard</code> library.</td></tr><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/moralis/">moralis</a></td><td style="text-align: left">Login integration using the <code>@uauth/moralis</code> library.</td></tr><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/server">server</a></td><td style="text-align: left">Login integration using the <code>@uauth/node</code> library.</td></tr><tr><td style="text-align: left"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/sveltekit">sveltekit</a></td><td style="text-align: left">Login integration using the <code>sveltekit</code> framework and <code>@uauth/js</code>.</td></tr></tbody></table></div><p><br></p>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>

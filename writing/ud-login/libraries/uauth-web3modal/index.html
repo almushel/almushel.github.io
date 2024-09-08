@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="UAuth Web3Modal Library | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>UAuth Web3Modal Library | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="uauth-web3modal-library">UAuth Web3Modal Library</h1><p>The <code>@uauth/web3modal</code> library is a middleware library used for integrating UAuth with Web3Modal applications.</p><h2 id="connector">connector()</h2><p>The <code>connector</code> function is used to create a provider for the <code>web3modal</code> library.</p><pre class="language-typescript">async function connector(
+  UAuth: typeof UAuthSPA,
+  opts: IUAuthOptions,
+): Promise&lt;any&gt;</pre><h2 id="registerweb3modal">registerWeb3Modal()</h2><p>The <code>connector()</code> function needs access to a <code>web3modal</code> instance in order to connect a provider properly. This function registers a <code>web3modal</code> instance for the <code>connector</code> to use. This function <strong>MUST</strong> be called before <a href="#connector">connector()</a>.</p><pre class="language-typescript">function registerWeb3Modal(web3modal: Web3Modal) =&gt; void</pre><h2 id="getuauth">getUAuth()</h2><p>This function creates and returns a new UAuth instance using the package and options.</p><pre class="language-typescript">function getUAuth(
+  UAuth: typeof UAuthSPA,
+  opts: IUAuthOptions): UAuth</pre><h2 id="display">display</h2><p>Since UAuth is not natively integrated into the <code>web3modal</code> library, applications must supply some assets for the Web3 Modal UI. These are those assets.</p><pre class="language-typescript">import type {IProviderDisplay} from &#39;web3modal&#39;
+
+export const display: IProviderDisplay = { ... }</pre><h2 id="iuauthoptions">IUAuthOptions</h2><p>The options object passed to the <a href="#connector">connector</a> function to configure a UAuth provider for Web3Modal. Extends <code>IAbstractConnectorOptions</code> and <a href="../uauth-js#clientoptions">UAuthConstructorOptions</a>;</p><pre class="language-typescript">interface IUAuthOptions
+  extends Partial&lt;IAbstractConnectorOptions&gt;,
+    UAuthConstructorOptions {
+  shouldLoginWithRedirect?: boolean
+}</pre><h3 id="shouldloginwithredirect">shouldLoginWithRedirect</h3><p>If set to <code>true</code>, the UAuth provider created by the <a href="#connector">connector</a> function will use the <a href="../uauth-js#login">login()</a> method instead of the default, <a href="../uauth-js#loginwithpopup">loginWithPopup()</a>.</p><p>Then you must set up a callback page for the authorization server to redirect back to.</p><pre class="language-javascript">import UAuthSPA from &#39;@uauth/js&#39;
+import * as UAuthWeb3Modal from &#39;@uauth/web3modal&#39;
+import {uauthOptions} from &#39;./web3modal&#39;
+
+// On page load...
+
+UAuthWeb3Modal.getUAuth(UAuthSPA, uauthOptions)
+  .loginCallback()
+  .then(async () =&gt; {
+    const provider = await web3modal.connectTo(&#39;custom-uauth&#39;)
+
+    // Save provider in state and redirect to success page
+  })
+  .catch(error =&gt; {
+    // Redirect to failure page
+  })</pre>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>

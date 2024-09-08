@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="Unstoppable Login: Web3 React v6 | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>Unstoppable Login: Web3 React v6 | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="unstoppable-login-web3-react-v6">Unstoppable Login: Web3 React v6</h1><p>This is the basic installation guide for the <code>web3-react</code> framework and is best used for React-based single page applications (SPAs). For more information about this library, please see the associated <a href="https://github.com/unstoppabledomains/uauth/tree/main/packages/web3-react">github repo</a>.</p><p><div class="admonition warning">
+This guide is for <code>@uauth/web3-react</code> version <code>2.4.0</code> and earlier, which uses the <a href="https://github.com/Uniswap/web3-react/tree/v6">v6 branch</a> of web3-react. For integrating login with the latest v8 beta branch, see the <a href="../web3-react-guide">v8 Web3 React guide</a>.
+</div></p><h2 id="step-1-install-the-libraries">Step 1: Install the Libraries</h2><p>Install with <code>yarn</code> or <code>npm</code>.</p><p><div class="tabs">
+<div class="tab">
+<input type="radio" id="tab-1" name="tab-group-1" checked>
+<label for="tab-1">yarn</label>
+<div class="tab-content"></p><pre class="language-shell">yarn add @web3-react/core@6.1.9 @web3-react/injected-connector @web3-react/walletconnect-connector @web3-react/abstract-connector @uauth/web3-react@2.4.0</pre><p></div>
+</div>
+<div class="tab">
+<input type="radio" id="tab-2" name="tab-group-1">
+<label for="tab-2">npm</label>
+<div class="tab-content"></p><pre class="language-shell">npm install --save @web3-react/core@6.1.9 @web3-react/injected-connector @web3-react/walletconnect-connector @web3-react/abstract-connector @uauth/web3-react@2.4.0</pre><p></div>
+</div>
+</div></p><h2 id="step-2-configure-the-web3-react-library">Step 2: Configure the <code>web3-react</code> Library</h2><p>Next, configure the <code>web3-react</code> connectors:</p><pre class="language-typescript">import {UAuthConnector} from &#39;@uauth/web3-react&#39;
+import {InjectedConnector} from &#39;@web3-react/injected-connector&#39;
+import {WalletConnectConnector} from &#39;@web3-react/walletconnect-connector&#39;
+import type {AbstractConnector} from &#39;@web3-react/abstract-connector&#39;
+
+// Instantiate your other connectors.
+export const injected = new InjectedConnector({supportedChainIds: [1]})
+
+export const walletconnect = new WalletConnectConnector({
+  infuraId: process.env.REACT_APP_INFURA_ID!,
+  qrcode: true,
+})
+
+export const uauth = new UAuthConnector({
+  clientID: process.env.REACT_APP_CLIENT_ID!,
+  redirectUri: process.env.REACT_APP_REDIRECT_URI!,
+  postLogoutRedirectUri: process.env.REACT_APP_POST_LOGOUT_REDIRECT_URI!,
+  // Scope must include openid and wallet
+  scope: &#39;openid wallet&#39;,
+
+  // Injected and walletconnect connectors are required.
+  connectors: {injected, walletconnect},
+})
+
+const connectors: Record&lt;string, AbstractConnector&gt; = {
+  injected,
+  walletconnect,
+  uauth,
+}
+
+export default connectors</pre><p>You can also construct a <code>UAuth</code> instance and use that to create the connector.</p><pre class="language-javascript">import UAuth from &#39;@uauth/js&#39;
+
+const uauth = new UAuthConnector({
+  uauth: new UAuth({
+    clientID: process.env.REACT_APP_CLIENT_ID!,
+    redirectUri: process.env.REACT_APP_REDIRECT_URI!,
+    postLogoutRedirectUri: process.env.REACT_APP_POST_LOGOUT_REDIRECT_URI!,
+    scope: &#39;openid wallet&#39;,
+  }),
+  connectors: {injected, walletconnect},
+})</pre><p><div class="admonition info">
+Because popups are a more integration friendly approach, the <code>@uauth/web3-react</code> library now uses them by default. If you want the "old" redirect functionality, you need to set <code>shouldLoginWithRedirect: true</code> in your <code>UAuthConnectorOptions</code> and <a href="../../libraries/uauth-web3-react#optionsshouldloginwithredirect">create a callback page</a>.
+</div></p><h2 id="step-3-login-with-unstoppable">Step 3: Login with Unstoppable</h2><p>Once configured, <code>web3-react</code> can be used like normal.</p><pre class="language-javascript">import {useWeb3React} from &#39;@web3-react/core&#39;
+import {WalletConnectConnector} from &#39;@web3-react/walletconnect-connector&#39;
+import React from &#39;react&#39;
+import {uauth} from &#39;./connectors&#39;
+
+// On login button click
+async function handleLogin() {
+  const {activate} = useWeb3React()
+
+  await activate(uauth)
+}
+
+// On logout button click
+async function handleLogout() {
+  const {deactivate} = useWeb3React()
+
+  deactivate()
+}</pre><p><div class="admonition success">
+Congratulations!
+You have implemented Login with Unstoppable with web3-react
+</div></p><p><a href="../../get-started-login#step-3-display-the-users-domain">Next to <strong>Display the User's Domain</strong></a></p>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>

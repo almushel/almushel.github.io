@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="Troubleshooting Guide | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>Troubleshooting Guide | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="troubleshooting-guide">Troubleshooting Guide</h1><p>Here are some of the most common error messages when integrating Login with Unstoppable and how to fix them.</p><h2 id="error-invalid-redirect-uri">Error: Invalid Redirect URI</h2><p>This commonly happens when a set of credentials meant to be used in a live environment are copied to the local test environment, which causes a mismatch between the configuration on the server and the configuration of the library instance. The error displays in the console and is highlighted in red when you inspect it (for Chrome).</p><p>To resolve this, modify the redirect URIs in the Login Client to ensure a match between the server and library instance. More than one redirect URI can be added to the Login Client to support two different sets of credentials (i.e. one for the live environment and another for the local test environment).</p><p>See <a href="../../login-integration-guides/login-client-configuration#rules-for-redirect-uris">Rules for Redirect URIs</a> for more details on valid redirect URIs.</p><h2 id="error-login-modal-doesn&#39;t-close">Error: Login Modal Doesn't Close</h2><p>If the login modal does not close after the signing request has been accepted, the website URL in the application credentials isn’t at the same origin as the site hosting the pop-up flow. For example, if the login pop-up is hosted at <code>https://staging.example.io</code>, while the <strong>Redirect URI</strong> is at <code>https://example.io</code>.</p><p><figure></p><p><img alt="Login modal should close after signature request is confirmed" src="/images/login-modal-doesnt-close.png '#width=33%'"></img></p><p><figcaption>Login modal should close after signature request is confirmed</figcaption>
+</figure></p><p>To resolve this, make sure that the <strong>redirect URI</strong> in your <a href="../../login-integration-guides/login-client-configuration">client configuration</a> is at same origin as the application hosting the login flow.</p><h2 id="error-port-&#34;5000&#34;-could-not-be-used">Error: Port "5000" Could Not Be Used</h2><p>If you see the following error message on MacOS, you need to turn off AirPlay Receiver in the Sharing preferences or use a different port for local development. MacOS Monterey (version 12) is already using Port 5000 for the Airplay Receiver, which is the default port used for local development.</p><pre class="language-bash">lisa@Unstoppable-Lisa login % yarn parcel --port 5000 --open index.html
+yarn run v1.22.17
+$ /Users/username/workspaces/login/node_modules/.bin/parcel --port 5000 --open index.html
+Error: Port &#34;5000&#34; could not be used
+    at normalizeOptions (/Users/username/workspaces/login/node_modules/parcel/lib/cli.js:463:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async run (/Users/username/workspaces/login/node_modules/parcel/lib/cli.js:264:17)
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.</pre><h2 id="error-please-unlock-or-install-metamask">Error: Please Unlock or Install MetaMask</h2><p>If you get an error message to “Please unlock or install MetaMask,” it means you need to <a href="https://metamask.io/download/">install MetaMask</a> within your browser. Alternatively, you can use the browser extension for WalletConnect (or whichever is your preferred wallet).</p><p><figure></p><p><img src="/images/MetaMaskError-small.png '#width=50%'" alt="Error Message presented to user if MetaMask is not installed"></img></p><p><figcaption>Error Message presented to user if MetaMask is not installed</figcaption>
+</figure></p><h2 id="error-ssr-errors">Error: SSR Errors</h2><p>This error occurs when you try to import the uAuth library, and the system won't allow you launch your application. This SSR error happens at runtime, not build time, and is most common with these frameworks: <strong>Next.js</strong>, <strong>Svelte kit</strong>, <strong>Nuxt.js</strong>, and <strong>Gatsby</strong>. The error will look something like the following:</p><p><code>Reference error: window is not defined</code></p><p>To resolve this, upgrade the UAuth library associated with Login with Unstoppable.</p><h2 id="error-node-version">Error: Node Version</h2><p>This error happens when you try to add a package using the package manager, and you receive an error like this:</p><p><code>The engine "node" is incompatible with this module.</code></p><p>To resolve this, upgrade the UAuth library associated with Login with Unstoppable.</p><h2 id="error-critical-dependency">Error: Critical Dependency</h2><p>This is a common build error that occurs when you attempt to run the application with an outdated library.</p><pre class="language-bash">./node_modules/@uauth/js/node_modules/@unstoppabledomains/resolution/build/utils/requireOrFail.js
+Critical dependency: the request of a dependency is an expression</pre><p>To resolve this, upgrade the UAuth library associated with Login with Unstoppable.</p><h2 id="error-logging-in/logging-out">Error: Logging in/Logging Out</h2><p><strong>This error is specific to the BNC Onboard model.</strong> Logging in/out is actively managed by Web3 React and Web3 Modal, so logging out is not an issue with those models.</p><p>The problem happens the second, or subsequent time, that you attempt to login to the application. You get a default popup login modal (this is the bug) and are unable to proceed through the login flow. This happens because the session expires every hour, which means that you are trying to access user information when there isn't any because the session has already ended (i.e. user data has been removed/wiped).</p><p>To resolve this for BNC Onboard integrations, check that you are still logged in by calling <code>user function</code> and catching the result.</p>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>

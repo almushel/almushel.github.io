@@ -1,249 +1,68 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8">
-
-	<title>Andrew Mushel</title>
-	<meta name="description" content="High performance ludic software">
+	<meta name="description" content="Low carb ludic software">
 	<meta name="author" content="Andrew Mushel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content="@almushel" />
 	<meta name="twitter:creator" content="@almushel" />
-	<meta property='og:title' content="Andrew Mushel" />
-	<meta property="og:description" content="High performance ludic software">
+	<meta property='og:title' content="Welcome | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
 	<meta property="og:url" content="https://andrewmushel.com" />
-	<meta property="og:image" content="https://andrewmushel.com/images/am_sd_site_banner.jpg" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
 	<meta property="og:type" content="website" />
 
-	<link rel="icon" href="./images/AM.png">
-	<link rel="stylesheet" href="css/styles.css">
-	<script src="/js/main.js" type="module"></script>
-	<script src="/js/tile-container.js" type="module"></script>
-	<script src="/js/tag-filter.js" type="module"></script>
+	<title>Welcome | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
 </head>
 
 <body>
 	<div id="top" class="top-banner">
-		<span class="top-banner-title">Andrew Mushel</span>
-		<span id="top-banner-tagline">&nbsp;</span>
-	</div>
-	<nav id="top-nav"><input type="checkbox" id="menu-toggle" name="menu"><label for="menu-toggle">Menu <span class="arrow"></span></label></nav>
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
 
-	<div class='section-banner' id="about">
-		<h1>ABOUT ME</h1>
-	</div>
-
-	<div class="content">
-		<div>
-			<h2>Communicating technical information by day. Learning and building by night.</h2>
-			
-			<p>I don't like talking or writing about myself, but I love creative problem-solving and my most valuable skill is my ability to learn.</p>
-			
-			<p>I like to understand how things work and tend to avoid complicated frameworks and libraries in my own projects.
-				I use <a href="http://vanilla-js.com/" rel="external" target="_blank">Vanilla JS</a> and standard 
-				<a href="https://developer.mozilla.org/en-US/docs/web/api" rel="external" target="_blank">Web APIs</a> for web development 
-				(though I have experience with <a href="https://www.typescriptlang.org/" rel="external" target="_blank">TypeScript</a> and <a href="https://reactjs.org/" rel="external" target="_blank">React</a>). 
-				Given the choice, I prefer programming in C.</p>
-		
-			<p>I've played the piano from an early age, but am a terrible sightreader because I always cheated by memorizing everything. 
-				My favorite piece to play at the moment is <a href="https://www.youtube.com/watch?v=ZOZowX8loig" rel="external" target="_blank">Fantasia in C minor</a> (BWV 906).
-			</p>
-
-			<p>This site is a showcase of my (published) personal projects, mostly related to game development.</p>
-		</div>
-
-		<br />
 		<nav class="social-links">
-			<a href="https://github.com/almushel/" title="Github" rel="external" target="_blank">
-				<img class="icon" height="100%" width="100%" src="./images/github.svg"/>
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
 			</a>
-			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="_blank">
-				<img class="icon" height="100%" width="100%" src="./images/itch.svg"/>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="_blank">
-				<img class="icon" height="100%" width="100%" src="./images/soundcloud.svg"/>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
 			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="_blank">
-					<img class="icon" height="100%" width="100%" src="./images/twitter.svg"/>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
 			</a>
-			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="_blank">
-				<img class="icon" height="100%" width="100%" src="./images/linkedin.svg"/>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
 			</a>
 		</nav>
 	</div>
-
-	<div class='section-banner' id="games">
-		<h1>GAMES</h1>
-	</div>
-
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
 	<div class="content">
-		<tag-filter>
-
-			<tile-container
-				data-category="games" data-tags="programming, game design, audio, solo"
-				title="Loot Not Found"
-				href="https://js13kgames.com/entries/loot-not-found"
-				video="/videos/loot-not-found.mp4"
-				img="/images/loot-not-found.png">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="programming, game design, audio, music, art, solo"
-				title="Space Drifter"
-				href="https://almushel.itch.io/space-drifter"
-				video="/videos/space-drifter.mp4"
-				img="/images/space-drifter.png">
-			</tile-container>
-		
-			<tile-container 
-				data-category="games" data-tags="programming, art, solo"
-				title="JS Raycaster"
-				href="/portfolio/js-raycaster.html"
-				video="/videos/js-raycaster.mp4"
-				img="/images/js-raycaster.png">
-			</tile-container>
-
-			<tile-container 
-				data-category="games" data-tags="game design, programming, art, team"
-				title="Glacierbound"
-				href="/portfolio/glacierbound.html"
-				img="/images/glacierbound.png"
-				img2="/images/glacierbound-gameplay.gif">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="programming, game design, team"
-				title="Video Nok"
-				href="/portfolio/video-nok.html"
-				img="/images/video-nok.png"
-				img2="/images/video-nok-gameplay.gif">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="programming, team"
-				title="Ghost Rustlers"
-				href="/portfolio/ghostrustlers.html"
-				img="/images/ghost-rustlers.png"
-				img2="/images/ghost-rustlers-gameplay.gif">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="programming, team"
-				title="Falldale"
-				href="/portfolio/falldale.html"
-				img="/images/falldale.png"
-				img2="/images/falldale-ee-gameplay.gif">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="music, audio, team"
-				title="G-Type"
-				href="/portfolio/g-type.html"
-				img="/images/g-type.png"
-				img2="/images/g-type-gameplay.gif">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="programming, team"
-				title="Hard Glitch"
-				href="https://klaim.itch.io/hardglitch"
-				img="/images/hardglitch.png"
-				img2="/images/hardglitch-gameplay.gif">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="music, audio, programming, team"
-				title="CryptoClash"
-				href="https://globalgamejam.org/2018/games/cryptoclash"
-				img="/images/CryptoClash.jpg">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="programming, team"
-				title="Flipside"
-				href="https://gamkedo.itch.io/flipside"
-				img="/images/flipside.png">
-			</tile-container>
-		
-			<tile-container
-				data-category="games" data-tags="music, audio, team"
-				title="A Slime's Quest for Freedom"
-				href="https://hrgames.itch.io/a-slimes-quest-for-freedom"
-				img="/images/ASQFF.jpg">
-			</tile-container>
-
-		</tag-filter>
+<h1 id="welcome">Welcome</h1><p>I have 10+ years of combined (student/intern and professional) experience in technical communication
+in a variety of domains, including:</p><ul><li>Online Learning</li><li>Lab Procedures and Safety Training</li><li>Civil, Construction, Industrial, and Environmental Engineering</li><li>Software Development</li></ul><p>Most recently I've worked as a professional software technical writer.</p><div style="overflow-x:auto;"><table><thead><tr><th style="text-align: center"></th><th style="text-align: center"></th></tr></thead><tbody><tr><td style="text-align: center"><a href="/resume">Resume</a></td><td style="text-align: center"><a href="/writing">Work Examples</a></td></tr></tbody></table></div><p><br></p><p>I also enjoy learning, building, and creating in my free time,
+including software and game development, music, and audio recording and design (mostly for games).</p><p>If any of this sounds interesting to you, you can see some of this work below:</p><div style="overflow-x:auto;"><table><thead><tr><th style="text-align: center"></th><th style="text-align: center"></th><th style="text-align: center"></th><th style="text-align: center"></th></tr></thead><tbody><tr><td style="text-align: center"><a href="/dev/#software">Software</a></td><td style="text-align: center"><a href="/dev/#games">Games</a></td><td style="text-align: center"><a href="/audio/#music">Music</a></td><td style="text-align: center"><a href="/audio/#sound-design">Sound Design</a></td></tr></tbody></table></div>
 	</div>
-
-	<div class='section-banner' id="music">
-		<h1>MUSIC</h1>
-	</div>
-
-	<div class="content">
-
-		<tile-container
-			title="Space Drifter OST"
-			iframe="https://bandcamp.com/EmbeddedPlayer/album=592038833/size=large/bgcol=333333/linkcol=0687f5/minimal=true/transparent=true/">
-		</tile-container>
-		
-		<tile-container
-			title="Zero Project"
-			iframe="https://bandcamp.com/EmbeddedPlayer/size=large/bgcol=333333/linkcol=ffffff/minimal=true/track=3837871122/transparent=true/">
-		</tile-container>
-		
-		<tile-container
-			title="Invasion"
-			iframe="https://bandcamp.com/EmbeddedPlayer/album=2796591934/size=large/bgcol=333333/linkcol=ffffff/minimal=true/transparent=true/">
-		</tile-container>
-
-		<tile-container
-		title="Laser Ninja OST"
-		iframe="https://bandcamp.com/EmbeddedPlayer/album=1482127870/size=large/bgcol=333333/linkcol=ffffff/minimal=true/transparent=true/">
-		</tile-container>
-		
-		<tile-container
-			iframe="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/5658250&amp;color=222222&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"
-			data-columns="2"
-			data-rows="2">
-		</tile-container>	
-
-	</div>
-
-	<div class='section-banner' id="audio">
-		<h1>AUDIO DESIGN</h1>
-	</div>
-
-	<div class="content">
-		<tile-container
-			title="Game Audio Demo Reel"
-			iframe="https://player.vimeo.com/video/246142268"
-			data-columns="2">
-		</tile-container>
-	
-		<tile-container
-			title="Q Beam Redesign"
-			iframe="https://www.youtube.com/embed/ZtTWx3GXiHg">
-		</tile-container>
-	
-		<tile-container
-			title="Bonehoard Ambience Redesign"
-			iframe="https://www.youtube.com/embed/MDpXmNo0_f4">
-		</tile-container>
-	
-		<tile-container
-			title="Time Stop Redesign"
-			iframe="https://www.youtube.com/embed/Qdld-EYhWOs">
-		</tile-container>
-	
-		<tile-container
-			title="Psychostatic Cutter Redesign"
-			iframe="https://www.youtube.com/embed/8z8JDw693Wk">
-		</tile-container>
-	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
 </body>
 
 </html>

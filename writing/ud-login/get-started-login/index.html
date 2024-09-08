@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="Getting Started with Login | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>Getting Started with Login | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="getting-started-with-login">Getting Started with Login</h1><p>Login with Unstoppable is a versatile feature with several integration pathways available for developers. This guide will step you through your first login integration with one of several supported libraries.</p><p><div class="admonition warning">
+Login with Unstoppable can be integrated with any EVM-compatible DApp (as well as <a href="../featured-updates#login-with-verified-solana-wallet">Solana</a> DApps). However, domains minted on testnets (e.g. Mumbai or Goerli) are not supported.
+</div></p><h2 id="step-1-get-your-client-credentials">Step 1: Get Your Client Credentials</h2><ul><li>Go to the <a href="https://dashboard.auth.unstoppabledomains.com">Client Management Dashboard</a>.</li><li>Click the <strong>Connect Wallet</strong> and sign the transaction.</li><li>Click the <strong>Create Client</strong> button to add a new client.</li></ul><p>The dashboard will generate a unique <strong>client ID</strong> and open the configuration page for your new client. The <strong>Client Metadata</strong> is automatically populated with the <code>clientID</code> and default values for the <code>redirectURI</code> and <code>scope</code>. See <a href="../login-integration-guides/login-client-configuration">Login Client Configuration</a> for more details about the settings on this page.</p><p><figure>
+<video loop autoplay muted width="100%" src="../videos/connect-wallet-and-create-client.mp4"></video>
+<figcaption>Connect a wallet and create a new client</figcaption>
+</figure></p><p>Once you've created your client, you will need the <strong>Client Metadata</strong> to configure your UAuth application. This can be copied directly from the <strong>Login</strong> page of your <strong>Client Configuration</strong>.</p><p><figure></p><pre class="language-javascript">{
+    clientID: &#34;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#34;,
+    redirectUri: &#34;http://localhost&#34;,
+    scope: &#34;openid wallet&#34;,
+}</pre><p><figcaption>Example client metadata</figcaption>
+</figure></p><p><div class="admonition info">
+The <code>scope</code> property of your client metadata will default to <code>"openid wallet"</code>, which is the minimum scope required for login. You can request additional information from users by adding additional scopes to this string. For information on the other scopes Login supports, see <a href="../scopes-for-login">Scopes for Login</a>.
+</div></p><h2 id="step-2-choose-your-integration-path">Step 2: Choose Your Integration Path</h2><p>There are several ways to integrate with Login with Unstoppable, which are listed in the table below.</p><p>Because pop-ups are a more integration friendly approach, every integration path except for <strong>Login without Pop-up</strong> and <strong>Node.js Server</strong> uses them by default. You can use redirects instead with the <code>login()</code> method of <code>@uauth/js</code> or the <code>shouldLoginWithRedirect</code> configuration option for other <code>@uauth/*</code> libraries.</p><p>For DApps built with web3 libraries like <code>web3-react</code>, <code>web3-modal</code>, <code>web3-onboard</code>, and <code>moralis</code>, UAuth provides packages that help you wrap a new UAuth instance in an interface that each library supports. After configuring these packages, you can continue using the web3 library normally.</p><div style="overflow-x:auto;"><table><thead><tr><th style="text-align: left">Integration Guide</th><th style="text-align: center">Example Project</th><th style="text-align: center">Web3 Provider</th><th style="text-align: center">Package</th><th style="text-align: center">Front-end UI</th></tr></thead><tbody><tr><td style="text-align: left"><a href="../login-integration-guides/login-with-popup">Login with Pop-up</a></td><td style="text-align: center"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/spa/">spa</a></td><td style="text-align: center">&#10060;</td><td style="text-align: center"><code>@uauth/js</code></td><td style="text-align: center">JavaScript</td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/login-without-popup">Login without Pop-up</a></td><td style="text-align: center">-</td><td style="text-align: center">&#10060;</td><td style="text-align: center"><code>@uauth/js</code></td><td style="text-align: center">React</td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/web3-react-guide">Web3 React</a></td><td style="text-align: center"><a href="https://github.com/unstoppabledomains/uauth/blob/main/examples/web3-react/">web3-react</a></td><td style="text-align: center">&#9989;</td><td style="text-align: center"><code>@uauth/web3-react</code></td><td style="text-align: center"><code>web3-react</code></td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/web3-modal-guide">Web3 Modal</a></td><td style="text-align: center"><a href="https://github.com/unstoppabledomains/uauth/blob/main/examples/web3modal/">web3modal</a></td><td style="text-align: center">&#9989;</td><td style="text-align: center"><code>@uauth/web3modal</code></td><td style="text-align: center"><code>web3-modal</code></td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/web3-onboard-guide">Web3 Onboard</a></td><td style="text-align: center">-</td><td style="text-align: center">&#9989;</td><td style="text-align: center"><code>@web3-onboard/uauth</code></td><td style="text-align: center"><code>web3-onboard</code></td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/moralis-guide">Moralis</a></td><td style="text-align: center"><a href="https://github.com/unstoppabledomains/uauth/blob/main/examples/moralis">moralis</a></td><td style="text-align: center">&#9989;</td><td style="text-align: center"><code>@uauth/moralis</code></td><td style="text-align: center"><code>moralis</code></td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/node-js-server-guide">Node.js Server</a></td><td style="text-align: center"><a href="https://github.com/unstoppabledomains/uauth/tree/main/examples/server">server</a></td><td style="text-align: center">&#10060;</td><td style="text-align: center"><code>@uauth/node</code></td><td style="text-align: center">None</td></tr><tr><td style="text-align: left"><a href="../login-integration-guides/auth0-guide">Auth0</a></td><td style="text-align: center"><a href="https://github.com/unstoppabledomains/uauth-auth0-sample-dapp">UAuth + Auth0 </a></td><td style="text-align: center">&#10060;</td><td style="text-align: center"><code>auth0</code></td><td style="text-align: center"><code>auth0</code></td></tr></tbody></table></div><p><div class="admonition info">
+See the <a href="https://example.auth.unstoppabledomains.com/">UAuth Example App</a> for a live demo of the login flow.
+</div></p><h2 id="step-3-display-the-user&#39;s-domain">Step 3: Display the User's Domain</h2><p>Once a user has successfully authenticated, the application should display the user’s <strong>domain</strong> (and not their <strong>wallet address</strong>) in the application’s UI to confirm the authorization was successful.</p><p><figure>
+<div style="width:50%">
+<img src="../images/third-UI-example-login-domains.png" alt="Showing an authenticated user's domain"></img>
+</div>
+<figcaption>Showing an authenticated user's domain</figcaption>
+</figure></p><p>Authorizations are stored inside <code>localStorage</code>, so any identically configured <code>UAuth</code> instance has access to the same users.
+Any integration using <a href="../libraries/uauth-js">@uauth/js</a> or a dependent middleware package can access the authorized user information by instantiating a new <a href="../libraries/uauth-js#client">UAuth</a> object with the same client options and calling the <a href="../libraries/uauth-js#user">user()</a> method.</p><p><div class="tabs" style="min-height:24em;"></p><p><div class="tab">
+<input type="radio" id="tab-1" name="tab-group-1" checked>
+<label for="tab-1">@uauth/js</label>
+<div class="tab-content"></p><pre class="language-javascript">import UAuth from &#39;@uauth/js&#39;
+
+const uauth = new UAuth({
+  // ... options
+})
+
+uauth.user()
+  .then((user) =&gt; {
+    // user exists
+    console.log(&#34;User information:&#34;, user)
+  })
+  .catch(() =&gt; {
+    // user does not exist
+  })</pre><p></div>
+</div></p><p><div class="tab">
+<input type="radio" id="tab-2" name="tab-group-1">
+<label for="tab-2">web3-onboard</label>
+<div class="tab-content"></p><pre class="language-javascript">const wallets$ = onboard.state.select(&#39;wallets&#39;).pipe(share())
+
+wallets$.subscribe(wallet =&gt; {
+  const unstoppableUser = wallet.find(
+    provider =&gt; provider.label === &#39;Unstoppable&#39;
+  )
+  
+  if (unstoppableUser) console.log(unstoppableUser.instance.user)
+})</pre><p></div>
+</div></p><p><div class="tab">
+<input type="radio" id="tab-3" name="tab-group-1">
+<label for="tab-3">web3-react</label>
+<div class="tab-content"></p><pre class="language-javascript">const uauthConnector = new UAuthConnector()
+
+uauthConnector.uauth.user().then().catch()</pre><p></div>
+</div></p><p><div class="tab">
+<input type="radio" id="tab-4" name="tab-group-1">
+<label for="tab-4">web3modal</label>
+<div class="tab-content"></p><pre class="language-javascript">import UAuth from &#39;@uauth/js&#39;
+
+const uauthOptions = {
+  clientID: &#34;&#34;,
+  redirectUri: &#34;&#34;
+}
+
+const web3ModalOptions = {
+  &#39;custom-uauth&#39;: {
+    ...uauthOptions}
+}
+
+const web3Modal = new Web3Modal(web3ModalOptions)
+
+new UAuth(uauthOptions).user().then().catch()</pre><p></div>
+</div></p><p><div class="tab">
+<input type="radio" id="tab-5" name="tab-group-1">
+<label for="tab-5">moralis</label>
+<div class="tab-content"></p><pre class="language-javascript" title="moralis">const uauthMoralisConnector = new UAuthMoralisConnector()
+
+uauthMoralisConnector.uauth.user().then().catch()</pre><p></div>
+</div></p><p></div></p><p>The <code>user()</code> method will return a <a href="../libraries/uauth-js#userinfo">UserInfo</a> object containing the information requested by your client scopes. The following key-value pairs would be returned by a login session with the minimum <code>"openid wallet"</code> scopes defined:</p><pre class="language-json">{
+  &#34;sub&#34; : &#34;domain.tld&#34;, // The domain used to login
+  &#34;wallet_address&#34; : &#34;0x . . . &#34;, // The Ethereum wallet that owns the domain
+  &#34;wallet_type_hint&#34; : &#34;web3&#34;,
+  &#34;eip4361_message&#34; : &#34;identity.unstoppable domains wants you sign in with your Ethereum account: . . . &#34;,
+  &#34;eip4361_signature&#34; : &#34;0x . . . &#34;,
+}</pre><h2 id="step-4-promote-your-application">Step 4: Promote Your Application</h2><p>Once your login integration is live, you can <a href="https://docs.unstoppabledomains.com/use-cases/promote-ud-integration">promote your application</a> by submitting it to the official UD <a href="https://unstoppabledomains.com/apps">app integrations database</a>.</p>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>

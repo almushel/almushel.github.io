@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Low carb ludic software">
+	<meta name="author" content="Andrew Mushel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@almushel" />
+	<meta name="twitter:creator" content="@almushel" />
+	<meta property='og:title' content="Unstoppable Login: Node.js Server | Andrew Mushel" />
+	<meta property="og:description" content="Low carb ludic software">
+	<meta property="og:url" content="https://andrewmushel.com" />
+	<meta property="og:image" content="/files/images/am_sd_site_banner.jpg" />
+	<meta property="og:type" content="website" />
+
+	<title>Unstoppable Login: Node.js Server | Andrew Mushel</title>
+
+	<link rel="icon" href="/files/images/am.png">
+	<link rel="stylesheet" href="/files/css/styles.css">
+	<script src="/files/js/main.js" type="module"></script>
+
+</head>
+
+<body>
+	<div id="top" class="top-banner">
+		<a href="/" title="Andrew Mushel" class="top-banner-title">Andrew Mushel</a>
+
+		<nav class="social-links">
+			<a href="https://github.com/almushel/" title="Github" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/github.svg"/>
+			</a>
+			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/itch.svg"/>
+			</a>
+			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/soundcloud.svg"/>
+			</a>
+			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
+					<img class="icon" src="/files/images/twitter.svg"/>
+			</a>
+			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
+				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+		</nav>
+	</div>
+	<nav id="top-nav">
+		<div class="nav-menu">
+			<a title="Technical Writing" href="/writing">Technical Writing</a>
+			<a title="Software & Games" href="/dev">Software & Games</a>
+			<a title="Audio" href="/audio">Audio</a>
+			<a title="Articles" href="/articles">Articles</a>
+			<a title="Resume" href="/resume">Resume</a>
+		</div>
+	</nav>
+	<div class="content">
+<h1 id="unstoppable-login-nodejs-server">Unstoppable Login: Node.js Server</h1><p>This integration guide is for the <code>@uauth/node</code> library used in server-side applications. It does not come with a default front-end UI and requires custom front-end UI development. For more information about this library, please see the associated <a href="https://github.com/unstoppabledomains/uauth/tree/main/packages/node">github repo</a>.</p><p><div class="admonition warning">
+The example code in this guide assumes that ECMAScript modules are <a href="https://nodejs.org/dist/latest-v16.x/docs/api/esm.html#enabling">enabled</a>. Otherwise, <code>import</code> statements should be replaced with CommonJS <code>require()</code> statements.
+</div></p><h2 id="step-1-configure-the-login-client">Step 1: Configure the Login Client</h2><p>Add <code>http://localhost:5000/callback</code> to your client's <a href="../login-client-configuration#redirect-uris">Redirect URIs</a>. Make sure that the port matches the port your app is being served to. Example code in this guide assumes port 5000.</p><p>Set the <a href="../login-client-configuration/#token-endpoint-authentication-method">Token Endpoint Authentication Method</a> on your client dashboard to <strong>Client Secret Post</strong>. Once you've clicked the <strong>Confirm Changes</strong> button, <code>clientSecret</code> and <code>clientAuthMethod</code> will be added to your client metadata on the <strong>Basic</strong> configuration page.</p><pre class="language-javascript">{
+  clientID: &#34;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#34;,
+  clientSecret: &#34;xxxxxxxxxxxxxxxxxxxxxxxxxx&#34;,
+  clientAuthMethod: &#34;client_secret_post&#34;,
+  redirectUri: &#34;http://localhost:5000/callback&#34;,
+  scope: &#34;openid wallet&#34;
+}</pre><h2 id="step-2-install-the-uauth/node-library">Step 2: Install the @uauth/node Library</h2><p>Install the <code>@uauth/node</code> and resolution packages with <code>yarn</code> or <code>npm</code>.</p><p><div class="tabs">
+<div class="tab">
+<input type="radio" id="tab-1" name="tab-group-1" checked>
+<label for="tab-1">yarn</label>
+<div class="tab-content"></p><pre class="language-shell">yarn add @uauth/node @unstoppabledomains/resolution</pre><p></div>
+</div>
+<div class="tab">
+<input type="radio" id="tab-2" name="tab-group-1">
+<label for="tab-2">npm</label>
+<div class="tab-content"></p><pre class="language-shell">npm install --save @uauth/node @unstoppabledomains/resolution</pre><p></div>
+</div>
+</div></p><p>For the example in this guide, you will also need to install the following packages:</p><p><div class="tabs">
+<div class="tab">
+<input type="radio" id="tab-3" name="tab-group-2" checked>
+<label for="tab-3">yarn</label>
+<div class="tab-content"></p><pre class="language-shell">yarn add express-session express express-async-errors morgan</pre><p></div>
+</div>
+<div class="tab">
+<input type="radio" id="tab-4" name="tab-group-2">
+<label for="tab-4">npm</label>
+<div class="tab-content"></p><pre class="language-shell">npm intall --save express-session express express-async-errors morgan</pre><p></div>
+</div>
+</div></p><h2 id="step-3-setup-uauth/node-library
+-
+you-can-then-initialize-a-new-client-instance-using-the-client-metadata-copied-from-the-basic-page">Step 3: Setup @uauth/node Library
+ 
+You can then initialize a new <code>Client</code> instance using the Client Metadata copied from the <strong>Basic</strong> page.</h2><pre class="language-typescript">import {Client} from &#39;@uauth/node&#39;
+import Resolution from &#39;@unstoppabledomains/resolution&#39;
+// This package requires a fetch polyfill for now.
+
+import &#39;whatwg-fetch&#39;
+
+global.XMLHttpRequest = require(&#39;xhr2&#39;)
+global.XMLHttpRequestUpload = (
+  global.XMLHttpRequest as any
+).XMLHttpRequestUpload
+
+// Initialize the client with the login client metadata and an instance of Resolution
+
+const client = new Client({
+  clientID: &#39;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#39;,
+  clientSecret: &#39;xxxxxxxxxxxxxxxxxxxxxxxxxx&#39;,
+  redirectUri: &#39;http://localhost:5000/callback&#39;,
+  scope: &#39;openid wallet&#39;,
+  resolution: new Resolution(),
+})</pre><h2 id="step-4-build-the-server&#39;s-endpoints">Step 4: Build the Server's Endpoints</h2><p>Because there are a variety of ways to store session data about a user, the package comes with a way to specify in an abstract way the three methods required to authorize and maintain a user session.</p><h3 id="the-login-method">The Login Method</h3><p><code>login(ctx: Context, options: {username: string}): Promise<void></code></p><ol><li>Takes a username and generates an interaction object, saves it to a session.</li><li>Queries the blockchain to find if an auth server has been configured otherwise uses fallback.</li><li>Redirects the user to the auth server with a OIDC compliant authorization request.</li><li>After every authorization attempt the server will redirect the user to the <code>redirectUri</code> specified at instantiation.</li></ol><h3 id="the-callback-method">The Callback Method</h3><p><code>callback(ctx: Context): Promise<Authorization></code></p><ol><li>Parses authorization code found in current uri.</li><li>Exchanges authorization code for access and id tokens.</li><li>Stores authorization (id and access tokens) inside session.</li></ol><h3 id="the-middleware-method">The Middleware Method</h3><p><code>middleware(): (ctx: Context) => void</code></p><ol><li>The authorization inside the session is attached to the context then passed to the next handler.</li><li>If there is no session, it throws an Error.</li></ol><h3 id="putting-it-all-together">Putting it all together</h3><p>The following is an example of using the pre-configured <code>express-session</code> to implement login.</p><pre class="language-javascript">import session from &#39;express-session&#39;
+import express from &#39;express&#39;
+import &#39;express-async-errors&#39;
+import morgan from &#39;morgan&#39;
+
+const app = express()
+
+app.use(morgan(&#39;dev&#39;))
+
+// Required for express session middleware
+app.use(session({secret: &#39;keyboard cat&#39;}))
+
+// Required for /login &amp; /callback
+app.use(express.urlencoded({extended: true}))
+
+const {login, callback, middleware} = client.createExpressSessionLogin()
+
+app.post(&#39;/login&#39;, (req, res, next) =&gt; {
+  return login(req, res, next, {
+    username: req.body.domain,
+  })
+})
+
+app.post(&#39;/callback&#39;, async (req, res, next) =&gt; {
+  console.log(&#39;Calling back!&#39;)
+
+  await callback(req, res, next)
+
+  return res.redirect(&#39;/profile&#39;)
+})
+
+const onlyAuthorized = middleware()
+
+app.get(&#39;/profile&#39;, onlyAuthorized, (req, res) =&gt; {
+  res.json(res.locals.uauth)
+})</pre><p>Developers can also create their own login system using a different session system from <code>express-session</code> using the <a href="#the-login-method">login() method</a>.</p><h2 id="step-5-build-a-front-end-ui">Step 5: Build a Front-end UI</h2><p>The form must call the endpoint where the <a href="#the-login-method"><code>login</code> handler</a> is called and it must correspond with the parameters to that function.</p><pre class="language-javascript">app.get(&#39;/&#39;, (_, res) =&gt; {
+  const indexPage = 
+  `&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;
+    &lt;form action=&#34;/login&#34; method=&#34;POST&#34;&gt;
+      &lt;input name=&#34;domain&#34; id=&#34;domain&#34; /&gt;
+    &lt;button type=&#34;submit&#34;&gt;Login&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;&lt;/html&gt;`
+
+  return res.send(indexPage)
+})
+
+app.listen(process.env.PORT, () =&gt; {
+  console.log(`Listening at http://localhost:${process.env.PORT}`)
+})</pre><p><div class="admonition success">
+Congratulations!
+You just implemented Login with Unstoppable.
+</div></p><p><a href="../../get-started-login#step-3-display-the-users-domain">Next to <strong>Display the User's Domain</strong></a></p>
+	</div>
+	<footer>
+© Andrew Mushel 2024
+	</footer>
+</body>
+
+</html>
