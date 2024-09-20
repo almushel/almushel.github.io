@@ -35,14 +35,11 @@
 			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
-				<img class="icon" src="/files/images/soundcloud.svg"/>
-			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
-					<img class="icon" src="/files/images/twitter.svg"/>
-			</a>
 			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+			<a href="https://x.com/almushel" title="X (Twitter)" rel="external" target="\_blank">
+				<img style="width:90%;" class="icon" src="/files/images/x.svg"/>
 			</a>
 		</nav>
 	</div>
@@ -57,7 +54,7 @@
 	</nav>
 	<div class="content">
 <h1 id="featured-updates-for-login-with-unstoppable">Featured Updates for Login With Unstoppable</h1><p>Login with Unstoppable is in active development and we're working to add new features on a regular basis. This page will highlight some of the newest additions, including features added to domain profiles and the Unstoppable authentication service. Many of these features require little or no change to existing integrations.</p><h2 id="web3-react-v8-beta-support">Web3-React v8 (Beta) Support</h2><p>With version <code>2.4.1-rc.0</code>, the <code>@uauth/web3-react</code> library now uses the v8 (beta) branch of web3-react. This new version of web3-react makes hooks available for each individual connector. Global state management can be achieved by providing these hooks to the <code>Web3ReactProvider</code> or by using the individual connector hooks to listen for connection status changes.</p><p>Developers will need to install the <code>v8.x.x-beta.0</code> versions of the web3-react core and connector packages to make use of this update. See the updated <code>web3-react</code> <a href="../login-integration-guides/web3-react-guide">integration guide</a> and the more advanced <a href="https://github.com/unstoppabledomains/uauth/blob/main/examples/web3-react/">example app</a> for more information.</p><h2 id="revenue-share-for-login">Revenue Share for Login</h2><p>Partners will now be able to generate additional revenue by offering paid domains within the integrated Login flow, and receiving revenue share payments immediately through Stripe after each purchase. Partners can view the revenue share percentage they will recieve on their <a href="https://dashboard.auth.unstoppabledomains.com">Client Management Dashboard</a> and see a more detailed view of the transactions through their Stripe dashboard.</p><p>For partners with existing integrations, offering Paid Domains via Login integration is a zero code update. See the instructions for requesting and configuring revenue share on the <a href="../login-integration-guides/login-client-configuration#payment">Payment</a> page of the login client configuration.</p><p><figure>
-<div style="width:50%;"></p><p><img src="../images/login-paid-domain-search.png" alt="Paid domain search results in the UD Login flow"></img></p><p></div>
+<div style="width:50%;"></p><p><img alt="Paid domain search results in the UD Login flow" src="../images/login-paid-domain-search.png"></img></p><p></div>
 <figcaption>Paid domain search results in the UD Login flow</figcaption>
 </figure></p><h2 id="login-with-verified-solana-wallet">Login with Verified Solana Wallet</h2><p>Users who have added a verified Solana address to their <strong>ud.me</strong> profile now automatically see the option to sign with the <strong>Phantom</strong> wallet to confirm ownership of their domain and login.</p><p>Applications can confirm that a user authenticated with a Solana address using the <a href="../libraries/uauth-js#getauthorizationaccount">getAuthorizationAccount()</a> method of <a href="../libraries/uauth-js">UAuth</a>.</p><pre class="language-javascript">const authorization = await uauth.loginWithPopup();
 const account = uauth.getAuthorizationAccount(authorization);</pre><p>The <a href="../libraries/uauth-js#verifiedaddress">VerifiedAddress</a> returned for a Login session authorized by a Solana wallet would look something like this:</p><pre class="language-javascript">{

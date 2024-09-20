@@ -35,14 +35,11 @@
 			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
-				<img class="icon" src="/files/images/soundcloud.svg"/>
-			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
-					<img class="icon" src="/files/images/twitter.svg"/>
-			</a>
 			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+			<a href="https://x.com/almushel" title="X (Twitter)" rel="external" target="\_blank">
+				<img style="width:90%;" class="icon" src="/files/images/x.svg"/>
 			</a>
 		</nav>
 	</div>
@@ -72,7 +69,7 @@ The <code>scope</code> property of your client metadata will default to <code>"o
 See the <a href="https://example.auth.unstoppabledomains.com/">UAuth Example App</a> for a live demo of the login flow.
 </div></p><h2 id="step-3-display-the-user&#39;s-domain">Step 3: Display the User's Domain</h2><p>Once a user has successfully authenticated, the application should display the user’s <strong>domain</strong> (and not their <strong>wallet address</strong>) in the application’s UI to confirm the authorization was successful.</p><p><figure>
 <div style="width:50%">
-<img src="../images/third-UI-example-login-domains.png" alt="Showing an authenticated user's domain"></img>
+<img alt="Showing an authenticated user's domain" src="../images/third-UI-example-login-domains.png"></img>
 </div>
 <figcaption>Showing an authenticated user's domain</figcaption>
 </figure></p><p>Authorizations are stored inside <code>localStorage</code>, so any identically configured <code>UAuth</code> instance has access to the same users.

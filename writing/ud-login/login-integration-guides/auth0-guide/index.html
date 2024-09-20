@@ -35,14 +35,11 @@
 			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
-				<img class="icon" src="/files/images/soundcloud.svg"/>
-			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
-					<img class="icon" src="/files/images/twitter.svg"/>
-			</a>
 			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+			<a href="https://x.com/almushel" title="X (Twitter)" rel="external" target="\_blank">
+				<img style="width:90%;" class="icon" src="/files/images/x.svg"/>
 			</a>
 		</nav>
 	</div>
@@ -57,7 +54,7 @@
 	</nav>
 	<div class="content">
 <h1 id="unstoppable-login-auth0">Unstoppable Login: Auth0</h1><p>The Unstoppable Domains social connection for Auth0 abstracts blockchain implementation details behind the OAuth2 standard. While many developers are new to blockchain, most will be familiar with OAuth2. This familiar approach enables your application to request OAuth2 scopes and receive claims to access Web3 user metadata, communication handles and blockchain specific details. Since the social connection is natively integrated into the Auth0 ecosystem, developers can tap into a rich client library to further simplify user management.</p><p><figure>
-<div style="width:40%"></p><p><img src="../../images/login-selection-auth0.png" alt="Auth0 with Unstoppable Domains"></img></p><p></div>
+<div style="width:40%"></p><p><img alt="Auth0 with Unstoppable Domains" src="../../images/login-selection-auth0.png"></img></p><p></div>
 <figcaption>Auth0 with Unstoppable Domains</figcaption>
 </figure></p><p>This integration guide will show you how to configure the Unstoppable Domains social connection for Auth0 to support web3 login without writing any blockchain-specific code.</p><h2 id="step-1-create-an-auth0-account">Step 1: Create an Auth0 Account</h2><p>Before using the Unstoppable Domains social connection, you’ll need an <a href="https://auth0.com/">Auth0</a> account. After creating an account, you will have an automatically generated tenant and a <strong>Default App</strong>. See the Auth0 documentation on <a href="https://auth0.com/docs/get-started/auth0-overview/create-tenants">Creating Tenants</a> and <a href="https://auth0.com/docs/get-started/auth0-overview/create-tenants">Creating Applications</a> for more information on creating your own.</p><h2 id="step-2-configure-your-login-client">Step 2: Configure your Login Client</h2><p>In addition to the basic configuraton outlined in <a href="../login-client-configuration">Login Client Configuration</a>, some configuration specific to Auth0 is required.</p><ol start="1"><li>Set your <a href="../login-client-configuration#redirect-uris">Redirect URI</a> to <code>https://{{ TENANT_ID}} .{{ REGION }}.auth0.com/login/callback</code>. You can copy the origin from the <strong>Domain</strong> field of your Auth0 application <strong>Settings</strong>.</li><li>Set the <a href="../login-client-configuration#token-endpoint-authentication-method">Token Endpoint Authentication Method</a> in the <strong>Advanced</strong> configuration page to <strong>Client Secret Post</strong>.</li><li>Click <strong>Confirm Changes</strong>.</li></ol><p><div class="admonition warning">
 Make sure that you copy the <code>client_secret</code> from the client metadata on the <strong>Login</strong> page of your client configuration. You won't be able to view it again without clicking <strong>Rotate Secret</strong> to generate a new one.

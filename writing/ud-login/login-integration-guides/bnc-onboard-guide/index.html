@@ -35,14 +35,11 @@
 			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
-				<img class="icon" src="/files/images/soundcloud.svg"/>
-			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
-					<img class="icon" src="/files/images/twitter.svg"/>
-			</a>
 			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+			<a href="https://x.com/almushel" title="X (Twitter)" rel="external" target="\_blank">
+				<img style="width:90%;" class="icon" src="/files/images/x.svg"/>
 			</a>
 		</nav>
 	</div>
@@ -58,8 +55,8 @@
 	<div class="content">
 <h1 id="bnc-onboard-guide-login-with-unstoppable">BNC Onboard Guide: Login with Unstoppable</h1><p><div class="admonition warning">
 This guide and the <code>@uauth/bnc-onboard</code> package uses <code>bnc-onboard</code>, a deprecated version of the <strong>Blocknative Onboard</strong> library. For integrating with <code>web3-onboard</code> (onboard <code>v2.0.0</code> and later), see the <a href="../web3-onboard-guide">Web3 Onboard Guide</a>.
-</div></p><p>This is the basic installation guide for the <code>bnc-onboard</code> library and is best used for single page applications (SPAs). For more information about this library, please see the associated <a href="https://github.com/unstoppabledomains/uauth/tree/main/packages/bnc-onboard">GitHub repo</a>.</p><p><figure></p><p><img src="/images/login-selection-bnc-onboard.png '#width=70%'" alt="BNC Onboard with Unstoppable Domains"></img></p><p><figcaption>BNC Onboard with Unstoppable Domains</figcaption>
-</figure></p><p><figure></p><p><img src="/images/login-selection-bnc-onboard.png '#width=70%'" alt="BNC Onboard with Unstoppable Domains"></img></p><p><figcaption>BNC Onboard with Unstoppable Domains</figcaption>
+</div></p><p>This is the basic installation guide for the <code>bnc-onboard</code> library and is best used for single page applications (SPAs). For more information about this library, please see the associated <a href="https://github.com/unstoppabledomains/uauth/tree/main/packages/bnc-onboard">GitHub repo</a>.</p><p><figure></p><p><img alt="BNC Onboard with Unstoppable Domains" src="/images/login-selection-bnc-onboard.png '#width=70%'"></img></p><p><figcaption>BNC Onboard with Unstoppable Domains</figcaption>
+</figure></p><p><figure></p><p><img alt="BNC Onboard with Unstoppable Domains" src="/images/login-selection-bnc-onboard.png '#width=70%'"></img></p><p><figcaption>BNC Onboard with Unstoppable Domains</figcaption>
 </figure></p><p><div class="admonition info">
 For a completed example of a BNC Onboard application, you can <a href="https://github.com/unstoppabledomains/uauth/blob/main/examples/bnc-onboard/">download this example project</a>.
 </div></p><h2 id="step-1-install-the-libraries">Step 1: Install the Libraries</h2><p>Install with <code>yarn</code> or <code>npm</code>.</p><pre class="language-shell">yarn add bnc-onboard @uauth/bnc-onboard @uauth/js @walletconnect/web3-provider</pre><pre class="language-shell">npm install --save bnc-onboard @uauth/bnc-onboard @uauth/js @walletconnect/web3-provider</pre><h2 id="step-2-configure-the-uauth/bnc-onboard-library">Step 2: Configure the @uauth/bnc-onboard Library</h2><p>Next, configure the <code>@uauth/bnc-onboard</code> library:</p><pre class="language-typescript">import UAuthBncOnboard from &#39;@uauth/bnc-onboard&#39;

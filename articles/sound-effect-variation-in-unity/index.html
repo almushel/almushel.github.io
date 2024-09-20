@@ -35,14 +35,11 @@
 			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
-				<img class="icon" src="/files/images/soundcloud.svg"/>
-			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
-					<img class="icon" src="/files/images/twitter.svg"/>
-			</a>
 			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+			<a href="https://x.com/almushel" title="X (Twitter)" rel="external" target="\_blank">
+				<img style="width:90%;" class="icon" src="/files/images/x.svg"/>
 			</a>
 		</nav>
 	</div>
@@ -64,8 +61,8 @@ within native Unity audio, assuming you already have a set of sound effects to u
 we’ll randomize the playing order and ensure that the same audio clip doesn’t play back-to-back. Finally,
 we’ll look at using pitch and volume randomization to add some more subtle differences every time these
 sounds are played.</p><p>Before we do any specific implementation, we need a game object with an Audio Source component attached to
-it. Create a new one or use an existing object in your game that needs to make some noise.</p><p><img src="/files/images/AddAudioSource2.gif" alt="AudioSource 2"></img></p><h2 id="round-robin">Round Robin</h2><p>To play our variations, we need to store them in a container Unity can work with: an array of AudioClips.</p><p><code>public AudioClip[] clipArray;</code></p><p>We also need to define an Audio Source to the play our sound effects.</p><p><code>public AudioSource effectSource;</code></p><p>And an integer variable to keep track of our current array index.</p><p><code>private int clipIndex;</code></p><p>In the inspector, set Effect Source to your AudioSource component, set the Clip Array size based on the
-number of variations you’re using, and add your AudioClips to the array.</p><p><img src="/files/images/SoundEffectVariation-Script.png" alt="Sound Effect Variation Script"></img></p><p>Now, for the playback itself. We’ll create a new method, PlayRoundRobin(). Every time this method is called,
+it. Create a new one or use an existing object in your game that needs to make some noise.</p><p><img alt="AudioSource 2" src="/files/images/AddAudioSource2.gif"></img></p><h2 id="round-robin">Round Robin</h2><p>To play our variations, we need to store them in a container Unity can work with: an array of AudioClips.</p><p><code>public AudioClip[] clipArray;</code></p><p>We also need to define an Audio Source to the play our sound effects.</p><p><code>public AudioSource effectSource;</code></p><p>And an integer variable to keep track of our current array index.</p><p><code>private int clipIndex;</code></p><p>In the inspector, set Effect Source to your AudioSource component, set the Clip Array size based on the
+number of variations you’re using, and add your AudioClips to the array.</p><p><img alt="Sound Effect Variation Script" src="/files/images/SoundEffectVariation-Script.png"></img></p><p>Now, for the playback itself. We’ll create a new method, PlayRoundRobin(). Every time this method is called,
 it will play the current index of the array then increment the clipIndex value. If the index is beyond the
 boundaries of the array, it is reset to 0 and the round robin continues.</p><pre>void PlayRoundRobin() {
     if (clipIndex &amp;&amp; clipArray.Length) {
@@ -102,7 +99,7 @@ equal to our previous index. It then returns that value. So, now we can plug thi
 }</pre><p>When this method is called, it will never play the same random variation back-to-back.</p><h2 id="pitch-and-volume-randomization">Pitch and Volume Randomization</h2><p>Now, the last thing we're going to do is randomize the pitch and volume of our Audio Source each time
 we play our sound effects. We’ll need a few more variables, so we can fine tune this effect easily in Unity.</p><p><code>public float pitchMin, pitchMax, volumeMin, volumeMax;</code></p><p>Set these values in the Inspector according to preference. This may vary depending on the specific sound
 effect, but in general very small ranges will sound more natural. Larger ranges sound jarring and unnatural
-(though that could be a useful effect in some cases). Set these values to 1 for no effect at all.</p><p><img src="/files/images/PitchVolumeMinMax.gif" alt="PitchVolumeMinMax"></img></p><p>Add these two new lines to the beginning of the PlayRandom() and PlayRoundRobin() methods:</p><pre>effectSource.pitch = Random.Range(pitchMin, pitchMax);
+(though that could be a useful effect in some cases). Set these values to 1 for no effect at all.</p><p><img alt="PitchVolumeMinMax" src="/files/images/PitchVolumeMinMax.gif"></img></p><p>Add these two new lines to the beginning of the PlayRandom() and PlayRoundRobin() methods:</p><pre>effectSource.pitch = Random.Range(pitchMin, pitchMax);
 effectSource.volume = Random.Range(volumeMin, volumeMax);</pre><p>Each variation will now playback at a random pitch and volume according to the ranges you set and can easily
 adjust in the Unity editor.</p><h2 id="testing-it-out">Testing it Out</h2><p>If you want to make sure this is working, without assets or systems to go with it, you can just drop a game
 object with an Audio Source and the script attached into an empty scene. Add something like this to your

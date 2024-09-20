@@ -35,14 +35,11 @@
 			<a href="https://almushel.itch.io" title="itch.io" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/itch.svg"/>
 			</a>
-			<a href="https://soundcloud.com/almushel" title="SoundCloud" rel="external" target="\_blank">
-				<img class="icon" src="/files/images/soundcloud.svg"/>
-			</a>
-			<a href="https://twitter.com/almushel" title="Twitter" rel="external" target="\_blank">
-					<img class="icon" src="/files/images/twitter.svg"/>
-			</a>
 			<a href="http://linkedin.com/in/andrew-mushel" title="LinkedIn" rel="external" target="\_blank">
 				<img class="icon" src="/files/images/linkedin.svg"/>
+			</a>
+			<a href="https://x.com/almushel" title="X (Twitter)" rel="external" target="\_blank">
+				<img style="width:90%;" class="icon" src="/files/images/x.svg"/>
 			</a>
 		</nav>
 	</div>
@@ -62,9 +59,9 @@
 Users will always have full control over which pieces of data they share with which applications, regardless of the information being requested by the application.
 </div></p><h2 id="identity-verification-partners">Identity Verification Partners</h2><p>To offer the Humanity Check feature, Unstoppable Domains has partnered with identity verification services such as <a href="https://withpersona.com">Persona</a>. When a Humanity Check provider verifies a new person, it assigns that person a new randomly generated ID number, which is then passed to UD.</p><p><div class="admonition info">
 Login with Unstoppable will partner with additional Humanity Check providers in future releases. Applications will have the ability to ask for a specific Humanity Check provider, but the Client Configuration UI will have a default provider selected.
-</div></p><h3 id="persona">Persona</h3><p>Persona asks users to take a photo of their government-issued ID and a few selfies. Persona uses these images to verify that a person is who they claim to be. Every time Persona verifies a new person, it gives that person a new randomly generated ID number.</p><p><figure class="one-third-inline-block"></p><p><img src="/images/persona_upload_photo_id.png" alt="Persona UI for uploading government ID"></img></p><p><figcaption>Uploading government ID</figcaption>
-</figure></p><p><figure class="one-third-inline-block"></p><p><img src="/images/persona_live_photo_capture.png" alt="Persona UI for uploading live photos or selfies"></img></p><p><figcaption>Uploading live photos or selfies</figcaption>
-</figure></p><p><figure class="one-third-inline-block"></p><p><img src="/images/persona_congratuations.png" alt="Persona UI after identity verification is complete"></img></p><p><figcaption>Persona identity verification complete</figcaption>
+</div></p><h3 id="persona">Persona</h3><p>Persona asks users to take a photo of their government-issued ID and a few selfies. Persona uses these images to verify that a person is who they claim to be. Every time Persona verifies a new person, it gives that person a new randomly generated ID number.</p><p><figure class="one-third-inline-block"></p><p><img alt="Persona UI for uploading government ID" src="/images/persona_upload_photo_id.png"></img></p><p><figcaption>Uploading government ID</figcaption>
+</figure></p><p><figure class="one-third-inline-block"></p><p><img alt="Persona UI for uploading live photos or selfies" src="/images/persona_live_photo_capture.png"></img></p><p><figcaption>Uploading live photos or selfies</figcaption>
+</figure></p><p><figure class="one-third-inline-block"></p><p><img alt="Persona UI after identity verification is complete" src="/images/persona_congratuations.png"></img></p><p><figcaption>Persona identity verification complete</figcaption>
 </figure></p><h2 id="humanity-check-configuration">Humanity Check Configuration</h2><p>Login with Unstoppable passes the unique Humanity Check ID number (or a proxy for it) from the Humanity Check provider through to applications. To access the humanity check identifier for users, applications can add a <a href="../scopes-for-login#humanity_check">humanity<em>check scope</em></a> to their Login with Unstoppable configuration.</p><p><div class="admonition info">
 For the moment, Login with Unstoppable only allows applications to request the Humanity Check identifier, but additional scopes will be added in future releases to allow applications to request more personal data (i.e., name, address, country, location, etc.).
 </div></p><p>These specific considerations apply to the Humanity Check feature:</p><ul><li><strong>Any domain from the same wallet will return the same Humanity Check identifier.</strong> If more than one domain exists in the same wallet, users will only need to complete the humanity check process once because identity verification is tied to the wallet address, not the domain.</li><li><strong>Humanity Check information will not transfer when a domain is sold.</strong> The humanity check identifier is tied to the wallet address, not the domain, so the humanity check information will not be transferred with the domain when it is sold to someone else.</li><li><strong>Each user only needs to verify themselves once per wallet address.</strong> If users verify humanity check information inside an app, this verification applies to other applications if using the same login. Even different domains within the same wallet will be pre-verified using the same humanity check information.</li></ul><p><div class="admonition warning">
