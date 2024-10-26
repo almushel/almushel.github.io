@@ -31,7 +31,7 @@ jobs:
       - name: Build with inertHTML
         run: inertHTML -r -t ./template.html -o ./_site -pagesAsDirs ./src
       - name: Copy site assets
-        run: rsync -ru --exclude='*.md*' ./src ./_site
+        run: rsync -ru --exclude='*.md*' ./src/* ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
