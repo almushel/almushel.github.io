@@ -3,6 +3,16 @@
 ## Experience
 
 ---
+<div class="split-heading-container">
+	<h3 class="split-heading-left">Communication and Technology Consultant</h3>
+	<span class="split-heading-right">May 2024 - Present</span>
+</div>
+_Freelance_
+
+* Technical writing and editing
+* Web development and design
+* Video and audio production
+* Voice-over narration and music composition
 
 <div class="split-heading-container">
 	<h3 class="split-heading-left">Technical Writer II</h3>
