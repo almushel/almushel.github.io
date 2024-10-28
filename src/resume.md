@@ -3,6 +3,7 @@
 ## Experience
 
 ---
+
 <div class="split-heading-container">
 	<h3 class="split-heading-left">Communication and Technology Consultant</h3>
 	<span class="split-heading-right">May 2024 - Present</span>
