@@ -10,10 +10,7 @@
 </div>
 _Freelance_
 
-* Technical writing and editing
-* Web development and design
-* Video and audio production
-* Voice-over narration and music composition
+* Providing a range of communication, media, and technology services including: technical writing and editing, web design and development, video/audio/music production, music composition, and voice-over. 
 
 <div class="split-heading-container">
 	<h3 class="split-heading-left">Technical Writer II</h3>
