@@ -5,14 +5,6 @@
 ---
 
 <div class="split-heading-container">
-	<h3 class="split-heading-left">Communication and Technology Consultant</h3>
-	<span class="split-heading-right">May 2024 - Present</span>
-</div>
-_Freelance_
-
-* Providing a range of communication, media, and technology services including: technical writing and editing, web design and development, video/audio/music production, music composition, and voice-over. 
-
-<div class="split-heading-container">
 	<h3 class="split-heading-left">Technical Writer II</h3>
 	<span class="split-heading-right">November 2022 - January 2023</span>
 </div>
